@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class World {
     
-    private Mario player;
+    private Unit player;
     
     public World(){
         
@@ -21,12 +21,7 @@ public class World {
     }
     
     private void demoLevel(){
-        player = new Mario(16,16,16,32);
-        // blocks along the floor
-        for(int i = 0; i < 50; i++){
-            
-        }
-        
+        player = new Unit(16,16,16,32);
         
     }
     
@@ -34,7 +29,7 @@ public class World {
         
     }
     
-    public Mario getPlayer(){
+    public Unit getPlayer(){
         return player;
     }
     

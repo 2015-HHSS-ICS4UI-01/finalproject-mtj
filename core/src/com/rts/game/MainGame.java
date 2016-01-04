@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rts.model.Mario;
+import com.rts.model.Unit;
 import com.rts.model.World;
 import com.rts.screens.WorldRenderer;
 
@@ -25,14 +25,19 @@ public class MainGame implements Screen{
 
     private MyRTSGame manager;
     private World theWorld;
-    private Mario player;
+    private Unit player;
     private WorldRenderer renderer;
+    private int round;
+    private Player user;
     
     public MainGame(MyRTSGame manager){
         this.manager = manager;
         theWorld = new World();
         player = theWorld.getPlayer();
         renderer = new WorldRenderer(theWorld);
+        round = 1;
+        user = new Player(round);
+        System.out.println(user.getCoins());
     }
     
     @Override
@@ -42,6 +47,8 @@ public class MainGame implements Screen{
 
     @Override
     public void render(float deltaTime) {
+        
+        
         if(Gdx.input.isKeyPressed(Keys.D)){
             player.setVelocityX(2f);
         }else if(Gdx.input.isKeyPressed(Keys.A)){

@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rts.model.Mario;
+import com.rts.model.Unit;
 import com.rts.model.World;
 
 /**
@@ -24,7 +24,7 @@ public class WorldRenderer {
     public final int V_HEIGHT = 600;
     
     private World world;
-    private Mario player;
+    private Unit player;
     
     private Viewport viewport;
     private OrthographicCamera camera;
@@ -71,19 +71,19 @@ public class WorldRenderer {
         
         
         // draw mario
-        if(player.getState() == Mario.State.STANDING){
+        if(player.getState() == Unit.State.STANDING){
             if(player.isFacingLeft()){
                 batch.draw(AssetManager.skrillex, player.getX(), player.getY());
             }else{
                 batch.draw(AssetManager.skrillex, player.getX(), player.getY());
             }
-        }else if(player.getState() == Mario.State.RUNNING){
+        }else if(player.getState() == Unit.State.RUNNING){
             if(player.isFacingLeft()){
                 batch.draw(AssetManager.marioRunL.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
             }else{
                 batch.draw(AssetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
             }
-        }else if(player.getState() == Mario.State.JUMPING){
+        }else if(player.getState() == Unit.State.JUMPING){
             if(player.isFacingLeft()){
                 batch.draw(AssetManager.marioJumpL, player.getX(), player.getY());
             }else{
