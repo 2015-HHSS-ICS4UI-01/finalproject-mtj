@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rts.game.Player;
 import com.rts.model.Unit;
 import com.rts.model.World;
 
@@ -23,16 +24,14 @@ public class WorldRenderer {
     public final int V_WIDTH = 800;
     public final int V_HEIGHT = 600;
     
-    private World world;
     private Unit player;
     
     private Viewport viewport;
     private OrthographicCamera camera;
     private SpriteBatch batch;
     
-    public WorldRenderer(World w){
-        world = w;
-        player = world.getPlayer();
+    public WorldRenderer(Unit p){
+        player = p;
         
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);

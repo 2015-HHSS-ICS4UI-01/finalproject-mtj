@@ -24,17 +24,15 @@ import com.rts.screens.WorldRenderer;
 public class MainGame implements Screen{
 
     private MyRTSGame manager;
-    private World theWorld;
-    private Unit player;
+    private Unit units;
     private WorldRenderer renderer;
     private int round;
     private Player user;
     
     public MainGame(MyRTSGame manager){
         this.manager = manager;
-        theWorld = new World();
-        player = theWorld.getPlayer();
-        renderer = new WorldRenderer(theWorld);
+        units = new Unit(16,16,16,32);
+        renderer = new WorldRenderer(units);
         round = 1;
         user = new Player(round);
         System.out.println(user.getCoins());
@@ -50,16 +48,16 @@ public class MainGame implements Screen{
         
         
         if(Gdx.input.isKeyPressed(Keys.D)){
-            player.setVelocityX(2f);
+            units.setVelocityX(2f);
         }else if(Gdx.input.isKeyPressed(Keys.A)){
-            player.setVelocityX(-2f);
+            units.setVelocityX(-2f);
         }else{
-            player.dampen();
+            units.dampen();
         }
         
         
         
-        player.update(deltaTime);
+        units.update(deltaTime);
         
         //collisions
         // go through each block

@@ -14,9 +14,10 @@ import com.rts.model.Entity;
 public class Player {
     
     private int coins = 450;
-    private int exp;
-    private int baseHealth;
-    private int MAX_UNITS;
+    private int exp = 0;
+    private int baseTotalHealth = 5000;
+    private int baseRemainingHealth = 5000;
+    private int MAX_UNITS = 10;
     private Array<Entity> entities;
     
     public Player(int round){
@@ -27,5 +28,16 @@ public class Player {
         return coins;
     }
     
+    public void updateCoins(int increase){
+        coins = coins + increase;
+    }
+    
+    public void updateExp(int increase){
+        exp = exp + increase;
+    }
+    
+    public void upgradeBaseHealth(){
+        baseRemainingHealth = baseRemainingHealth + 1000;
+    }
     
 }
