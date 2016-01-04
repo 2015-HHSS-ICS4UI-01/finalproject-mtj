@@ -83,13 +83,6 @@ public class WorldRenderer {
             }else{
                 batch.draw(AssetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
             }
-        }else if(player.getState() == Mario.State.JUMPING){
-            if(player.isFacingLeft()){
-                batch.draw(AssetManager.marioJumpL, player.getX(), player.getY());
-            }else{
-                batch.draw(AssetManager.marioJump, player.getX(), player.getY());
-            }
-            
         }
         
         // finished listing things to draw

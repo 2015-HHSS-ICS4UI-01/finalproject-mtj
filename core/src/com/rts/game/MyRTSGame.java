@@ -12,7 +12,7 @@ public class MyRTSGame extends Game {
 	
 	@Override
 	public void create () {
-            setScreen(new MainGame(this));
+            setScreen(new MainMenu(this));
             
 	}
 
