@@ -17,7 +17,7 @@ public class Unit extends Entity{
     
     // states for mario
     public enum State{
-        STANDING, RUNNING, JUMPING
+        STANDING, RUNNING
     }
     
     // the actual state mario is in
@@ -57,13 +57,13 @@ public class Unit extends Entity{
         // moving to the left
         if(velocity.x < 0){
             isFacingLeft = true;
-            if(state != State.RUNNING && state != State.JUMPING){
+            if(state != State.RUNNING){
                 stateTime = 0;
                 state = State.RUNNING;
             }
         }else if(velocity.x > 0){
             isFacingLeft = false;
-            if(state != State.RUNNING && state != State.JUMPING){
+            if(state != State.RUNNING){
                 stateTime = 0;
                 state = State.RUNNING;
             }
@@ -75,12 +75,6 @@ public class Unit extends Entity{
         stateTime += delta;
     }
     
-    public void jump(){
-        if(state != State.JUMPING && velocity.y == 0){
-            velocity.y = Y_MAX_VEL;
-            state = State.JUMPING;
-        }
-    }
     
     public void setVelocityX(float x){
         velocity.x = x;
