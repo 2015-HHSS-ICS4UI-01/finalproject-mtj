@@ -15,6 +15,12 @@ public class Unit extends Entity{
     private final float Y_MAX_VEL = 4.0f;
     private final float DAMP = 0.8f;
     
+    private int health;
+    private int attackSpeed;
+    private int attackDamage;
+    private int spawnTime;
+    private int dollarWorth;
+    
     // states for mario
     public enum State{
         STANDING, RUNNING
@@ -46,7 +52,7 @@ public class Unit extends Entity{
     }
     
     public void update(float delta){
-        acceleration.y = 0;
+        
         velocity.mulAdd(acceleration, delta);
         
         if(velocity.x < 0.01f && velocity.x > -0.01f){
