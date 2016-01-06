@@ -28,6 +28,7 @@ public class AssetManager {
     
     public static Texture grass = new Texture("grass.png");
     public static Texture skrillex = new Texture("skrillex.png");
+    public static Texture boxUnit = new Texture("BoxUnit.png");
     
     
     public static void load(){

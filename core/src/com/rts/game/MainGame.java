@@ -20,44 +20,46 @@ import com.rts.screens.WorldRenderer;
  *
  * @author donet6376
  */
-public class MainGame implements Screen{
+public class MainGame implements Screen {
 
     private MyRTSGame manager;
-    private Unit units;
     private WorldRenderer renderer;
     private int round;
-    private Player user;
-    
-    public MainGame(MyRTSGame manager){
+    private Player p1;
+    private Player p2;
+
+    public MainGame(MyRTSGame manager) {
         this.manager = manager;
-        units = new Unit(16,16,16,32);
-        renderer = new WorldRenderer(units);
+        
         round = 1;
-        user = new Player(round);
-        System.out.println(user.getCoins());
+        p1 = new Player(round);
+        p2 = new Player(round);
+        renderer = new WorldRenderer(p1, p2);
+
     }
-    
+
     @Override
     public void show() {
-        
     }
 
     @Override
     public void render(float deltaTime) {
-        
-        
-        if(Gdx.input.isKeyPressed(Keys.D)){
-            units.setVelocityX(2f);
-        }else if(Gdx.input.isKeyPressed(Keys.A)){
-            units.setVelocityX(-2f);
-        }else{
-            units.dampen();
+
+        if (Gdx.input.isKeyPressed(Keys.H)) {
+            p1.createUnit();
         }
-        
-        
-        
-        units.update(deltaTime);
-        
+
+        if (p1.getUnits() != null) {
+            for (Unit u : p1.getUnits()) {
+
+                u.setVelocityX(1f);
+
+                u.update(deltaTime);
+            }
+        }
+
+
+
         //collisions
         // go through each block
 //        for(Block b: theWorld.getBlocks()){
@@ -112,22 +114,17 @@ public class MainGame implements Screen{
 
     @Override
     public void pause() {
-        
     }
 
     @Override
     public void resume() {
-        
     }
 
     @Override
     public void hide() {
-        
     }
 
     @Override
     public void dispose() {
-        
     }
-    
 }

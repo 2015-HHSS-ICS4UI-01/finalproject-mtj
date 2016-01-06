@@ -6,6 +6,7 @@ package com.rts.game;
 
 import com.badlogic.gdx.utils.Array;
 import com.rts.model.Entity;
+import com.rts.model.Unit;
 
 /**
  *
@@ -18,10 +19,11 @@ public class Player {
     private int baseTotalHealth = 5000;
     private int baseRemainingHealth = 5000;
     private int MAX_UNITS = 10;
-    private Array<Entity> entities;
+    private Array<Unit> units;
     
     public Player(int round){
-           coins = coins + (round * 50);  
+           coins = coins + (round * 50); 
+           units = new Array<Unit>();
     }
     
     public int getCoins(){
@@ -38,6 +40,14 @@ public class Player {
     
     public void upgradeBaseHealth(){
         baseRemainingHealth = baseRemainingHealth + 1000;
+    }
+    
+    public void createUnit(){
+        units.add(new Unit(16,16,16,32));
+    }
+ 
+    public Array<Unit> getUnits(){
+        return units;
     }
     
 }
