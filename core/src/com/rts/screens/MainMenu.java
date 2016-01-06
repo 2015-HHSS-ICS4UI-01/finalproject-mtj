@@ -78,11 +78,15 @@ public class MainMenu implements Screen{
         }
         
         if(Gdx.input.isTouched()){
+            //converts screen touch coordinates to ingame coordinates
             viewport.unproject(clickPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             
+            //starts single player mode
             if(singlePlayer.contains(clickPoint.x, clickPoint.y)){
                 manager.changeScreen(new MainGame(manager));
             }
+            
+            //shows instructions on how to play
             if(howToPlay.contains(clickPoint.x, clickPoint.y)){
                 manager.changeScreen(new HowToPlay(manager));
             }
