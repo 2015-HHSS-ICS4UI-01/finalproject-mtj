@@ -17,7 +17,7 @@ public class Mario extends Entity{
     
     // states for mario
     public enum State{
-        STANDING, RUNNING, ATTACKING, DYING
+        STANDING, RUNNING, JUMPING
     }
     
     // the actual state mario is in
