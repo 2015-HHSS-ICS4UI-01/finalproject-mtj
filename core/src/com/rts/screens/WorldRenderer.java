@@ -67,10 +67,15 @@ public class WorldRenderer {
         //draw the units
         if(p1.getUnits() != null){
         for(Unit u: p1.getUnits()){
-            batch.draw(AssetManager.boxUnit, u.getX(), u.getY());
+            batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY());
         }
         }
         
+        if(p2.getUnits() != null){
+        for(Unit u: p2.getUnits()){
+            batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY());
+        }
+        }
         
         
 //        // draw mario

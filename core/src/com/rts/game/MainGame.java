@@ -32,8 +32,8 @@ public class MainGame implements Screen {
         this.manager = manager;
         
         round = 1;
-        p1 = new Player(round);
-        p2 = new Player(round);
+        p1 = new Player(round, "p1");
+        p2 = new Player(round, "p2");
         renderer = new WorldRenderer(p1, p2);
 
     }
@@ -46,18 +46,32 @@ public class MainGame implements Screen {
     public void render(float deltaTime) {
 
         if (Gdx.input.isKeyPressed(Keys.H)) {
-            p1.createUnit();
+            p1.createUnit(p1.getName());
         }
 
+        if (Gdx.input.isKeyPressed(Keys.G)){
+            p2.createUnit(p2.getName());
+        }
+        
         if (p1.getUnits() != null) {
             for (Unit u : p1.getUnits()) {
 
-                u.setVelocityX(1f);
+                u.setState(Unit.State.MOVING);
 
                 u.update(deltaTime);
             }
         }
+        
+        
 
+        if (p2.getUnits() != null) {
+            for (Unit u : p2.getUnits()) {
+
+                u.setState(Unit.State.MOVING);
+
+                u.update(deltaTime);
+            }
+        }
 
 
         //collisions

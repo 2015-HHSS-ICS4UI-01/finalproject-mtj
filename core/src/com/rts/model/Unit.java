@@ -15,6 +15,7 @@ public class Unit extends Entity{
     private final float Y_MAX_VEL = 4.0f;
     private final float DAMP = 0.8f;
     
+    private String playerName;
     private int health;
     private int attackSpeed;
     private int attackDamage;
@@ -23,7 +24,7 @@ public class Unit extends Entity{
     
     // states for mario
     public enum State{
-        STANDING, RUNNING
+        STANDING, MOVING, ATTACKING
     }
     
     // the actual state mario is in
@@ -31,19 +32,17 @@ public class Unit extends Entity{
     // movement variables
     private Vector2 velocity;
     private Vector2 acceleration;
-    // facing
-    private boolean isFacingLeft;
     
     // animation state counter
     private float stateTime;
     
-    public Unit(float x, float y, float width, float height){
+    public Unit(float x, float y, float width, float height, String playerName){
         super(x,y,width,height);
         state = State.STANDING;
         velocity = new Vector2(0,0);
         acceleration = new Vector2(0,0);
-        isFacingLeft = false;
         stateTime = 0;
+        this.playerName = playerName;
     }
     
     
@@ -60,23 +59,25 @@ public class Unit extends Entity{
         }
         addToPosition(velocity.x,velocity.y);
         
-        // moving to the left
-        if(velocity.x < 0){
-            isFacingLeft = true;
-            if(state != State.RUNNING){
-                stateTime = 0;
-                state = State.RUNNING;
-            }
-        }else if(velocity.x > 0){
-            isFacingLeft = false;
-            if(state != State.RUNNING){
-                stateTime = 0;
-                state = State.RUNNING;
-            }
+        //STATES
+        if(playerName.contains("p1")){
+           if(state == State.STANDING){
+            this.setVelocityX(0f);
+        }else if(state == State.MOVING){
+            this.setVelocityX(1f);
         }else{
-            state = State.STANDING;
-            stateTime = 0;
+            this.setVelocityX(0f);
+        } 
+        }else if(playerName.contains("p2")){
+            if(state == State.STANDING){
+                this.setVelocityX(0f);
+            }else if(state == State.MOVING){
+                this.setVelocityX(-1f);
+            }else{
+                this.setVelocityX(0f);
+            }
         }
+        
         
         stateTime += delta;
     }
@@ -113,7 +114,4 @@ public class Unit extends Entity{
         return stateTime;
     }
     
-    public boolean isFacingLeft(){
-        return isFacingLeft;
-    }
 }
