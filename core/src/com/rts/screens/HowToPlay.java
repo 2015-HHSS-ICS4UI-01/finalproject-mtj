@@ -6,11 +6,13 @@ package com.rts.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MainGame;
@@ -26,14 +28,16 @@ public class HowToPlay implements Screen{
     
     private MyRTSGame manager;
     private Viewport viewport;
-    private Rectangle back;
-    private Rectangle next;
-    private SpriteBatch batch;
-    private OrthographicCamera camera;
-    private float x;
-    private float y;  
-    private Vector3 clickPoint;
     
+    //back button
+    private Rectangle back;
+    //next button
+    private Rectangle next;
+    
+    private SpriteBatch batch;
+    private OrthographicCamera camera;  
+    private Vector2 clickPoint;
+ 
     public HowToPlay(MyRTSGame manager){
         this.manager = manager;
         back = new Rectangle(4,0,64,64);
@@ -41,7 +45,7 @@ public class HowToPlay implements Screen{
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
-        clickPoint = new Vector3(); 
+        clickPoint = new Vector2(); 
         camera.position.x = V_WIDTH/2f;
         // move the y position of the camera
         camera.position.y = V_HEIGHT/2f;
@@ -65,12 +69,12 @@ public class HowToPlay implements Screen{
         batch.end();
         
         if(Gdx.input.isTouched()){
-            viewport.unproject(clickPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if(back.contains(clickPoint.x, clickPoint.y)){
-                manager.changeScreen(new MainMenu(manager));
+            viewport.unproject(clickPoint.set(Gdx.input.getX(), Gdx.input.getY()));
+            if(back.contains(clickPoint)){
+                manager.changeScreen(new MainMenu(manager)); 
             }
-            if(next.contains(clickPoint.x, clickPoint.y)){
-                manager.changeScreen(new HowToPlay(manager));
+            if(next.contains(clickPoint)){
+                
             }
         }
     }
