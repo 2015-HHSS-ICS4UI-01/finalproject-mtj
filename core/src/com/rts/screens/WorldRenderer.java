@@ -63,6 +63,9 @@ public class WorldRenderer {
         // list of things to draw
         // draw the ground
         batch.draw(AssetManager.grass, 0, 0, 800, 40);
+        // draw the bases
+        batch.draw(AssetManager.baseBlue,0,0);
+        batch.draw(AssetManager.baseRed,768,0);
         
         //draw the units
         if(p1.getUnits() != null){
