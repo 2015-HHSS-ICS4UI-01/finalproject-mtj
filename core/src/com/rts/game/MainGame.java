@@ -13,47 +13,53 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rts.model.Mario;
-import com.rts.model.World;
+import com.rts.model.Unit;
 import com.rts.screens.WorldRenderer;
 
 /**
  *
  * @author donet6376
  */
-public class MainGame implements Screen{
+public class MainGame implements Screen {
 
     private MyRTSGame manager;
-    private World theWorld;
-    private Mario player;
     private WorldRenderer renderer;
-    
-    public MainGame(MyRTSGame manager){
+    private int round;
+    private Player p1;
+    private Player p2;
+
+    public MainGame(MyRTSGame manager) {
         this.manager = manager;
-        theWorld = new World();
-        player = theWorld.getPlayer();
-        renderer = new WorldRenderer(theWorld);
+        
+        round = 1;
+        p1 = new Player(round);
+        p2 = new Player(round);
+        renderer = new WorldRenderer(p1, p2);
+
     }
-    
+
     @Override
     public void show() {
-        
     }
 
     @Override
     public void render(float deltaTime) {
-        if(Gdx.input.isKeyPressed(Keys.D)){
-            player.setVelocityX(2f);
-        }else if(Gdx.input.isKeyPressed(Keys.A)){
-            player.setVelocityX(-2f);
-        }else{
-            player.dampen();
+
+        if (Gdx.input.isKeyPressed(Keys.H)) {
+            p1.createUnit();
         }
-        
-        
-        
-        player.update(deltaTime);
-        
+
+        if (p1.getUnits() != null) {
+            for (Unit u : p1.getUnits()) {
+
+                u.setVelocityX(1f);
+
+                u.update(deltaTime);
+            }
+        }
+
+
+
         //collisions
         // go through each block
 //        for(Block b: theWorld.getBlocks()){
@@ -108,22 +114,17 @@ public class MainGame implements Screen{
 
     @Override
     public void pause() {
-        
     }
 
     @Override
     public void resume() {
-        
     }
 
     @Override
     public void hide() {
-        
     }
 
     @Override
     public void dispose() {
-        
     }
-    
 }

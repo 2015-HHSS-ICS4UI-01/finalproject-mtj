@@ -11,8 +11,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rts.model.Mario;
-import com.rts.model.World;
+import com.rts.game.Player;
+import com.rts.model.Unit;
 
 /**
  *
@@ -23,20 +23,20 @@ public class WorldRenderer {
     public final int V_WIDTH = 800;
     public final int V_HEIGHT = 600;
     
-    private World world;
-    private Mario player;
-    
     private Viewport viewport;
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    private Player p1;
+    private Player p2;
     
-    public WorldRenderer(World w){
-        world = w;
-        player = world.getPlayer();
+    public WorldRenderer(Player p1, Player p2){
         
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         batch = new SpriteBatch();
+        
+        this.p1 = p1;
+        this.p2 = p2;
         
         // move the x position of the camera
         camera.position.x = V_WIDTH/2f;
@@ -55,35 +55,38 @@ public class WorldRenderer {
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         
-        // update the camera
-        camera.position.x = Math.max(player.getX(), V_WIDTH/2);
-        camera.update();
-        
         // links the renderer to the camera
         batch.setProjectionMatrix(camera.combined);
         
         // tells the renderer this is the list
         batch.begin();
         // list of things to draw
-        
         // draw the ground
         batch.draw(AssetManager.grass, 0, 0, 800, 40);
         
-        
-        // draw mario
-        if(player.getState() == Mario.State.STANDING){
-            if(player.isFacingLeft()){
-                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
-            }else{
-                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
-            }
-        }else if(player.getState() == Mario.State.RUNNING){
-            if(player.isFacingLeft()){
-                batch.draw(AssetManager.marioRunL.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
-            }else{
-                batch.draw(AssetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
-            }
+        //draw the units
+        if(p1.getUnits() != null){
+        for(Unit u: p1.getUnits()){
+            batch.draw(AssetManager.boxUnit, u.getX(), u.getY());
         }
+        }
+        
+        
+        
+//        // draw mario
+//        if(player.getState() == Unit.State.STANDING){
+//            if(player.isFacingLeft()){
+//                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
+//            }else{
+//                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
+//            }
+//        }else if(player.getState() == Unit.State.RUNNING){
+//            if(player.isFacingLeft()){
+//                batch.draw(AssetManager.marioRunL.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
+//            }else{
+//                batch.draw(AssetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
+//            }
+//        }
         
         // finished listing things to draw
         batch.end();
