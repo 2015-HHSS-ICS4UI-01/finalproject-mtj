@@ -1,5 +1,6 @@
 package com.rts.game;
 
+import com.rts.screens.MainMenu;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -12,7 +13,7 @@ public class MyRTSGame extends Game {
 	
 	@Override
 	public void create () {
-            setScreen(new MainGame(this));
+            setScreen(new MainMenu(this));
             
 	}
 
