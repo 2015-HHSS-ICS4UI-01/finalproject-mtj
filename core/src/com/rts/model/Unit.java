@@ -16,6 +16,7 @@ public class Unit extends Entity{
     private final float DAMP = 0.8f;
     
     private String playerName;
+    private String unitName;
     private int health;
     private int attackSpeed;
     private int attackDamage;
@@ -38,7 +39,7 @@ public class Unit extends Entity{
     
     public Unit(float x, float y, float width, float height, String playerName){
         super(x,y,width,height);
-        state = State.STANDING;
+        state = State.MOVING;
         velocity = new Vector2(0,0);
         acceleration = new Vector2(0,0);
         stateTime = 0;
@@ -52,13 +53,6 @@ public class Unit extends Entity{
     
     public void update(float delta){
         
-        velocity.mulAdd(acceleration, delta);
-        
-        if(velocity.x < 0.01f && velocity.x > -0.01f){
-            velocity.x = 0;
-        }
-        addToPosition(velocity.x,velocity.y);
-        
         //STATES
         if(playerName.contains("p1")){
            if(state == State.STANDING){
@@ -68,6 +62,7 @@ public class Unit extends Entity{
         }else{
             this.setVelocityX(0f);
         } 
+           
         }else if(playerName.contains("p2")){
             if(state == State.STANDING){
                 this.setVelocityX(0f);
@@ -77,6 +72,16 @@ public class Unit extends Entity{
                 this.setVelocityX(0f);
             }
         }
+        
+        
+        velocity.mulAdd(acceleration, delta);
+        
+        if(velocity.x < 0.01f && velocity.x > -0.01f){
+            velocity.x = 0;
+        }
+        addToPosition(velocity.x,velocity.y);
+        
+        
         
         
         stateTime += delta;

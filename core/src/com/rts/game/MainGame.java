@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.model.Unit;
@@ -27,15 +28,16 @@ public class MainGame implements Screen {
     private int round;
     private Player p1;
     private Player p2;
+    private Array<Unit> collisionCheck;
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
-        
+
         round = 1;
         p1 = new Player(round, "p1");
         p2 = new Player(round, "p2");
         renderer = new WorldRenderer(p1, p2);
-
+        collisionCheck = new Array<Unit>();
     }
 
     @Override
@@ -45,78 +47,52 @@ public class MainGame implements Screen {
     @Override
     public void render(float deltaTime) {
 
-        if (Gdx.input.isKeyPressed(Keys.H)) {
-            p1.createUnit(p1.getName());
+        if (Gdx.input.isKeyJustPressed(Keys.H)) {
+            p1.createUnit("p1");
+            
         }
 
-        if (Gdx.input.isKeyPressed(Keys.G)){
-            p2.createUnit(p2.getName());
+        if (Gdx.input.isKeyJustPressed(Keys.G)) {
+            p2.createUnit("p2");
+            
         }
-        
+
         if (p1.getUnits() != null) {
             for (Unit u : p1.getUnits()) {
-
-                u.setState(Unit.State.MOVING);
-
                 u.update(deltaTime);
             }
         }
-        
-        
+
+
 
         if (p2.getUnits() != null) {
             for (Unit u : p2.getUnits()) {
-
-                u.setState(Unit.State.MOVING);
-
                 u.update(deltaTime);
             }
         }
 
 
         //collisions
+        collisionCheck.clear();
+        collisionCheck.addAll(p1.getUnits());
+        collisionCheck.addAll(p2.getUnits());
         // go through each block
-//        for(Block b: theWorld.getBlocks()){
-//            // if player is hitting a block
-//            if(player.isColliding(b)){
-//                // get overlapping amount
-//                float overX = player.getOverlapX(b);
-//                float overY = player.getOverlapY(b);
-//                
-//                //just fixing y if not moving
-//                if(player.getVelocityX() == 0){
-//                    // player is above the block
-//                    if(player.getY() > b.getY()){
-//                        player.addToPosition(0, overY);
-//                        player.setState(Mario.State.STANDING);
-//                    }else{
-//                        player.addToPosition(0, -overY);
-//                    }
-//                    player.setVelocityY(0);
-//                }else{
-//                    // fix the smallest overlap
-//                    if(overX < overY){
-//                        // left of the block
-//                        if(player.getX() < b.getX()){
-//                            player.addToPosition(-overX, 0);
-//                        }else{
-//                            player.addToPosition(overX, 0);
-//                        }
-//                    } else {
-//                        // above the block
-//                        if(player.getY() > b.getY()){
-//                            player.addToPosition(0, overY);
-//                            if(player.getState() == Mario.State.JUMPING){
-//                                player.setState(Mario.State.STANDING);
-//                            }
-//                        }else{
-//                            player.addToPosition(0, -overY);
-//                        }
-//                        player.setVelocityY(0);
-//                    }
-//                }
-//            }
-//        }
+        if (p1.getUnits() != null && p2.getUnits() != null) {
+            for (int i = 0; i < collisionCheck.size; i++) {
+                Unit u1 = collisionCheck.get(i);
+                for (Unit u2 : collisionCheck) {
+                    if (u1 != u2 && u1.isColliding(u2)) {
+                        float overX = u1.getOverlapX(u2);
+                        u1.setState(Unit.State.STANDING);
+                        u2.setState(Unit.State.STANDING);
+                    }
+                }
+            }
+        }
+
+        
+        p1.addToSpawnTime(deltaTime);
+        p2.addToSpawnTime(deltaTime);
         // draw the screen
         renderer.render(deltaTime);
     }
