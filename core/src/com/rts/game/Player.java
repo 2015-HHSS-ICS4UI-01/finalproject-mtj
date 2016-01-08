@@ -17,10 +17,10 @@ public class Player {
     private final float COOLDOWN = 2;
     private String name;
     private int coins = 450;
-    private int exp = 0;
     private int baseTotalHealth = 5000;
     private int baseRemainingHealth = 5000;
-    private int MAX_UNITS = 10;
+    private int maxUnits = 5;
+    private int currentUnits = 0;
     private Array<Unit> units;
     private float spawnTime = 2;
 
@@ -38,24 +38,22 @@ public class Player {
         coins = coins + increase;
     }
 
-    public void updateExp(int increase) {
-        exp = exp + increase;
-    }
-
     public void upgradeBaseHealth() {
         baseRemainingHealth = baseRemainingHealth + 1000;
     }
 
     public void createUnit(String p) {
-        if (spawnTime >= COOLDOWN) {
-            if (p.contains("p1")) {
-                units.add(new Unit(0, 16, 32, 32, "p1"));
-            } else if (p.contains("p2")) {
-                units.add(new Unit(768, 16, 32, 32, "p2"));
+        if (currentUnits < maxUnits) {
+            if (spawnTime >= COOLDOWN) {
+                if (p.contains("p1")) {
+                    units.add(new Unit(0, 16, 32, 32, "p1"));
+                } else if (p.contains("p2")) {
+                    units.add(new Unit(768, 16, 32, 32, "p2"));
+                }
+                spawnTime = 0;
+                currentUnits++;
             }
-            spawnTime = 0;
         }
-
     }
 
     public Array<Unit> getUnits() {
@@ -65,9 +63,8 @@ public class Player {
     public String getName() {
         return name;
     }
-    
-    public void addToSpawnTime(float deltaTime){
+
+    public void addToSpawnTime(float deltaTime) {
         spawnTime = spawnTime + deltaTime;
-        System.out.println(spawnTime);
     }
 }

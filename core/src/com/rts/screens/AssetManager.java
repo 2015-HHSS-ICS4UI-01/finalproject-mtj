@@ -27,7 +27,6 @@ public class AssetManager {
     public static Animation marioRunL;
     
     public static Texture grass = new Texture("grass.png");
-    public static Texture skrillex = new Texture("skrillex.png");
     public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
     public static Texture boxUnitRed = new Texture("BoxUnitRed.png");
     public static Texture baseBlue = new Texture("BoxUnitBlue.png");//placeholder image name
