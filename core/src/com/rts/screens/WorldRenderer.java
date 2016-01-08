@@ -63,11 +63,7 @@ public class WorldRenderer {
         // list of things to draw
         // draw the ground
         batch.draw(AssetManager.grass, 0, 0, 800, 40);
-        // draw the bases
-        batch.draw(AssetManager.baseBlue,0,0);
-        batch.draw(AssetManager.baseRed,768,0);
         
-        //draw the units
         if(p1.getUnits() != null){
         for(Unit u: p1.getUnits()){
             batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
@@ -80,6 +76,9 @@ public class WorldRenderer {
         }
         }
         
+        // draw the bases
+        batch.draw(AssetManager.baseBlue,0,16,80,80);
+        batch.draw(AssetManager.baseRed,720,16,80,80);
         
 //        // draw mario
 //        if(player.getState() == Unit.State.STANDING){

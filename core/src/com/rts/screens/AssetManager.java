@@ -29,8 +29,8 @@ public class AssetManager {
     public static Texture grass = new Texture("grass.png");
     public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
     public static Texture boxUnitRed = new Texture("BoxUnitRed.png");
-    public static Texture baseBlue = new Texture("BoxUnitBlue.png");//placeholder image name
-    public static Texture baseRed = new Texture("BoxUnitRed.png");//placeholder image name
+    public static Texture baseBlue = new Texture("BaseBlue.png");
+    public static Texture baseRed = new Texture("BaseRed.png");
     
     
     

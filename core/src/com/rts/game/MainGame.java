@@ -29,6 +29,8 @@ public class MainGame implements Screen {
     private int round;
     private Player p1;
     private Player p2;
+    private Base b1;
+    private Base b2;
     private Array<Unit> collisionCheck;
 
     public MainGame(MyRTSGame manager) {
@@ -37,6 +39,8 @@ public class MainGame implements Screen {
         round = 1;
         p1 = new Player(round, "p1");
         p2 = new Player(round, "p2");
+        b1 = new Base(round);
+        b2 = new Base(round);
         renderer = new WorldRenderer(p1, p2);
         collisionCheck = new Array<Unit>();
        
