@@ -8,12 +8,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MainGame;
@@ -40,8 +42,13 @@ public class MainMenu implements Screen{
     private Rectangle howToPlay;
     private Rectangle difficulty;
     
-    //vector that tracks the coordinates of user's click
-    private Vector3 clickPoint;
+    //vector that helps tracks the coordinates of user's click
+    private Vector2 clickPoint;
+    
+    //debugging
+    private BitmapFont testing;
+    private String coords;
+    private String height;
     
     public MainMenu(MyRTSGame manager){
         this.manager = manager;
@@ -50,12 +57,18 @@ public class MainMenu implements Screen{
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
-        clickPoint = new Vector3(); 
+        clickPoint = new Vector2(); 
         camera.position.x = V_WIDTH/2f;
         // move the y position of the camera
         camera.position.y = V_HEIGHT/2f;
         // update the camera
         camera.update();
+        
+        //debugging
+        testing = new BitmapFont();
+        testing.setColor(Color.BLUE);
+        coords = new String();
+        height = String.valueOf(singlePlayer.height);
     }
     
     @Override
@@ -70,7 +83,9 @@ public class MainMenu implements Screen{
         
         batch.begin();
         batch.draw(AssetManager.grass,singlePlayer.x,singlePlayer.y,singlePlayer.width,singlePlayer.height);
+        testing.draw(batch, coords, 128, 128);
         batch.draw(AssetManager.grass,howToPlay.x,howToPlay.y,howToPlay.width,howToPlay.height);
+        testing.draw(batch, height, 256, 128);
         batch.end();
         
         if(Gdx.input.isKeyPressed(Keys.SPACE)){
@@ -79,7 +94,8 @@ public class MainMenu implements Screen{
         
         if(Gdx.input.isTouched()){
             //converts screen touch coordinates to ingame coordinates
-            viewport.unproject(clickPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            viewport.unproject(clickPoint.set(Gdx.input.getX(), Gdx.input.getY()));
+            coords = String.valueOf(clickPoint.x) + " " + String.valueOf(clickPoint.y);
             
             //starts single player mode
             if(singlePlayer.contains(clickPoint.x, clickPoint.y)){
