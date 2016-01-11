@@ -52,14 +52,25 @@ public class MainGame implements Screen {
     @Override
     public void render(float deltaTime) {
 
-        if (Gdx.input.isKeyJustPressed(Keys.H)) {
-            p1.createUnit("p1");
-            
+        //small unit
+        if (Gdx.input.isKeyJustPressed(Keys.A)) {
+            p1.createUnit("p1", 75, 100, 100, 50, 2, 2);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.S)) {
+            p1.createUnit("p1", 150, 175, 150, 100, 3, 3);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.D)) {
+            p1.createUnit("p1", 300, 350, 300, 150, 5, 5);
         }
 
-        if (Gdx.input.isKeyJustPressed(Keys.G)) {
-            p2.createUnit("p2");
-            
+        if (Gdx.input.isKeyJustPressed(Keys.J)) {
+            p2.createUnit("p2", 75, 100, 100, 50, 2, 2);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.K)) {
+            p2.createUnit("p2", 150, 175, 150, 100, 3, 3);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.L)) {
+            p2.createUnit("p2", 300, 350, 300, 150, 5, 5);
         }
 
         if (p1.getUnits() != null) {

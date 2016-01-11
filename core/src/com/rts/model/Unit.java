@@ -16,13 +16,13 @@ public class Unit extends Entity{
     private final float DAMP = 0.8f;
     
     private String playerName;
-    private String unitName;
     private int cost;
-    private int health;
-    private int attackSpeed;
-    private int attackDamage;
-    private int spawnTime;
     private int dollarWorth;
+    private int health;
+    private int attackDamage;
+    private int attackSpeed;
+    private int spawnTime;
+    
     
     // states for mario
     public enum State{
@@ -38,13 +38,22 @@ public class Unit extends Entity{
     // animation state counter
     private float stateTime;
     
-    public Unit(float x, float y, float width, float height, String playerName){
+    public Unit(float x, float y, float width, float height, String playerName, int cost, 
+            int dollarWorth, int health, int attackDamage, int attackSpeed, int spawnTime){
+        
         super(x,y,width,height);
         state = State.MOVING;
         velocity = new Vector2(0,0);
         acceleration = new Vector2(0,0);
         stateTime = 0;
+        
         this.playerName = playerName;
+        this.cost = cost;
+        this.dollarWorth = dollarWorth;
+        this.health = health;
+        this.attackDamage = attackDamage;
+        this.attackSpeed = attackSpeed;
+        this.spawnTime = spawnTime;
     }
     
     

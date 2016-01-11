@@ -14,7 +14,7 @@ import com.rts.model.Unit;
  */
 public class Player {
 
-    private final float COOLDOWN = 2;
+    private float COOLDOWN = 2;
     private String name;
     private int coins = 450;
     private int baseTotalHealth = 5000;
@@ -23,7 +23,7 @@ public class Player {
     private int currentUnits = 0;
     private Array<Unit> units;
     private Array<Unit> base;
-    private float spawnTime = 2;
+    private float unitSpawnTime = 2;
 
     public Player(int round, String name) {
         this.name = name;
@@ -44,16 +44,21 @@ public class Player {
         baseRemainingHealth = baseRemainingHealth + 1000;
     }
 
-    public void createUnit(String p) {
+    public void createUnit(String p, int cost, int dollarWorth, int health, 
+            int attackDamage, int attackSpeed, int spawnTime) {
         if (currentUnits < maxUnits) {
-            if (spawnTime >= COOLDOWN) {
+            if (unitSpawnTime >= COOLDOWN) {
                 if (p.contains("p1")) {
-                    units.add(new Unit(0, 16, 32, 32, "p1"));
+                    units.add(new Unit(0, 16, 32, 32, "p1", cost, dollarWorth, 
+                            health, attackDamage, attackSpeed, spawnTime));
                 } else if (p.contains("p2")) {
-                    units.add(new Unit(768, 16, 32, 32, "p2"));
+                    units.add(new Unit(768, 16, 32, 32, "p2", cost, dollarWorth, 
+                            health, attackDamage, attackSpeed, spawnTime));
                 }
-                spawnTime = 0;
+                unitSpawnTime = 0;
+                COOLDOWN = spawnTime;
                 currentUnits++;
+                System.out.println(COOLDOWN);
             }
         }
     }    
@@ -67,6 +72,6 @@ public class Player {
     }
 
     public void addToSpawnTime(float deltaTime) {
-        spawnTime = spawnTime + deltaTime;
+        unitSpawnTime = unitSpawnTime + deltaTime;
     }
 }
