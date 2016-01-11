@@ -24,7 +24,7 @@ public class Base{
     }
 
     public void createBase() {
-        base.add(new Base(0,0,32,32));
+        base.add(new Base(0,0,0,0));
     }
     
     public Array<Base> getBase(){

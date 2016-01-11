@@ -17,6 +17,7 @@ public class Unit extends Entity{
     
     private String playerName;
     private String unitName;
+    private int cost;
     private int health;
     private int attackSpeed;
     private int attackDamage;
