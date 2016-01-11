@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rts.model.Base;
 import com.rts.model.Unit;
 import com.rts.screens.WorldRenderer;
 
@@ -29,8 +28,8 @@ public class MainGame implements Screen {
     private int round;
     private Player p1;
     private Player p2;
-    private Base b1;
-    private Base b2;
+    private Player b1;
+    private Player b2;
     private Array<Unit> collisionCheck;
 
     public MainGame(MyRTSGame manager) {
@@ -39,8 +38,8 @@ public class MainGame implements Screen {
         round = 1;
         p1 = new Player(round, "p1");
         p2 = new Player(round, "p2");
-        b1 = new Base(round);
-        b2 = new Base(round);
+        b1 = new Player(round, "b1");
+        b2 = new Player(round, "b2");
         renderer = new WorldRenderer(p1, p2);
         collisionCheck = new Array<Unit>();
        

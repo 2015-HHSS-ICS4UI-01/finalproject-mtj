@@ -22,6 +22,7 @@ public class Player {
     private int maxUnits = 5;
     private int currentUnits = 0;
     private Array<Unit> units;
+    private Array<Unit> base;
     private float spawnTime = 2;
 
     public Player(int round, String name) {
@@ -29,6 +30,7 @@ public class Player {
         coins = coins + (round * 50);
         units = new Array<Unit>();
     }
+
 
     public int getCoins() {
         return coins;
@@ -54,7 +56,7 @@ public class Player {
                 currentUnits++;
             }
         }
-    }
+    }    
 
     public Array<Unit> getUnits() {
         return units;
