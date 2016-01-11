@@ -29,8 +29,6 @@ public class MainGame implements Screen {
     private int round;
     private Player p1;
     private Player p2;
-    private String gameMode;
-    private String difficulty;
     private Array<Unit> collisionCheck;
 
     public MainGame(MyRTSGame manager) {
@@ -43,14 +41,6 @@ public class MainGame implements Screen {
         collisionCheck = new Array<Unit>();
     }
     
-    public void setMode(String gameMode){
-        this.gameMode = gameMode;
-    }
-    
-    public void setDifficulty(String difficulty){
-        this.difficulty = difficulty;
-    }
-
     @Override
     public void show() {
     }
@@ -63,10 +53,18 @@ public class MainGame implements Screen {
             
         }
 
-        if (Gdx.input.isKeyJustPressed(Keys.G) && gameMode.equals("Multiplayer")) {
+        if (Gdx.input.isKeyJustPressed(Keys.G)) {
             p2.createUnit("p2");
             
         }
+        
+//        if(Gdx.input.isKeyJustPressed(Keys.S)){
+//            p1.createTurret("p1");
+//        }
+//        
+//        if(Gdx.input.isKeyJustPressed(Keys.J)){
+//            p2.createTurret("p2");
+//        }
 
         if (p1.getUnits() != null) {
             for (Unit u : p1.getUnits()) {

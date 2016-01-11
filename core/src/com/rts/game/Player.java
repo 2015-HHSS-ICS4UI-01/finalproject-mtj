@@ -6,6 +6,7 @@ package com.rts.game;
 
 import com.badlogic.gdx.utils.Array;
 import com.rts.model.Entity;
+import com.rts.model.Turret;
 import com.rts.model.Unit;
 
 /**
@@ -21,13 +22,17 @@ public class Player {
     private int baseRemainingHealth = 5000;
     private int maxUnits = 5;
     private int currentUnits = 0;
+    private int maxTurrets = 1;
+    private int currentTurrets = 0;
     private Array<Unit> units;
+    private Array<Turret> turrets;
     private float spawnTime = 2;
 
     public Player(int round, String name) {
         this.name = name;
         coins = coins + (round * 50);
         units = new Array<Unit>();
+        turrets = new Array<Turret>();
     }
 
     public int getCoins() {
@@ -55,9 +60,23 @@ public class Player {
             }
         }
     }
+    
+    public void createTurret(String p){
+        if(currentTurrets < maxTurrets){
+            if(p.contains("p1")){
+                turrets.add(new Turret(48, 96, 32,32, "p1"));
+            }else if(p.contains("p2")){
+                turrets.add(new Turret(720,96,32,32, "p1"));
+            }
+        }
+    }
 
     public Array<Unit> getUnits() {
         return units;
+    }
+    
+    public Array<Turret> getTurrets(){
+        return turrets;
     }
 
     public String getName() {

@@ -93,7 +93,7 @@ public class MainMenu implements Screen{
         testing.draw(batch, height, 256, 128);
         batch.end();
         
-        if(Gdx.input.isKeyPressed(Keys.SPACE)){
+        if(Gdx.input.isKeyPressed(Keys.ENTER)){
             manager.changeScreen(new MainGame(manager));
         }
         
@@ -105,8 +105,6 @@ public class MainMenu implements Screen{
             //starts single player mode
             if(singlePlayer.contains(clickPoint.x, clickPoint.y)){
                 newGame = new MainGame(manager);
-                newGame.setMode("Single Player");
-                newGame.setDifficulty(difficultyLevel);
                 manager.changeScreen(newGame);
             }
             
