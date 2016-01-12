@@ -28,18 +28,13 @@ public class MainGame implements Screen {
     private int round;
     private Player p1;
     private Player p2;
-    private Player b1;
-    private Player b2;
     private Array<Unit> collisionCheck;
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
-
         round = 1;
         p1 = new Player(round, "p1");
         p2 = new Player(round, "p2");
-        b1 = new Player(round, "b1");
-        b2 = new Player(round, "b2");
         renderer = new WorldRenderer(p1, p2);
         collisionCheck = new Array<Unit>();
        
@@ -54,23 +49,23 @@ public class MainGame implements Screen {
 
         //small unit
         if (Gdx.input.isKeyJustPressed(Keys.A)) {
-            p1.createUnit("p1", 75, 100, 100, 50, 2, 2);
+            p1.createUnit(16, 32, "p1", 75, 100, 100, 50, 2, 2);
         }
         if (Gdx.input.isKeyJustPressed(Keys.S)) {
-            p1.createUnit("p1", 150, 175, 150, 100, 3, 3);
+            p1.createUnit(32, 48, "p1", 150, 175, 150, 100, 3, 3);
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)) {
-            p1.createUnit("p1", 300, 350, 300, 150, 5, 5);
+            p1.createUnit(48, 64, "p1", 300, 350, 300, 150, 5, 5);
         }
 
         if (Gdx.input.isKeyJustPressed(Keys.J)) {
-            p2.createUnit("p2", 75, 100, 100, 50, 2, 2);
+            p2.createUnit(16, 32, "p2", 75, 100, 100, 50, 2, 2);
         }
         if (Gdx.input.isKeyJustPressed(Keys.K)) {
-            p2.createUnit("p2", 150, 175, 150, 100, 3, 3);
+            p2.createUnit(32, 48, "p2", 150, 175, 150, 100, 3, 3);
         }
         if (Gdx.input.isKeyJustPressed(Keys.L)) {
-            p2.createUnit("p2", 300, 350, 300, 150, 5, 5);
+            p2.createUnit(48, 64, "p2", 300, 350, 300, 150, 5, 5);
         }
 
         if (p1.getUnits() != null) {
@@ -92,7 +87,8 @@ public class MainGame implements Screen {
         collisionCheck.clear();
         collisionCheck.addAll(p1.getUnits());
         collisionCheck.addAll(p2.getUnits());
-        // go through each block
+        // go through each unit
+        // units colliding with each other
         if (p1.getUnits() != null && p2.getUnits() != null) {
             for (int i = 0; i < collisionCheck.size; i++) {
                 Unit u1 = collisionCheck.get(i);
@@ -101,11 +97,34 @@ public class MainGame implements Screen {
                         float overX = u1.getOverlapX(u2);
                         u1.setState(Unit.State.STANDING);
                         u2.setState(Unit.State.STANDING);
+                        //damage
+                        u1.attack(u2);
+                        u2.attack(u1);
                     }
                 }
             }
+            
+            //player 2 units colliding with player 1's base
+            Unit base1 = p1.getBase();
+            for(Unit u2: p2.getUnits()){
+                if(u2.isColliding(base1)){
+                    float overX = u2.getOverlapX(base1);
+                    u2.setState(Unit.State.STANDING);
+                    u2.attack(base1);
+                }
+            }
+            
+            //player 1 units colliding with player 2's base
+            Unit base2 = p2.getBase();
+            for(Unit u1: p1.getUnits()){
+                if(u1.isColliding(base2)){
+                    float overX = u1.getOverlapX(base2);
+                    u1.setState(Unit.State.STANDING);
+                    u1.attack(base2);
+                }
+            }
         }
-
+        
         
         p1.addToSpawnTime(deltaTime);
         p2.addToSpawnTime(deltaTime);
