@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.Player;
+import com.rts.model.Turret;
 import com.rts.model.Unit;
 import com.rts.model.Unit.State;
 
@@ -84,6 +85,18 @@ public class WorldRenderer {
             }
         }
         }
+        
+//        if(p1.getTurrets() != null){
+//            for(Turret t: p1.getTurrets()){
+//                batch.draw(AssetManager.boxUnitBlue, t.getX(), t.getY(), t.getWidth(), t.getHeight());
+//            }
+//        }
+//        
+//        if(p2.getTurrets() != null){
+//            for(Turret t: p2.getTurrets()){
+//                batch.draw(AssetManager.boxUnitRed, t.getX(), t.getY(), t.getWidth(), t.getHeight());
+//            }
+//        }
         
         // draw the bases
         batch.draw(AssetManager.baseBlue,0,16,80,80);

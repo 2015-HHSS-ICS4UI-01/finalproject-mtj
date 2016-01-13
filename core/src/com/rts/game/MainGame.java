@@ -33,14 +33,14 @@ public class MainGame implements Screen {
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
+
         round = 1;
         p1 = new Player(round, "p1");
         p2 = new Player(round, "p2");
         renderer = new WorldRenderer(p1, p2);
         collisionCheck = new Array<Unit>();
-       
     }
-
+    
     @Override
     public void show() {
     }
@@ -138,7 +138,7 @@ public class MainGame implements Screen {
             
             
         }
-        
+
         
         p1.addToSpawnTime(deltaTime);
         p2.addToSpawnTime(deltaTime);

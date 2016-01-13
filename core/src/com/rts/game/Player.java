@@ -7,6 +7,7 @@ package com.rts.game;
 import com.badlogic.gdx.utils.Array;
 import com.rts.model.Base;
 import com.rts.model.Entity;
+import com.rts.model.Turret;
 import com.rts.model.Unit;
 
 /**
@@ -15,11 +16,15 @@ import com.rts.model.Unit;
  */
 public class Player {
 
-    private float COOLDOWN = 2;
+    private final float COOLDOWN = 2;
     private String name;
     private int coins = 450;
+    private int baseTotalHealth = 5000;
+    private int baseRemainingHealth = 5000;
     private int maxUnits = 5;
     private int currentUnits = 0;
+    private int maxTurrets = 1;
+    private int currentTurrets = 0;
     private Array<Unit> units;
     private Base base;
     private float unitSpawnTime = 2;
@@ -34,7 +39,7 @@ public class Player {
             base = new Base(720,16,80,80,"p2",1500);
         }
     }
-    
+
     public int getCoins() {
         return coins;
     }
@@ -54,12 +59,11 @@ public class Player {
                     units.add(new Unit(768, 16, width, height, p, cost, dollarWorth, 
                             health, attackDamage, attackSpeed, spawnTime));
                 }
-                unitSpawnTime = 0;
-                COOLDOWN = spawnTime;
+                spawnTime = 0;
                 currentUnits++;
             }
         }
-    }    
+    }
     
     public void removeUnit(Unit u){
         for(int i = 0; i < units.size; i++){
@@ -83,7 +87,6 @@ public class Player {
     }
 
     public void addToSpawnTime(float deltaTime) {
-        unitSpawnTime = unitSpawnTime + deltaTime;
+        spawnTime = spawnTime + deltaTime;
     }
-    
 }
