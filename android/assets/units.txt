@@ -1,0 +1,23 @@
+Small
+Cost: 75
+DollarWorth: 100
+Health: 100
+AttackDamage: 50
+AttackSpeed: 2
+SpawnTime: 2
+
+Medium
+Cost: 150
+DollarWorth: 175
+Health: 150
+AttackDamage: 100
+AttackSpeed: 3
+SpawnTime: 3
+
+Large
+Cost: 300
+DollarWorth: 350
+Health: 300
+AttackDamage: 150
+AttackSpeed: 5
+SpawnTime: 5

@@ -32,6 +32,7 @@ public class MainMenu implements Screen{
     public final int V_HEIGHT = 600;
     
     private MyRTSGame manager;
+    private MainGame newGame;
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private Viewport viewport;
@@ -41,6 +42,9 @@ public class MainMenu implements Screen{
     private Rectangle multiplayer;
     private Rectangle howToPlay;
     private Rectangle difficulty;
+    
+    //difficulty of a single player game
+    private String difficultyLevel;
     
     //vector that helps tracks the coordinates of user's click
     private Vector2 clickPoint;
@@ -54,6 +58,7 @@ public class MainMenu implements Screen{
         this.manager = manager;
         singlePlayer = new Rectangle(0,0,64,64);
         howToPlay = new Rectangle(128,0,64,64);
+        difficultyLevel = "Easy";
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
@@ -88,7 +93,7 @@ public class MainMenu implements Screen{
         testing.draw(batch, height, 256, 128);
         batch.end();
         
-        if(Gdx.input.isKeyPressed(Keys.SPACE)){
+        if(Gdx.input.isKeyPressed(Keys.ENTER)){
             manager.changeScreen(new MainGame(manager));
         }
         
@@ -99,13 +104,30 @@ public class MainMenu implements Screen{
             
             //starts single player mode
             if(singlePlayer.contains(clickPoint.x, clickPoint.y)){
-                manager.changeScreen(new MainGame(manager));
+                newGame = new MainGame(manager);
+                manager.changeScreen(newGame);
             }
+            
+//            if(multiplayer.contains(clickPoint.x, clickPoint.y)){
+//                newGame = new MainGame(manager);
+//                newGame.setMode("Multiplayer");
+//                manager.changeScreen(newGame);
+//            }
             
             //shows instructions on how to play
             if(howToPlay.contains(clickPoint.x, clickPoint.y)){
                 manager.changeScreen(new HowToPlay(manager));
             }
+            
+//            if(difficulty.contains(clickPoint.x,clickPoint.y)){
+//                if(difficultyLevel.equals("Easy")){
+//                    difficultyLevel = "Medium";
+//                }else if(difficultyLevel.equals("Medium")){
+//                    difficultyLevel = "Hard";
+//                }else{
+//                    difficultyLevel = "Easy";
+//                }
+//            }
         }
     }
 
