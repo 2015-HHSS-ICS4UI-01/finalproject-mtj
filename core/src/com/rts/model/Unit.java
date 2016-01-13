@@ -5,6 +5,7 @@
 package com.rts.model;
 
 import com.badlogic.gdx.math.Vector2;
+import com.rts.game.Player;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Unit extends Entity {
     private final float X_MAX_VEL = 2.0f;
     private final float Y_MAX_VEL = 4.0f;
     private final float DAMP = 0.8f;
-    private String playerName;
+    private Player player;
     private int cost;
     private int dollarWorth;
     private int health;
@@ -27,7 +28,7 @@ public class Unit extends Entity {
     // states for mario
     public enum State {
 
-        STANDING, MOVING, ATTACKING
+        STANDING, MOVING, DAMAGE
     }
     // the actual state mario is in
     private State state;
@@ -37,7 +38,7 @@ public class Unit extends Entity {
     // animation state counter
     private float stateTime;
 
-    public Unit(float x, float y, float width, float height, String playerName, int cost,
+    public Unit(float x, float y, float width, float height, Player p, int cost,
             int dollarWorth, int health, int attackDamage, int attackSpeed, int spawnTime) {
 
         super(x, y, width, height);
@@ -46,7 +47,7 @@ public class Unit extends Entity {
         acceleration = new Vector2(0, 0);
         stateTime = 0;
 
-        this.playerName = playerName;
+        player = p;
         this.cost = cost;
         this.dollarWorth = dollarWorth;
         this.health = health;
@@ -63,7 +64,7 @@ public class Unit extends Entity {
     public void update(float delta) {
 
         //STATES
-        if (playerName.contains("p1")) {
+        if (player.getName().equals("p1")) {
             if (state == State.STANDING) {
                 this.setVelocityX(0f);
             } else if (state == State.MOVING) {
@@ -72,11 +73,7 @@ public class Unit extends Entity {
                 this.setVelocityX(0f);
             }
 
-        } else if (playerName.contains("b1")) {
-            state = State.STANDING;
-            this.setVelocityX(0f);
-
-        } else if (playerName.contains("p2")) {
+        } else if (player.getName().equals("p2")) {
             if (state == State.STANDING) {
                 this.setVelocityX(0f);
             } else if (state == State.MOVING) {
@@ -98,12 +95,17 @@ public class Unit extends Entity {
         stateTime += delta;
     }
 
-    public void attack(Unit u) {
-        
+    public void attack(Unit u, Base b, String isBase) {
+        //attacking a base
+        if(isBase.contains("yes")){
+            b.removeHealth(attackDamage);
+        }
+        //attacking another unit
         if (damageTimer >= attackSpeed) {
             u.health = u.health - attackDamage;
             System.out.println("Health is " + u.health);
             damageTimer = 0;
+            u.setState(State.DAMAGE);
         }
 
     }
@@ -138,4 +140,13 @@ public class Unit extends Entity {
     public float getStateTime() {
         return stateTime;
     }
+    
+    public Player getPlayer(){
+        return player;
+    }
+    
+    public int getHealth(){
+        return health;
+    }
+    
 }

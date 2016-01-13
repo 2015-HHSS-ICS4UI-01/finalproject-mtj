@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.Player;
 import com.rts.model.Unit;
+import com.rts.model.Unit.State;
 
 /**
  *
@@ -66,13 +67,21 @@ public class WorldRenderer {
         
         if(p1.getUnits() != null){
         for(Unit u: p1.getUnits()){
-            batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            if(u.getState() == State.DAMAGE){
+                batch.draw(AssetManager.boxUnitBlueDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            }else{
+                batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            }
         }
         }
         
         if(p2.getUnits() != null){
         for(Unit u: p2.getUnits()){
-            batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            if(u.getState() == State.DAMAGE){
+                batch.draw(AssetManager.boxUnitRedDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            }else{
+                batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            }
         }
         }
         

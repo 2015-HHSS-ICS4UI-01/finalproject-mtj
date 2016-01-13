@@ -28,7 +28,9 @@ public class AssetManager {
     
     public static Texture grass = new Texture("grass.png");
     public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
+    public static Texture boxUnitBlueDamage = new Texture("BoxUnitBlueDamage.png");
     public static Texture boxUnitRed = new Texture("BoxUnitRed.png");
+    public static Texture boxUnitRedDamage = new Texture("BoxUnitRedDamage.png");
     public static Texture baseBlue = new Texture("BaseBlue.png");
     public static Texture baseRed = new Texture("BaseRed.png");
     
