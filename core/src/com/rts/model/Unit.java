@@ -11,7 +11,8 @@ import com.rts.game.Player;
  *
  * @author lamonta
  */
-public class Unit extends Entity{
+public class Unit extends Entity {
+
     private final float X_MAX_VEL = 2.0f;
     private final float Y_MAX_VEL = 4.0f;
     private final float DAMP = 0.8f;
@@ -22,19 +23,18 @@ public class Unit extends Entity{
     private int attackDamage;
     private int spawnTime;
     private int dollarWorth;
-    
+    private float damageTimer;
+
     // states for mario
     public enum State {
 
         STANDING, MOVING, DAMAGE
     }
-    
     // the actual state mario is in
     private State state;
     // movement variables
     private Vector2 velocity;
     private Vector2 acceleration;
-    
     // animation state counter
     private float stateTime;
 
@@ -43,8 +43,8 @@ public class Unit extends Entity{
 
         super(x, y, width, height);
         state = State.MOVING;
-        velocity = new Vector2(0,0);
-        acceleration = new Vector2(0,0);
+        velocity = new Vector2(0, 0);
+        acceleration = new Vector2(0, 0);
         stateTime = 0;
 
         player = p;
@@ -56,14 +56,13 @@ public class Unit extends Entity{
         this.spawnTime = spawnTime;
         damageTimer = attackSpeed;
     }
-    
-    
-      public void dampen(){
-        velocity.x = velocity.x*DAMP;
+
+    public void dampen() {
+        velocity.x = velocity.x * DAMP;
     }
-    
-    public void update(float delta){
-        
+
+    public void update(float delta) {
+
         //STATES
         if (player.getName().equals("p1")) {
             if (state == State.STANDING) {
@@ -77,79 +76,79 @@ public class Unit extends Entity{
         } else if (player.getName().equals("p2")) {
             if (state == State.STANDING) {
                 this.setVelocityX(0f);
-            }else if(state == State.MOVING){
+            } else if (state == State.MOVING) {
                 this.setVelocityX(-1f);
-            }else{
+            } else {
                 this.setVelocityX(0f);
             }
         }
-        
-        
+
+
         velocity.mulAdd(acceleration, delta);
-        
-        if(velocity.x < 0.01f && velocity.x > -0.01f){
+
+        if (velocity.x < 0.01f && velocity.x > -0.01f) {
             velocity.x = 0;
         }
-        addToPosition(velocity.x,velocity.y);
-        
-        
-        
-        
+        addToPosition(velocity.x, velocity.y);
+
+
+
+        damageTimer += delta;
         stateTime += delta;
     }
 
-    public void attack(Unit u, Base b, String isBase) {
-        //attacking a base
-        if(isBase.contains("yes")){
-            b.removeHealth(attackDamage);
-        }
-        //attacking another unit
+    public void attack(Unit u) {
         if (damageTimer >= attackSpeed) {
             u.health = u.health - attackDamage;
             System.out.println("Health is " + u.health);
             damageTimer = 0;
             u.setState(State.DAMAGE);
         }
+    }
 
+    public void attackBase(Base b) {
+        if(damageTimer >= attackSpeed){
+            b.removeHealth(attackDamage);
+            damageTimer = 0;
+        }
     }
 
     public void setVelocityX(float x) {
         velocity.x = x;
     }
-    
-    public void setVelocityY(float y){
+
+    public void setVelocityY(float y) {
         velocity.y = y;
     }
-    
-    public void setState(State s){
-        if(state != s){
+
+    public void setState(State s) {
+        if (state != s) {
             stateTime = 0;
         }
         state = s;
     }
-    
-    public float getVelocityX(){
+
+    public float getVelocityX() {
         return velocity.x;
     }
-    
-    public float getVelocityY(){
+
+    public float getVelocityY() {
         return velocity.y;
     }
-    
-    public State getState(){
+
+    public State getState() {
         return state;
     }
-    
-    public float getStateTime(){
+
+    public float getStateTime() {
         return stateTime;
     }
-    
-    public Player getPlayer(){
+
+    public Player getPlayer() {
         return player;
     }
-    
-    public int getHealth(){
+
+    public int getHealth() {
         return health;
     }
-    
 }

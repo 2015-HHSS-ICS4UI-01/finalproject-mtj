@@ -90,25 +90,7 @@ public class MainGame implements Screen {
         // units colliding with each other
         if (p1.getUnits() != null && p2.getUnits() != null) {
             
-            //player 2 units colliding with player 1's base
-            Base base1 = p1.getBase();
-            for(Unit u2: p2.getUnits()){
-                if(u2.isColliding(base1)){
-                    float overX = u2.getOverlapX(base1);
-                    u2.setState(Unit.State.STANDING);
-                    u2.attack(u2,base1,"yes");
-                }
-            }
             
-            //player 1 units colliding with player 2's base
-            Base base2 = p2.getBase();
-            for(Unit u1: p1.getUnits()){
-                if(u1.isColliding(base2)){
-                    float overX = u1.getOverlapX(base2);
-                    u1.setState(Unit.State.STANDING);
-                    u1.attack(u1,base2,"yes");
-                }
-            }
             
             collisionCheck.clear();
             collisionCheck.addAll(p1.getUnits());
@@ -117,23 +99,54 @@ public class MainGame implements Screen {
                 Unit u1 = collisionCheck.get(i);
                 if(u1.getHealth() <= 0){
                     u1.getPlayer().removeUnit(u1);
+                    
                 }
+                boolean hitting = false;
                 for (Unit u2 : collisionCheck) {
                     if (u1 != u2 && u1.isColliding(u2)) {
+                        hitting = true;
                         float overX = u1.getOverlapX(u2);
                         u1.setState(Unit.State.STANDING);
                         u2.setState(Unit.State.STANDING);
                         
                         //damage
                         if(!u1.getPlayer().getName().equals(u2.getPlayer().getName())){                            
-                            u1.attack(u2,base1,"no");
-                            u2.attack(u1,base1,"no");
+                            u1.attack(u2);
+                            u2.attack(u1);
                             
                         }
                         
                     }
                     
                 }
+                if(hitting == false){
+                    u1.setState(Unit.State.MOVING);
+                    
+                }
+            }
+            
+            //player 2 units colliding with player 1's base
+            Base base1 = p1.getBase();
+           
+            for(Unit u2: p2.getUnits()){
+                if(u2.isColliding(base1)){
+                    float overX = u2.getOverlapX(base1);
+                    u2.setState(Unit.State.STANDING);
+                    u2.attackBase(base1);
+                }
+                
+            }
+            
+            //player 1 units colliding with player 2's base
+            Base base2 = p2.getBase();
+          
+            for(Unit u1: p1.getUnits()){
+                if(u1.isColliding(base2)){
+                    float overX = u1.getOverlapX(base2);
+                    u1.setState(Unit.State.STANDING);
+                    u1.attackBase(base2);
+                }
+                
             }
             
             

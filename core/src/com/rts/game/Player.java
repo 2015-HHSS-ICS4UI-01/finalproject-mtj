@@ -16,7 +16,7 @@ import com.rts.model.Unit;
  */
 public class Player {
 
-    private final float COOLDOWN = 2;
+    private float COOLDOWN = 2;
     private String name;
     private int coins = 450;
     private int baseTotalHealth = 5000;
@@ -59,7 +59,8 @@ public class Player {
                     units.add(new Unit(768, 16, width, height, p, cost, dollarWorth, 
                             health, attackDamage, attackSpeed, spawnTime));
                 }
-                spawnTime = 0;
+                unitSpawnTime = 0;
+                COOLDOWN = spawnTime;
                 currentUnits++;
             }
         }
@@ -69,6 +70,7 @@ public class Player {
         for(int i = 0; i < units.size; i++){
             if(units.get(i) == u){
                 units.removeIndex(i);
+                currentUnits--;
                 break;
             }
         }
@@ -87,6 +89,6 @@ public class Player {
     }
 
     public void addToSpawnTime(float deltaTime) {
-        spawnTime = spawnTime + deltaTime;
+        unitSpawnTime = unitSpawnTime + deltaTime;
     }
 }
