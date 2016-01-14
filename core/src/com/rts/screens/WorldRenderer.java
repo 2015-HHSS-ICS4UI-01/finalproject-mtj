@@ -80,7 +80,6 @@ public class WorldRenderer {
         for(Unit u: p2.getUnits()){
             if(u.getState() == State.DAMAGE){
                 batch.draw(AssetManager.boxUnitRedDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
-                System.out.println("taking damage");
             }else{
                 batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
             }

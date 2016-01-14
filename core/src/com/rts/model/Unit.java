@@ -23,12 +23,14 @@ public class Unit extends Entity {
     private int attackDamage;
     private int spawnTime;
     private int dollarWorth;
-    private float damageTimer;
+    private float attackTimer;
+    private float damageStateTimer = 0;
+    
 
     // states for mario
     public enum State {
 
-        STANDING, MOVING, DAMAGE
+        STANDING, MOVING, DAMAGE, WAITING
     }
     // the actual state mario is in
     private State state;
@@ -54,7 +56,7 @@ public class Unit extends Entity {
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.spawnTime = spawnTime;
-        damageTimer = attackSpeed;
+        attackTimer = attackSpeed;
     }
 
     public void dampen() {
@@ -62,7 +64,15 @@ public class Unit extends Entity {
     }
 
     public void update(float delta) {
-
+        
+        if(state == State.DAMAGE){
+            
+            if(damageStateTimer >= 0.2){
+                this.setState(State.STANDING);
+                
+            }
+        }
+        
         //STATES
         if (player.getName().equals("p1")) {
             if (state == State.STANDING) {
@@ -91,25 +101,29 @@ public class Unit extends Entity {
         }
         addToPosition(velocity.x, velocity.y);
 
+        
+        
 
-
-        damageTimer += delta;
+        
+        attackTimer += delta;
         stateTime += delta;
+        damageStateTimer+= delta;
     }
 
     public void attack(Unit u) {
-        if (damageTimer >= attackSpeed) {
+        if (attackTimer >= attackSpeed) {
             u.health = u.health - attackDamage;
             System.out.println("Health is " + u.health);
-            damageTimer = 0;
-            u.setState(State.DAMAGE);
+            attackTimer = 0;
+            u.state = State.DAMAGE;
+            u.damageStateTimer = 0;
         }
     }
 
     public void attackBase(Base b) {
-        if(damageTimer >= attackSpeed){
+        if(attackTimer >= attackSpeed){
             b.removeHealth(attackDamage);
-            damageTimer = 0;
+            attackTimer = 0;
         }
     }
 
@@ -126,6 +140,7 @@ public class Unit extends Entity {
             stateTime = 0;
         }
         state = s;
+        
     }
 
     public float getVelocityX() {
@@ -150,5 +165,9 @@ public class Unit extends Entity {
 
     public int getHealth() {
         return health;
+    }
+    
+    public float getDamageStateTimer(){
+        return damageStateTimer;
     }
 }

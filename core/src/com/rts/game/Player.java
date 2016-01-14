@@ -33,10 +33,10 @@ public class Player {
         this.name = name;
         coins = coins + (round * 50);
         units = new Array<Unit>();
-        if(name.contains("p1")){
-            base = new Base(0,16,80,80,"p1",1500);
-        }else{
-            base = new Base(720,16,80,80,"p2",1500);
+        if (name.contains("p1")) {
+            base = new Base(0, 16, 80, 80, "p1", 1500);
+        } else {
+            base = new Base(720, 16, 80, 80, "p2", 1500);
         }
     }
 
@@ -48,15 +48,15 @@ public class Player {
         coins = coins + increase;
     }
 
-    public void createUnit(int width, int height, Player p, int cost, int dollarWorth, int health, 
+    public void createUnit(int width, int height, Player p, int cost, int dollarWorth, int health,
             int attackDamage, int attackSpeed, int spawnTime) {
         if (currentUnits < maxUnits) {
             if (unitSpawnTime >= COOLDOWN) {
                 if (p.getName().equals("p1")) {
-                    units.add(new Unit(0, 16, width, height, p, cost, dollarWorth, 
+                    units.add(new Unit(0, 16, width, height, p, cost, dollarWorth,
                             health, attackDamage, attackSpeed, spawnTime));
                 } else if (p.getName().equals("p2")) {
-                    units.add(new Unit(768, 16, width, height, p, cost, dollarWorth, 
+                    units.add(new Unit(768, 16, width, height, p, cost, dollarWorth,
                             health, attackDamage, attackSpeed, spawnTime));
                 }
                 unitSpawnTime = 0;
@@ -65,10 +65,10 @@ public class Player {
             }
         }
     }
-    
-    public void removeUnit(Unit u){
-        for(int i = 0; i < units.size; i++){
-            if(units.get(i) == u){
+
+    public void removeUnit(Unit u) {
+        for (int i = 0; i < units.size; i++) {
+            if (units.get(i) == u && u.getDamageStateTimer() > 0.2) {
                 units.removeIndex(i);
                 currentUnits--;
                 break;
@@ -79,8 +79,8 @@ public class Player {
     public Array<Unit> getUnits() {
         return units;
     }
-    
-    public Base getBase(){
+
+    public Base getBase() {
         return base;
     }
 
@@ -90,5 +90,13 @@ public class Player {
 
     public void addToSpawnTime(float deltaTime) {
         unitSpawnTime = unitSpawnTime + deltaTime;
+    }
+
+    public Unit getFrontUnit() {
+        if (units.size > 0) {
+            Unit u = units.get(0);
+            return u;
+        }
+        return null;
     }
 }
