@@ -125,6 +125,7 @@ public class MainMenu implements Screen{
                 }
             }
             
+            //shows the how to play menu
             if(currentPos.equals("How to Play")){
                 manager.changeScreen(new HowToPlay(manager));
             }
@@ -132,6 +133,7 @@ public class MainMenu implements Screen{
         }
         
         //main menu navigation using the keyboard
+        //moves the selection down
         if(Gdx.input.isKeyJustPressed(Keys.DOWN)){
             String posChange = "";
             if(currentPos.equals("Single Player")){
@@ -153,7 +155,9 @@ public class MainMenu implements Screen{
             currentPos = posChange;
             
             System.out.println(currentPos);
-        }else if(Gdx.input.isKeyJustPressed(Keys.UP)){
+        }
+        //moves the selection up
+        else if(Gdx.input.isKeyJustPressed(Keys.UP)){
             String posChange = "";
             if(currentPos.equals("Single Player")){
                 posChange = "How to Play";
