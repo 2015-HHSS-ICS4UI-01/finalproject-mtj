@@ -110,9 +110,11 @@ public class MainGame implements Screen {
 
 
                             if (u1 == p1.getFrontUnit() || u1 == p2.getFrontUnit()) {
-                                u1.setState(Unit.State.STANDING);
-
-                            } else {
+                                if(!u1.getPlayer().getName().equals(u2.getPlayer().getName())){
+                                    u1.setState(Unit.State.STANDING);
+                                }
+                            }else if (u1.getPlayer().getName().equals(u2.getPlayer().getName())
+                                    && u2 != p1.getFrontUnit() || u2 != p2.getFrontUnit()){
                                 u1.setState(Unit.State.WAITING);
                             }
 
