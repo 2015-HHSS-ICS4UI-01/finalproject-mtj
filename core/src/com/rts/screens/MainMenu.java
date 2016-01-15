@@ -37,6 +37,8 @@ public class MainMenu implements Screen{
     private OrthographicCamera camera;
     private Viewport viewport;
     
+    private String currentPos;
+    
     //menu button collisions
     private Rectangle singlePlayer;
     private Rectangle multiplayer;
@@ -44,7 +46,8 @@ public class MainMenu implements Screen{
     private Rectangle difficulty;
     
     //difficulty of a single player game
-    private String difficultyLevel;
+    private String[] difficultyLevels;
+    private String currentDifficulty;
     
     //vector that helps tracks the coordinates of user's click
     private Vector2 clickPoint;
@@ -58,7 +61,9 @@ public class MainMenu implements Screen{
         this.manager = manager;
         singlePlayer = new Rectangle(0,0,64,64);
         howToPlay = new Rectangle(128,0,64,64);
-        difficultyLevel = "Easy";
+        difficultyLevels = new String[] {"Easy", "Normal", "Hard"};
+        currentDifficulty = difficultyLevels[0];
+        currentPos = "Single Player";
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
@@ -93,8 +98,82 @@ public class MainMenu implements Screen{
         testing.draw(batch, height, 256, 128);
         batch.end();
         
+        //main menu inputs using the keyboard
         if(Gdx.input.isKeyPressed(Keys.ENTER)){
-            manager.changeScreen(new MainGame(manager));
+            System.out.println(currentPos);
+            //starts single player mode
+            if(currentPos.equals("Single Player")){
+                manager.changeScreen(new MainGame(manager));
+            }
+            
+            //starts multiplayer mode
+            if(currentPos.equals("Multiplayer")){
+                manager.changeScreen(new MainGame(manager));
+            }
+            
+            //changes the difficulty of the single player mode
+            if(currentPos.equals("Difficulty")){
+                if(currentDifficulty.equals(difficultyLevels[difficultyLevels.length - 1])){
+                    currentDifficulty = difficultyLevels[0];
+                }else{
+                    for(int i = 0; i < difficultyLevels.length; i++){
+                        if(currentDifficulty.equals((difficultyLevels[i]))){
+                            currentDifficulty = difficultyLevels[i+1];
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if(currentPos.equals("How to Play")){
+                manager.changeScreen(new HowToPlay(manager));
+            }
+            
+        }
+        
+        //main menu navigation using the keyboard
+        if(Gdx.input.isKeyJustPressed(Keys.DOWN)){
+            String posChange = "";
+            if(currentPos.equals("Single Player")){
+                posChange = "Multiplayer";
+            }
+            
+            if(currentPos.equals("Multiplayer")){
+                posChange = "Difficulty";
+            }
+            
+            if(currentPos.equals("Difficulty")){
+                posChange = "How to Play";
+            }
+            
+            if(currentPos.equals("How to Play")){
+                posChange = "Single Player";
+            }
+            
+            currentPos = posChange;
+            
+            System.out.println(currentPos);
+        }else if(Gdx.input.isKeyJustPressed(Keys.UP)){
+            String posChange = "";
+            if(currentPos.equals("Single Player")){
+                posChange = "How to Play";
+            }
+            
+            if(currentPos.equals("How to Play")){
+                posChange = "Difficulty";
+            }
+            
+            if(currentPos.equals("Difficulty")){
+                posChange = "Multiplayer";
+            }
+            
+            if(currentPos.equals("Multiplayer")){
+                posChange = "Single Player";
+            }
+            
+            currentPos = posChange;
+            
+            System.out.println(currentPos);
         }
         
         if(Gdx.input.isTouched()){
