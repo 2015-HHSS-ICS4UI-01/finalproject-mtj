@@ -92,11 +92,15 @@ public class Player {
         unitSpawnTime = unitSpawnTime + deltaTime;
     }
 
-    public Unit getFrontUnit() {
-        if (units.size > 0) {
-            Unit u = units.get(0);
-            return u;
+    public int getUnitPosition(Unit u) {
+        for(int i = 0; i < this.getUnits().size; i++){
+        if(units.get(i) == u){
+            return i;
         }
-        return null;
+        }
+        //dead return
+        return -1;
     }
+    
+    
 }

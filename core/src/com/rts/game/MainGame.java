@@ -109,12 +109,13 @@ public class MainGame implements Screen {
                         if (u1 != u2 && u1.isColliding(u2)) {
 
 
-                            if (u1 == p1.getFrontUnit() || u1 == p2.getFrontUnit()) {
+                            if (p1.getUnitPosition(u1) == 0 || p2.getUnitPosition(u1) == 0) {
                                 if(!u1.getPlayer().getName().equals(u2.getPlayer().getName())){
                                     u1.setState(Unit.State.STANDING);
                                 }
                             }else if (u1.getPlayer().getName().equals(u2.getPlayer().getName())
-                                    && u2 != p1.getFrontUnit() || u2 != p2.getFrontUnit()){
+                                    && (p1.getUnitPosition(u1) != -1 && p1.getUnitPosition(u1) > p1.getUnitPosition(u2) 
+                                    || p2.getUnitPosition(u1) != -1 && p2.getUnitPosition(u1) > p2.getUnitPosition(u2))){
                                 u1.setState(Unit.State.WAITING);
                             }
 
@@ -132,9 +133,9 @@ public class MainGame implements Screen {
                 }
             }
 
-            //player 2 units colliding with player 1's base
+            
             Base base1 = p1.getBase();
-
+            //player 2 units colliding with player 1's base
             for (Unit u2 : p2.getUnits()) {
                 if (u2.isColliding(base1)) {
                     float overX = u2.getOverlapX(base1);
@@ -144,9 +145,9 @@ public class MainGame implements Screen {
 
             }
 
-            //player 1 units colliding with player 2's base
+            
             Base base2 = p2.getBase();
-
+            //player 1 units colliding with player 2's base
             for (Unit u1 : p1.getUnits()) {
                 if (u1.isColliding(base2)) {
                     float overX = u1.getOverlapX(base2);
