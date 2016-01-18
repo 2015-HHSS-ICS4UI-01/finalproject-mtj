@@ -27,12 +27,12 @@ public class Unit extends Entity {
     private float damageStateTimer = 0;
     
 
-    // states for mario
+    // states for units
     public enum State {
 
         STANDING, MOVING, DAMAGE, WAITING
     }
-    // the actual state mario is in
+    // the actual state the unit is in
     private State state;
     // movement variables
     private Vector2 velocity;
@@ -124,6 +124,8 @@ public class Unit extends Entity {
         if(attackTimer >= attackSpeed){
             b.removeHealth(attackDamage);
             attackTimer = 0;
+            b.setBaseState(Base.baseState.DAMAGE);
+            b.damageStateTimer = 0;
         }
     }
 

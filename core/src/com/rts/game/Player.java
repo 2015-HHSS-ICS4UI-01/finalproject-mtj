@@ -95,12 +95,20 @@ public class Player {
     public void addToSpawnTime(float deltaTime) {
         unitSpawnTime = unitSpawnTime + deltaTime;
     }
-
-    public Unit getFrontUnit() {
-        if (units.size > 0) {
-            Unit u = units.get(0);
-            return u;
-        }
-        return null;
+    
+    public void addToBaseCheck(float deltaTime){
+        base.baseCheck(deltaTime);
     }
+
+    public int getUnitPosition(Unit u) {
+        for(int i = 0; i < this.getUnits().size; i++){
+        if(units.get(i) == u){
+            return i;
+        }
+        }
+        //dead return
+        return -1;
+    }
+    
+    
 }

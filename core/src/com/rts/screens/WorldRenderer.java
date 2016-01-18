@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.Player;
+import com.rts.model.Base;
 import com.rts.model.Turret;
 import com.rts.model.Unit;
 import com.rts.model.Unit.State;
@@ -99,8 +100,16 @@ public class WorldRenderer {
 //        }
         
         // draw the bases
-        batch.draw(AssetManager.baseBlue,0,16,80,80);
-        batch.draw(AssetManager.baseRed,720,16,80,80);
+        if(p1.getBase().getState() == Base.baseState.DAMAGE){
+            batch.draw(AssetManager.baseBlueDamage,0,16,80,80);
+        }else{
+            batch.draw(AssetManager.baseBlue,0,16,80,80);
+        }
+        if(p2.getBase().getState() == Base.baseState.DAMAGE){
+            batch.draw(AssetManager.baseRedDamage,720,16,80,80);
+        }else{
+            batch.draw(AssetManager.baseRed,720,16,80,80);
+        }
         
 //        // draw mario
 //        if(player.getState() == Unit.State.STANDING){
