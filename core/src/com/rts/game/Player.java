@@ -87,6 +87,10 @@ public class Player {
     public String getName() {
         return name;
     }
+    
+    public float getRemainingCooldown(){
+        return unitSpawnTime;
+    }
 
     public void addToSpawnTime(float deltaTime) {
         unitSpawnTime = unitSpawnTime + deltaTime;

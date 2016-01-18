@@ -23,13 +23,14 @@ import com.rts.screens.WorldRenderer;
  * @author donet6376
  */
 public class MainGame implements Screen {
-
+    
     private MyRTSGame manager;
     private WorldRenderer renderer;
     private int round;
     private Player p1;
     private Player p2;
     private Array<Unit> collisionCheck;
+    private Unit moneyCheck;
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
@@ -49,28 +50,63 @@ public class MainGame implements Screen {
     public void render(float deltaTime) {
 
         //small unit
-        if (Gdx.input.isKeyJustPressed(Keys.A)) {
+        if (Gdx.input.isKeyJustPressed(Keys.A) && p1.getCoins() >= 50) {
             p1.createUnit(16, 32, p1, 75, 100, 100, 50, 2, 2);
+            //testing
+            System.out.println(p1.getRemainingCooldown());
+            //when unit is spawned, coins are deducted from user
+            if(p1.getRemainingCooldown() == 0){ 
+                p1.updateCoins(-50);
+                System.out.println(p1.getCoins());
+            }
         }
-        //medium unit
-        if (Gdx.input.isKeyJustPressed(Keys.S)) {
+        //medium unit that costs 
+        if (Gdx.input.isKeyJustPressed(Keys.S) && p1.getCoins() >= 100) {
             p1.createUnit(32, 48, p1, 150, 175, 150, 100, 3, 3);
+            //testing
+            System.out.println(p1.getRemainingCooldown());
+            //when unit is spawned, coins are deducted from user
+            if(p1.getRemainingCooldown() == 0){ 
+                p1.updateCoins(-100);
+                System.out.println(p1.getCoins());
+            }
         }
-        //large unit
-        if (Gdx.input.isKeyJustPressed(Keys.D)) {
+        //large unit that costs 300 coins
+        if (Gdx.input.isKeyJustPressed(Keys.D)) { 
             p1.createUnit(48, 64, p1, 300, 350, 300, 150, 5, 5);
+            System.out.println(p1.getRemainingCooldown());
+            //when unit is spawned, coins are deducted from player 1
+            if(p1.getRemainingCooldown() == 0){
+                p1.updateCoins(-(p1.getFrontUnit().getCost()));
+                System.out.println(p1.getCoins());
+            }
         }
-        //small unit
-        if (Gdx.input.isKeyJustPressed(Keys.J)) {
+        //small unit that costs 75 coins
+        if (Gdx.input.isKeyJustPressed(Keys.J) && p2.getCoins() >= 75) {
             p2.createUnit(16, 32, p2, 75, 100, 100, 50, 2, 2);
+            //when unit is spawned, coins are deducted from player 2
+            if(p2.getRemainingCooldown() == 0){ 
+                p2.updateCoins(-50);
+                System.out.println(p2.getCoins());
+            }
         }
-        //medium unit
-        if (Gdx.input.isKeyJustPressed(Keys.K)) {
+        //medium unit that costs 150 coins
+        if (Gdx.input.isKeyJustPressed(Keys.K) && p2.getCoins() >= 100) {
             p2.createUnit(32, 48, p2, 150, 175, 150, 100, 3, 3);
+            //when unit is spawned, coins are deducted from player 2
+            if(p2.getRemainingCooldown() == 0){ 
+                p2.updateCoins(-100);
+                System.out.println(p2.getCoins());
+            }
         }
-        //large unit
-        if (Gdx.input.isKeyJustPressed(Keys.L)) {
+        //large unit that costs 300 coins
+        if (Gdx.input.isKeyJustPressed(Keys.L) && p2.getCoins() >= 300) {
             p2.createUnit(48, 64, p2, 300, 350, 300, 150, 5, 5);
+            //when unit is spawned, coins are deducted from player 2
+            if(p2.getRemainingCooldown() == 0){
+                p2.updateCoins(-300);
+                System.out.println(p2.getCoins());
+            }
         }
 
         if (p1.getUnits() != null) {
