@@ -132,37 +132,38 @@ public class MainGame implements Screen {
                     }
                 }
             }
-
+            
             
             Base base1 = p1.getBase();
             //player 2 units colliding with player 1's base
-            for (Unit u2 : p2.getUnits()) {
+            
+                for (Unit u2 : p2.getUnits()) {
                 if (u2.isColliding(base1)) {
                     float overX = u2.getOverlapX(base1);
                     u2.setState(Unit.State.STANDING);
                     u2.attackBase(base1);
                 }
-
             }
-
+            
             
             Base base2 = p2.getBase();
             //player 1 units colliding with player 2's base
-            for (Unit u1 : p1.getUnits()) {
+            
+                for (Unit u1 : p1.getUnits()) {
                 if (u1.isColliding(base2)) {
                     float overX = u1.getOverlapX(base2);
                     u1.setState(Unit.State.STANDING);
                     u1.attackBase(base2);
                 }
-
             }
-
-
+            
+            
         }
-
-
+        
         p1.addToSpawnTime(deltaTime);
         p2.addToSpawnTime(deltaTime);
+        p1.addToBaseCheck(deltaTime);
+        p2.addToBaseCheck(deltaTime);
         // draw the screen
         renderer.render(deltaTime);
     }
