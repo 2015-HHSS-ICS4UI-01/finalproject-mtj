@@ -25,7 +25,6 @@ public class Unit extends Entity {
     private int dollarWorth;
     private float attackTimer;
     private float damageStateTimer = 0;
-    
 
     // states for units
     public enum State {
@@ -64,30 +63,38 @@ public class Unit extends Entity {
     }
 
     public void update(float delta) {
-        
-        if(state == State.DAMAGE){
-            
-            if(damageStateTimer >= 0.2){
+
+        if (state == State.DAMAGE) {
+
+            if (damageStateTimer >= 0.2) {
                 this.setState(State.STANDING);
-                
+
             }
         }
-        
+
         //STATES
         if (player.getName().equals("p1")) {
-            if (state == State.STANDING) {
-                this.setVelocityX(0f);
-            } else if (state == State.MOVING) {
-                this.setVelocityX(1f);
+            if (state == State.MOVING) {
+                if (cost == 75) {
+                    this.setVelocityX(2.5f);
+                } else if (cost == 150) {
+                    this.setVelocityX(1.5f);
+                } else {
+                    this.setVelocityX(1f);
+                }
             } else {
                 this.setVelocityX(0f);
             }
 
         } else if (player.getName().equals("p2")) {
-            if (state == State.STANDING) {
-                this.setVelocityX(0f);
-            } else if (state == State.MOVING) {
-                this.setVelocityX(-1f);
+            if (state == State.MOVING) {
+                if (cost == 75) {
+                    this.setVelocityX(-2.5f);
+                } else if (cost == 150) {
+                    this.setVelocityX(-1.5f);
+                } else {
+                    this.setVelocityX(-1f);
+                }
             } else {
                 this.setVelocityX(0f);
             }
@@ -101,13 +108,13 @@ public class Unit extends Entity {
         }
         addToPosition(velocity.x, velocity.y);
 
-        
-        
 
-        
+
+
+
         attackTimer += delta;
         stateTime += delta;
-        damageStateTimer+= delta;
+        damageStateTimer += delta;
     }
 
     public void attack(Unit u) {
@@ -121,7 +128,7 @@ public class Unit extends Entity {
     }
 
     public void attackBase(Base b) {
-        if(attackTimer >= attackSpeed){
+        if (attackTimer >= attackSpeed) {
             b.removeHealth(attackDamage);
             attackTimer = 0;
             b.setBaseState(Base.baseState.DAMAGE);
@@ -142,7 +149,7 @@ public class Unit extends Entity {
             stateTime = 0;
         }
         state = s;
-        
+
     }
 
     public float getVelocityX() {
@@ -168,8 +175,8 @@ public class Unit extends Entity {
     public int getHealth() {
         return health;
     }
-    
-    public float getDamageStateTimer(){
+
+    public float getDamageStateTimer() {
         return damageStateTimer;
     }
     
