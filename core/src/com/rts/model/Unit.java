@@ -173,7 +173,7 @@ public class Unit extends Entity {
         return damageStateTimer;
     }
     
-    public int getCost(){
-        return cost;
+    public int getDollarWorth(){
+        return dollarWorth;
     }
 }
