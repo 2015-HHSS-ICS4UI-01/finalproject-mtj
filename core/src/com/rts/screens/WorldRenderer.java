@@ -68,9 +68,11 @@ public class WorldRenderer {
         // tells the renderer this is the list
         batch.begin();
         // list of things to draw
+        
         // draw the ground
         batch.draw(AssetManager.grass, 0, 0, 800, 40);
         
+        //draw player 1 units
         if(p1.getUnits() != null){
         for(Unit u: p1.getUnits()){
             if(u.getState() == State.DAMAGE){
@@ -78,9 +80,23 @@ public class WorldRenderer {
             }else{
                 batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
             }
+            if(u.getHealth() > 0){
+                //drawing health
+                batch.draw(AssetManager.health,u.getX(),u.getY() + u.getHeight() + 5,
+                        u.getWidth() *(u.getHealth() / u.getStartingHealth()), 5);
+                //drawing cooldown
+                if(u.getAttackTimer() < u.getAttackSpeed()){
+                    batch.draw(AssetManager.cooldown,u.getX(),u.getY() + u.getHeight() + 10,
+                        u.getWidth() *(u.getAttackTimer() / u.getAttackSpeed()), 5);
+                }else {
+                    batch.draw(AssetManager.cooldown,u.getX(),u.getY() + u.getHeight() + 10,
+                            u.getWidth(), 5);
+                }
+            }
         }
         }
         
+        //draw player 2 units
         if(p2.getUnits() != null){
         for(Unit u: p2.getUnits()){
             if(u.getState() == State.DAMAGE){
@@ -88,7 +104,20 @@ public class WorldRenderer {
             }else{
                 batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
             }
-            
+            if(u.getHealth() > 0){
+                //drawing health
+                batch.draw(AssetManager.health,u.getX(),u.getY() + u.getHeight() + 5,
+                        u.getWidth() *(u.getHealth() / u.getStartingHealth()), 5);
+                //drawing cooldown
+                if(u.getAttackTimer() < u.getAttackSpeed()){
+                    batch.draw(AssetManager.cooldown,u.getX(),u.getY() + u.getHeight() + 10,
+                        u.getWidth() *(u.getAttackTimer() / u.getAttackSpeed()), 5);
+                }else {
+                    batch.draw(AssetManager.cooldown,u.getX(),u.getY() + u.getHeight() + 10,
+                            u.getWidth(), 5);
+                }
+                
+            }
         }
         }
         

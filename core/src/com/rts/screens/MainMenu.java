@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MainGame;
@@ -34,6 +35,7 @@ public class MainMenu implements Screen{
     private MyRTSGame manager;
     private MainGame newGame;
     private SpriteBatch batch;
+    BitmapFont text;
     private OrthographicCamera camera;
     private Viewport viewport;
     
@@ -65,6 +67,7 @@ public class MainMenu implements Screen{
         currentDifficulty = difficultyLevels[0];
         currentPos = "Single Player";
         batch = new SpriteBatch();
+        text = new BitmapFont();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         clickPoint = new Vector2(); 
@@ -90,8 +93,10 @@ public class MainMenu implements Screen{
     public void render(float delta) {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
+        text.draw(batch, "MAIN MENU", 0, V_HEIGHT / 2, V_WIDTH, Align.center, false);
         batch.draw(AssetManager.grass,singlePlayer.x,singlePlayer.y,singlePlayer.width,singlePlayer.height);
         testing.draw(batch, coords, 128, 128);
         batch.draw(AssetManager.grass,howToPlay.x,howToPlay.y,howToPlay.width,howToPlay.height);

@@ -20,6 +20,7 @@ public class Unit extends Entity {
     private Player player;
     private int cost;
     private int health;
+    private float startingHealth;
     private int attackSpeed;
     private int attackDamage;
     private int spawnTime;
@@ -53,6 +54,7 @@ public class Unit extends Entity {
         this.cost = cost;
         this.dollarWorth = dollarWorth;
         this.health = health;
+        this.startingHealth = health;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.spawnTime = spawnTime;
@@ -175,6 +177,10 @@ public class Unit extends Entity {
     public int getHealth() {
         return health;
     }
+    
+    public float getStartingHealth(){
+        return startingHealth;
+    }
 
     public float getDamageStateTimer() {
         return damageStateTimer;
@@ -182,5 +188,13 @@ public class Unit extends Entity {
     
     public int getDollarWorth(){
         return dollarWorth;
+    }
+    
+    public int getAttackSpeed(){
+        return attackSpeed;
+    }
+    
+    public float getAttackTimer(){
+        return attackTimer;
     }
 }
