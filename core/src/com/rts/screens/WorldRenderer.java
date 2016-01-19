@@ -84,6 +84,7 @@ public class WorldRenderer {
             }else{
                 batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
             }
+            
         }
         }
         

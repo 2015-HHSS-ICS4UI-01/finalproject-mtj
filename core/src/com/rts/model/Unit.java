@@ -111,7 +111,6 @@ public class Unit extends Entity {
 
 
 
-
         attackTimer += delta;
         stateTime += delta;
         damageStateTimer += delta;
