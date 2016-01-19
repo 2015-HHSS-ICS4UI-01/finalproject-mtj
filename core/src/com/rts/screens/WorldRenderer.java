@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -30,6 +31,7 @@ public class WorldRenderer {
     private Viewport viewport;
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    BitmapFont font;
     private Player p1;
     private Player p2;
     
@@ -38,6 +40,7 @@ public class WorldRenderer {
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         batch = new SpriteBatch();
+        font = new BitmapFont();
         
         this.p1 = p1;
         this.p2 = p2;
@@ -104,6 +107,9 @@ public class WorldRenderer {
 //        batch.draw(AssetManager.GUI,671,536,64,64);
 //        batch.draw(AssetManager.GUI,736,536,64,64);
         
+        font.setColor(1f, 1f, 1f, 1f);
+        font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);
+        font.draw(batch, "Coins: " + p2.getCoins(), 671, 472);
         
         
         
