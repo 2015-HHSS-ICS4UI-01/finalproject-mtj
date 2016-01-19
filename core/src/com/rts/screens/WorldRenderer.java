@@ -9,6 +9,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.Player;
@@ -87,6 +88,24 @@ public class WorldRenderer {
             
         }
         }
+        
+        
+        
+        Rectangle GUI = new Rectangle(0,536,64,64);
+
+        //GUI
+        //team blue
+        batch.draw(AssetManager.GUI,0,536,64,64);
+        batch.draw(AssetManager.GUI,65,536,64,64);
+        batch.draw(AssetManager.GUI,130,536,64,64);
+        
+        //team red
+        batch.draw(AssetManager.GUI,606,536,64,64);
+        batch.draw(AssetManager.GUI,671,536,64,64);
+        batch.draw(AssetManager.GUI,736,536,64,64);
+        
+        
+        
         
 //        if(p1.getTurrets() != null){
 //            for(Turret t: p1.getTurrets()){

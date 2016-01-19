@@ -178,4 +178,8 @@ public class Unit extends Entity {
     public float getDamageStateTimer() {
         return damageStateTimer;
     }
+    
+    public int getDollarWorth(){
+        return dollarWorth;
+    }
 }
