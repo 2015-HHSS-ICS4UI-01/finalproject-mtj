@@ -67,7 +67,10 @@ public class Player {
         }
     }
 
-    public void removeUnit(Unit u) {
+    public void removeUnit(Unit u, Player enemy) {
+        //give the other player coins
+        enemy.updateCoins(u.getDollarWorth());
+        //remove the unit
         for (int i = 0; i < units.size; i++) {
             if (units.get(i) == u && u.getDamageStateTimer() > 0.2) {
                 units.removeIndex(i);

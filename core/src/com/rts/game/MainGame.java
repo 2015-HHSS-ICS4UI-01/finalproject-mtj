@@ -23,10 +23,10 @@ import com.rts.screens.WorldRenderer;
  * @author donet6376
  */
 public class MainGame implements Screen {
+
     private final int smallUnitCost = 75;
     private final int mediumUnitCost = 150;
     private final int largeUnitCost = 300;
-    
     private MyRTSGame manager;
     private WorldRenderer renderer;
     private int round;
@@ -55,7 +55,7 @@ public class MainGame implements Screen {
         if (Gdx.input.isKeyJustPressed(Keys.A) && p1.getCoins() >= smallUnitCost) {
             p1.createUnit(16, 32, p1, 75, 100, 100, 50, 2, 2);
             //when unit is spawned, coins are deducted from player 1
-            if(p1.getRemainingCooldown() == 0){ 
+            if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-smallUnitCost);
                 System.out.println("p1:" + p1.getCoins());
             }
@@ -64,16 +64,16 @@ public class MainGame implements Screen {
         if (Gdx.input.isKeyJustPressed(Keys.S) && p1.getCoins() >= mediumUnitCost) {
             p1.createUnit(32, 48, p1, 150, 175, 150, 100, 3, 3);
             //when unit is spawned, coins are deducted from player 1
-            if(p1.getRemainingCooldown() == 0){ 
+            if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-mediumUnitCost);
                 System.out.println("p1:" + p1.getCoins());
             }
         }
         //spawns a large unit that costs 300 coins
-        if (Gdx.input.isKeyJustPressed(Keys.D) && p1.getCoins() >= largeUnitCost) { 
+        if (Gdx.input.isKeyJustPressed(Keys.D) && p1.getCoins() >= largeUnitCost) {
             p1.createUnit(48, 64, p1, 300, 350, 300, 150, 5, 5);
             //when unit is spawned, coins are deducted from player 1
-            if(p1.getRemainingCooldown() == 0){
+            if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-largeUnitCost);
                 System.out.println("p1:" + p1.getCoins());
             }
@@ -82,7 +82,7 @@ public class MainGame implements Screen {
         if (Gdx.input.isKeyJustPressed(Keys.J) && p2.getCoins() >= smallUnitCost) {
             p2.createUnit(16, 32, p2, 75, 100, 100, 50, 2, 2);
             //when unit is spawned, coins are deducted from player 2
-            if(p2.getRemainingCooldown() == 0){ 
+            if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-smallUnitCost);
                 System.out.println("p2:" + p2.getCoins());
             }
@@ -91,7 +91,7 @@ public class MainGame implements Screen {
         if (Gdx.input.isKeyJustPressed(Keys.K) && p2.getCoins() >= mediumUnitCost) {
             p2.createUnit(32, 48, p2, 150, 175, 150, 100, 3, 3);
             //when unit is spawned, coins are deducted from player 2
-            if(p2.getRemainingCooldown() == 0){ 
+            if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-mediumUnitCost);
                 System.out.println("p2:" + p2.getCoins());
             }
@@ -100,7 +100,7 @@ public class MainGame implements Screen {
         if (Gdx.input.isKeyJustPressed(Keys.L) && p2.getCoins() >= largeUnitCost) {
             p2.createUnit(48, 64, p2, 300, 350, 300, 150, 5, 5);
             //when unit is spawned, coins are deducted from player 2
-            if(p2.getRemainingCooldown() == 0){
+            if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-largeUnitCost);
                 System.out.println("p2:" + p2.getCoins());
             }
@@ -135,17 +135,12 @@ public class MainGame implements Screen {
                     //if a unit has died
                     if (u1.getHealth() <= 0) {
                         //if unit was player 1's, player 2 earns coins
-                        if(u1.getPlayer().getName().equals("p1")){
-                            p2.updateCoins(u1.getDollarWorth());
-                            System.out.println("p2:" + p2.getCoins());
+                        if (u1.getPlayer().getName().equals("p1")) {
+                            u1.getPlayer().removeUnit(u1, p2);
+                        } //if unit was player 2's, player 1 earns coins
+                        else if (u1.getPlayer().getName().equals("p2")) {
+                            u1.getPlayer().removeUnit(u1, p1);
                         }
-                        //if unit was player 2's, player 1 earns coins
-                        else if(u1.getPlayer().getName().equals("p2")){
-                            p1.updateCoins(u1.getDollarWorth());
-                            System.out.println("p1:" + p1.getCoins());
-                        }
-                        //the dead unit is removed from the game
-                        u1.getPlayer().removeUnit(u1);
                         continue;
                     }
 
@@ -155,12 +150,12 @@ public class MainGame implements Screen {
 
 
                             if (p1.getUnitPosition(u1) == 0 || p2.getUnitPosition(u1) == 0) {
-                                if(!u1.getPlayer().getName().equals(u2.getPlayer().getName())){
+                                if (!u1.getPlayer().getName().equals(u2.getPlayer().getName())) {
                                     u1.setState(Unit.State.STANDING);
                                 }
-                            }else if (u1.getPlayer().getName().equals(u2.getPlayer().getName())
-                                    && (p1.getUnitPosition(u1) != -1 && p1.getUnitPosition(u1) > p1.getUnitPosition(u2) 
-                                    || p2.getUnitPosition(u1) != -1 && p2.getUnitPosition(u1) > p2.getUnitPosition(u2))){
+                            } else if (u1.getPlayer().getName().equals(u2.getPlayer().getName())
+                                    && (p1.getUnitPosition(u1) != -1 && p1.getUnitPosition(u1) > p1.getUnitPosition(u2)
+                                    || p2.getUnitPosition(u1) != -1 && p2.getUnitPosition(u1) > p2.getUnitPosition(u2))) {
                                 u1.setState(Unit.State.WAITING);
                             }
 
@@ -177,34 +172,36 @@ public class MainGame implements Screen {
                     }
                 }
             }
-            
-            
+
+
             Base base1 = p1.getBase();
             //player 2 units colliding with player 1's base
-            
-                for (Unit u2 : p2.getUnits()) {
-                if (u2.isColliding(base1)) {
-                    float overX = u2.getOverlapX(base1);
+
+            for (Unit u2 : p2.getUnits()) {
+                if(u2.getState() != Unit.State.DAMAGE){
+                   if (u2.isColliding(base1)) {
                     u2.setState(Unit.State.STANDING);
                     u2.attackBase(base1);
+                } 
                 }
+                
             }
-            
-            
+
+
             Base base2 = p2.getBase();
             //player 1 units colliding with player 2's base
-            
-                for (Unit u1 : p1.getUnits()) {
+
+            for (Unit u1 : p1.getUnits()) {
+                if(u1.getState() != Unit.State.DAMAGE){
                 if (u1.isColliding(base2)) {
-                    float overX = u1.getOverlapX(base2);
                     u1.setState(Unit.State.STANDING);
                     u1.attackBase(base2);
                 }
             }
-            
-            
+            }
+
         }
-        
+
         p1.addToSpawnTime(deltaTime);
         p2.addToSpawnTime(deltaTime);
         p1.addToBaseCheck(deltaTime);

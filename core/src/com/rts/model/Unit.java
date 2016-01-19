@@ -79,7 +79,7 @@ public class Unit extends Entity {
         if (player.getName().equals("p1")) {
             if (state == State.MOVING) {
                 if (cost == 75) {
-                    this.setVelocityX(2.5f);
+                    this.setVelocityX(2f);
                 } else if (cost == 150) {
                     this.setVelocityX(1.5f);
                 } else {
@@ -92,7 +92,7 @@ public class Unit extends Entity {
         } else if (player.getName().equals("p2")) {
             if (state == State.MOVING) {
                 if (cost == 75) {
-                    this.setVelocityX(-2.5f);
+                    this.setVelocityX(-2f);
                 } else if (cost == 150) {
                     this.setVelocityX(-1.5f);
                 } else {
