@@ -33,7 +33,6 @@ public class MainGame implements Screen {
     private Player p1;
     private Player p2;
     private Array<Unit> collisionCheck;
-    private Unit moneyCheck;
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
@@ -55,8 +54,6 @@ public class MainGame implements Screen {
         //spawns a small unit that costs 75 coins
         if (Gdx.input.isKeyJustPressed(Keys.A) && p1.getCoins() >= smallUnitCost) {
             p1.createUnit(16, 32, p1, 75, 100, 100, 50, 2, 2);
-            //testing
-            System.out.println(p1.getRemainingCooldown());
             //when unit is spawned, coins are deducted from player 1
             if(p1.getRemainingCooldown() == 0){ 
                 p1.updateCoins(-smallUnitCost);

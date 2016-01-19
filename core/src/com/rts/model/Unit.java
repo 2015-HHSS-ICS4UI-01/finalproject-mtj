@@ -8,7 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.rts.game.Player;
 
 /**
- *
+ * Creates units that will advance towards the opposing base, and will attack 
+ * enemy units or the enemy base if either are in range.
  * @author lamonta
  */
 public class Unit extends Entity {

@@ -11,7 +11,8 @@ import com.rts.model.Turret;
 import com.rts.model.Unit;
 
 /**
- *
+ * The player; each user has a base, a set of units, coins, and a cooldown
+ * associated with spawning each unit.
  * @author donet6376
  */
 public class Player {

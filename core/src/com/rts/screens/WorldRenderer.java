@@ -94,14 +94,14 @@ public class WorldRenderer {
 
         //GUI
         //team blue
-        batch.draw(AssetManager.GUI,0,536,64,64);
-        batch.draw(AssetManager.GUI,65,536,64,64);
-        batch.draw(AssetManager.GUI,130,536,64,64);
+//        batch.draw(AssetManager.GUI,0,536,64,64);
+//        batch.draw(AssetManager.GUI,65,536,64,64);
+//        batch.draw(AssetManager.GUI,130,536,64,64);
         
         //team red
-        batch.draw(AssetManager.GUI,606,536,64,64);
-        batch.draw(AssetManager.GUI,671,536,64,64);
-        batch.draw(AssetManager.GUI,736,536,64,64);
+//        batch.draw(AssetManager.GUI,606,536,64,64);
+//        batch.draw(AssetManager.GUI,671,536,64,64);
+//        batch.draw(AssetManager.GUI,736,536,64,64);
         
         
         

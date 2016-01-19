@@ -23,8 +23,8 @@ import com.rts.game.MyRTSGame;
 import com.rts.screens.AssetManager;
 
 /**
- * The game's Main Menu; allows user to select a game mode, change the game's 
- * difficulty, or learn how to play the game.
+ * The game's Main Menu; allows user to start a 2 player game,
+ * or learn how to play the game.
  * @author besem4079
  */
 public class MainMenu implements Screen{
