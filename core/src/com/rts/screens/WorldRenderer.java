@@ -53,7 +53,7 @@ public class WorldRenderer {
         camera.update();
 
         // loads in the images
-        AssetManager.load();
+        
     }
 
     public void render(float delta) {
@@ -76,7 +76,8 @@ public class WorldRenderer {
         if (p1.getUnits() != null) {
             for (Unit u : p1.getUnits()) {
                 if (u.getState() == State.DAMAGE) {
-                    batch.draw(AssetManager.boxUnitBlueDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(AssetManager.unitDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 } else {
                     batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 }
@@ -100,7 +101,8 @@ public class WorldRenderer {
         if (p2.getUnits() != null) {
             for (Unit u : p2.getUnits()) {
                 if (u.getState() == State.DAMAGE) {
-                    batch.draw(AssetManager.boxUnitRedDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(AssetManager.unitDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 } else {
                     batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 }
@@ -118,6 +120,10 @@ public class WorldRenderer {
                     }
 
                 }
+                if(u.getPlayer().getRemainingCooldown() != 0){
+                    batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                }else{
+                    batch.draw(AssetManager.GUI,606,536,64,64);
             }
         }
 
@@ -127,14 +133,14 @@ public class WorldRenderer {
 
         //GUI
         //team blue
-//        batch.draw(AssetManager.GUI,0,536,64,64);
-//        batch.draw(AssetManager.GUI,65,536,64,64);
-//        batch.draw(AssetManager.GUI,130,536,64,64);
+        batch.draw(AssetManager.GUI,0,536,64,64);
+        batch.draw(AssetManager.GUI,65,536,64,64);
+        batch.draw(AssetManager.GUI,130,536,64,64);
 
         //team red
-//        batch.draw(AssetManager.GUI,606,536,64,64);
-//        batch.draw(AssetManager.GUI,671,536,64,64);
-//        batch.draw(AssetManager.GUI,736,536,64,64);
+        batch.draw(AssetManager.GUI,606,536,64,64);
+        batch.draw(AssetManager.GUI,671,536,64,64);
+        batch.draw(AssetManager.GUI,736,536,64,64);
 
         font.setColor(1f, 1f, 1f, 1f);
         font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);
@@ -154,12 +160,14 @@ public class WorldRenderer {
 
         // draw the bases
         if (p1.getBase().getState() == Base.baseState.DAMAGE) {
-            batch.draw(AssetManager.baseBlueDamage, 0, 16, 80, 80);
+            batch.draw(AssetManager.baseBlue, 0, 16, 80, 80);
+            batch.draw(AssetManager.base1Damage, 0, 16, 80, 80);
         } else {
             batch.draw(AssetManager.baseBlue, 0, 16, 80, 80);
         }
         if (p2.getBase().getState() == Base.baseState.DAMAGE) {
-            batch.draw(AssetManager.baseRedDamage, 720, 16, 80, 80);
+            batch.draw(AssetManager.baseRed, 720, 16, 80, 80);
+            batch.draw(AssetManager.base2Damage, 720, 16, 80, 80);
         } else {
             batch.draw(AssetManager.baseRed, 720, 16, 80, 80);
         }
@@ -181,6 +189,7 @@ public class WorldRenderer {
 
         // finished listing things to draw
         batch.end();
+    }
     }
 
     public void resize(int width, int height) {
