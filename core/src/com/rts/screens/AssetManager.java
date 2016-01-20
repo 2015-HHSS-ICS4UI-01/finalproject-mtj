@@ -17,8 +17,8 @@ import com.badlogic.gdx.utils.Array;
  */
 public class AssetManager {
     
-    private Array<Texture> unitTextures;
-    private Array<Texture> baseTextures;
+    public Array<Texture> unitTextures;
+    public Array<Texture> baseTextures;
     private int arrayPosP1 = 0;
     private int arrayPosP2 = 1;
     
@@ -43,7 +43,7 @@ public class AssetManager {
     public Texture GUI = new Texture("GUI.png");
     public Texture GUICooldown = new Texture("GUICooldown.png");
     
-    public void AssetManager(){
+    public AssetManager(){
         unitTextures = new Array<Texture>();
         baseTextures = new Array<Texture>();
         //adding unit colors to unit array
@@ -63,21 +63,25 @@ public class AssetManager {
     
     public void setColorRight(String player){
         if(player.contains("p1")){
-            if(arrayPosP1 == unitTextures.size){
+            if(arrayPosP1 == unitTextures.size - 1){
                 p1UnitColor = unitTextures.get(0);
                 p1BaseColor = baseTextures.get(0);
+                arrayPosP1 = 0;
             }else {
                 p1UnitColor = unitTextures.get(arrayPosP1 + 1);
                 p1BaseColor = baseTextures.get(arrayPosP1 + 1);
+                arrayPosP1++;
             }
             
         }else if(player.contains("p2")){
-            if(arrayPosP2 == unitTextures.size){
+            if(arrayPosP2 == unitTextures.size - 1){
                 p2UnitColor = unitTextures.get(0);
                 p2BaseColor = baseTextures.get(0);
+                arrayPosP2 = 0;
             }else {
                 p2UnitColor = unitTextures.get(arrayPosP2 + 1);
                 p2BaseColor = baseTextures.get(arrayPosP2 + 1);
+                arrayPosP2++;
             }
         }
     }
@@ -85,20 +89,24 @@ public class AssetManager {
     public void setColorLeft(String player){
         if(player.contains("p1")){
             if(arrayPosP1 == 0){
-                p1UnitColor = unitTextures.get(unitTextures.size);
-                p1BaseColor = baseTextures.get(baseTextures.size);
+                p1UnitColor = unitTextures.get(unitTextures.size - 1);
+                p1BaseColor = baseTextures.get(baseTextures.size - 1);
+                arrayPosP1 = unitTextures.size - 1;
             }else {
                 p1UnitColor = unitTextures.get(arrayPosP1 - 1);
                 p1BaseColor = baseTextures.get(arrayPosP1 - 1);
+                arrayPosP1--;
             }
             
         }else if(player.contains("p2")){
             if(arrayPosP2 == 0){
-                p2UnitColor = unitTextures.get(unitTextures.size);
-                p2BaseColor = baseTextures.get(baseTextures.size);
+                p2UnitColor = unitTextures.get(unitTextures.size - 1);
+                p2BaseColor = baseTextures.get(baseTextures.size - 1);
+                arrayPosP2 = unitTextures.size - 1;
             }else {
                 p2UnitColor = unitTextures.get(arrayPosP2 - 1);
                 p2BaseColor = baseTextures.get(arrayPosP2 - 1);
+                arrayPosP2--;
             }
         }
     }
@@ -113,7 +121,6 @@ public class AssetManager {
     
     public Texture getBaseColor(String player){
         if(player.contains("p1")){
-            System.out.println(p1BaseColor);
             return p1BaseColor;
         }else{
             return p2BaseColor;
