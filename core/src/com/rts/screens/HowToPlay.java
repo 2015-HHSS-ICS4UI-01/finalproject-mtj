@@ -37,6 +37,7 @@ public class HowToPlay implements Screen{
     private SpriteBatch batch;
     private OrthographicCamera camera;  
     private Vector2 clickPoint;
+    private AssetManager assetManager;
  
     public HowToPlay(MyRTSGame manager){
         this.manager = manager;
@@ -44,6 +45,7 @@ public class HowToPlay implements Screen{
         next = new Rectangle(128,0,64,64);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
+        assetManager = new AssetManager();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         clickPoint = new Vector2(); 
         camera.position.x = V_WIDTH/2f;
@@ -64,8 +66,8 @@ public class HowToPlay implements Screen{
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         batch.begin();
-        batch.draw(AssetManager.grass,back.x,back.y,back.width,back.height);
-        batch.draw(AssetManager.grass,next.x,next.y,next.width,next.height);
+        batch.draw(assetManager.grass,back.x,back.y,back.width,back.height);
+        batch.draw(assetManager.grass,next.x,next.y,next.width,next.height);
         batch.end();
         
         if(Gdx.input.isTouched()){

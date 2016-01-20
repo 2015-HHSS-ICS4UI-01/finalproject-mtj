@@ -17,28 +17,107 @@ import com.badlogic.gdx.utils.Array;
  */
 public class AssetManager {
     
-    private Array<Texture> textures;
+    private Array<Texture> unitTextures;
+    private Array<Texture> baseTextures;
+    private int arrayPosP1 = 0;
+    private int arrayPosP2 = 1;
     
     //the color of the team units
-    public static Texture p1color;
-    public static Texture p2color;
+    private Texture p1UnitColor;
+    private Texture p1BaseColor;
+    private Texture p2UnitColor;
+    private Texture p2BaseColor;
     
-    public static Texture grass = new Texture("grass.png");
-    public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
-    public static Texture boxUnitRed = new Texture("BoxUnitRed.png");
-    public static Texture boxUnitLime = new Texture("BoxUnitLime.png");
-    public static Texture baseBlue = new Texture("BaseBlue.png");
-    public static Texture baseRed = new Texture("BaseRed.png");
-    public static Texture baseLime = new Texture("BaseLime.png");
-    public static Texture unitDamage = new Texture("UnitDamage.png");
-    public static Texture base1Damage = new Texture("Base1Damage.png");
-    public static Texture base2Damage = new Texture("Base2Damage.png");
-    public static Texture health = new Texture("Health.png");
-    public static Texture cooldown = new Texture("Cooldown.png");
-    public static Texture GUI = new Texture("GUI.png");
-    public static Texture GUICooldown = new Texture("GUICooldown.png");
+    public Texture grass = new Texture("grass.png");
+    public Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
+    public Texture boxUnitRed = new Texture("BoxUnitRed.png");
+    public Texture boxUnitLime = new Texture("BoxUnitLime.png");
+    public Texture baseBlue = new Texture("BaseBlue.png");
+    public Texture baseRed = new Texture("BaseRed.png");
+    public Texture baseLime = new Texture("BaseLime.png");
+    public Texture unitDamage = new Texture("UnitDamage.png");
+    public Texture base1Damage = new Texture("Base1Damage.png");
+    public Texture base2Damage = new Texture("Base2Damage.png");
+    public Texture health = new Texture("Health.png");
+    public Texture cooldown = new Texture("Cooldown.png");
+    public Texture GUI = new Texture("GUI.png");
+    public Texture GUICooldown = new Texture("GUICooldown.png");
     
-    public void setColor(String player){
+    public void AssetManager(){
+        unitTextures = new Array<Texture>();
+        baseTextures = new Array<Texture>();
+        //adding unit colors to unit array
+        unitTextures.add(boxUnitBlue);
+        unitTextures.add(boxUnitRed);
+        unitTextures.add(boxUnitLime);
+        //adding base colors to the base array
+        baseTextures.add(baseBlue);
+        baseTextures.add(baseRed);
+        baseTextures.add(baseLime);
         
+        p1UnitColor = unitTextures.get(arrayPosP1);
+        p1BaseColor = baseTextures.get(arrayPosP1);
+        p2UnitColor = unitTextures.get(arrayPosP2);
+        p2BaseColor = baseTextures.get(arrayPosP2);
     }
+    
+    public void setColorRight(String player){
+        if(player.contains("p1")){
+            if(arrayPosP1 == unitTextures.size){
+                p1UnitColor = unitTextures.get(0);
+                p1BaseColor = baseTextures.get(0);
+            }else {
+                p1UnitColor = unitTextures.get(arrayPosP1 + 1);
+                p1BaseColor = baseTextures.get(arrayPosP1 + 1);
+            }
+            
+        }else if(player.contains("p2")){
+            if(arrayPosP2 == unitTextures.size){
+                p2UnitColor = unitTextures.get(0);
+                p2BaseColor = baseTextures.get(0);
+            }else {
+                p2UnitColor = unitTextures.get(arrayPosP2 + 1);
+                p2BaseColor = baseTextures.get(arrayPosP2 + 1);
+            }
+        }
+    }
+    
+    public void setColorLeft(String player){
+        if(player.contains("p1")){
+            if(arrayPosP1 == 0){
+                p1UnitColor = unitTextures.get(unitTextures.size);
+                p1BaseColor = baseTextures.get(baseTextures.size);
+            }else {
+                p1UnitColor = unitTextures.get(arrayPosP1 - 1);
+                p1BaseColor = baseTextures.get(arrayPosP1 - 1);
+            }
+            
+        }else if(player.contains("p2")){
+            if(arrayPosP2 == 0){
+                p2UnitColor = unitTextures.get(unitTextures.size);
+                p2BaseColor = baseTextures.get(baseTextures.size);
+            }else {
+                p2UnitColor = unitTextures.get(arrayPosP2 - 1);
+                p2BaseColor = baseTextures.get(arrayPosP2 - 1);
+            }
+        }
+    }
+    
+    public Texture getUnitColor(String player){
+        if(player.contains("p1")){
+            return p1UnitColor;
+        }else{
+            return p2UnitColor;
+        }
+    }
+    
+    public Texture getBaseColor(String player){
+        if(player.contains("p1")){
+            System.out.println(p1BaseColor);
+            return p1BaseColor;
+        }else{
+            return p2BaseColor;
+        }
+    }
+    
 }
