@@ -35,7 +35,6 @@ public class MainMenu implements Screen{
     private MyRTSGame manager;
     private MainGame newGame;
     private SpriteBatch batch;
-    BitmapFont text;
     private OrthographicCamera camera;
     private Viewport viewport;
     
@@ -49,7 +48,6 @@ public class MainMenu implements Screen{
         coinLevels = new String[] {"Low", "Medium", "High"};
         startingCoins = "Medium";
         batch = new SpriteBatch();
-        text = new BitmapFont();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         camera.position.x = V_WIDTH/2f;
@@ -71,7 +69,6 @@ public class MainMenu implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-        text.draw(batch, "MAIN MENU", 0, V_HEIGHT / 2, V_WIDTH, Align.center, false);
         batch.end();
         
         //if the enter key is pressed, the game starts
