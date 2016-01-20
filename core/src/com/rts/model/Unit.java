@@ -20,6 +20,7 @@ public class Unit extends Entity {
     private Player player;
     private int cost;
     private int health;
+    private float startingHealth;
     private int attackSpeed;
     private int attackDamage;
     private int spawnTime;
@@ -67,6 +68,7 @@ public class Unit extends Entity {
         this.cost = cost;
         this.dollarWorth = dollarWorth;
         this.health = health;
+        this.startingHealth = health;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.spawnTime = spawnTime;
@@ -91,7 +93,7 @@ public class Unit extends Entity {
         if (player.getName().equals("p1")) {
             if (state == State.MOVING) {
                 if (cost == 75) {
-                    this.setVelocityX(2.5f);
+                    this.setVelocityX(2f);
                 } else if (cost == 150) {
                     this.setVelocityX(1.5f);
                 } else {
@@ -104,7 +106,7 @@ public class Unit extends Entity {
         } else if (player.getName().equals("p2")) {
             if (state == State.MOVING) {
                 if (cost == 75) {
-                    this.setVelocityX(-2.5f);
+                    this.setVelocityX(-2f);
                 } else if (cost == 150) {
                     this.setVelocityX(-1.5f);
                 } else {
@@ -194,6 +196,10 @@ public class Unit extends Entity {
     public int getHealth() {
         return health;
     }
+    
+    public float getStartingHealth(){
+        return startingHealth;
+    }
 
     public float getDamageStateTimer() {
         return damageStateTimer;
@@ -201,5 +207,13 @@ public class Unit extends Entity {
     
     public int getDollarWorth(){
         return dollarWorth;
+    }
+    
+    public int getAttackSpeed(){
+        return attackSpeed;
+    }
+    
+    public float getAttackTimer(){
+        return attackTimer;
     }
 }
