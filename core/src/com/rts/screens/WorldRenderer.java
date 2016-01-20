@@ -118,6 +118,10 @@ public class WorldRenderer {
                     }
 
                 }
+                if(u.getPlayer().getRemainingCooldown() != 0){
+                    batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                }else{
+                    batch.draw(AssetManager.GUI,606,536,64,64);
             }
         }
 
@@ -127,14 +131,14 @@ public class WorldRenderer {
 
         //GUI
         //team blue
-//        batch.draw(AssetManager.GUI,0,536,64,64);
-//        batch.draw(AssetManager.GUI,65,536,64,64);
-//        batch.draw(AssetManager.GUI,130,536,64,64);
+        batch.draw(AssetManager.GUI,0,536,64,64);
+        batch.draw(AssetManager.GUI,65,536,64,64);
+        batch.draw(AssetManager.GUI,130,536,64,64);
 
         //team red
-//        batch.draw(AssetManager.GUI,606,536,64,64);
-//        batch.draw(AssetManager.GUI,671,536,64,64);
-//        batch.draw(AssetManager.GUI,736,536,64,64);
+        batch.draw(AssetManager.GUI,606,536,64,64);
+        batch.draw(AssetManager.GUI,671,536,64,64);
+        batch.draw(AssetManager.GUI,736,536,64,64);
 
         font.setColor(1f, 1f, 1f, 1f);
         font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);

@@ -37,8 +37,8 @@ public class AssetManager {
     public static Texture baseRedDamage = new Texture("BaseRedDamage.png");
     public static Texture health = new Texture("Health.png");
     public static Texture cooldown = new Texture("Cooldown.png");
-    //public static Texture GUI = new Texture("GUI.png");
-    //public static Texture GUICoolDown = new Texture("GUICoolDown.png");
+    public static Texture GUI = new Texture("GUI.png");
+    public static Texture GUICoolDown = new Texture("GUICooldown.png");
     
     
     
