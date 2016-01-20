@@ -157,6 +157,10 @@ public class Unit extends Entity {
         }
     }
     
+    /**
+     * Sets the movement speed of the unit.
+     * @param x the speed at which the unit is moving
+     */
     public void setVelocityX(float x) {
         velocity.x = x;
     }
@@ -165,6 +169,10 @@ public class Unit extends Entity {
         velocity.y = y;
     }
 
+    /**
+     * Sets the current state of the unit
+     * @param s the new state
+     */
     public void setState(State s) {
         if (state != s) {
             stateTime = 0;
@@ -173,6 +181,10 @@ public class Unit extends Entity {
 
     }
 
+    /**
+     * Returns the movement speed of the unit
+     * @return the unit's movement speed
+     */
     public float getVelocityX() {
         return velocity.x;
     }
@@ -181,22 +193,42 @@ public class Unit extends Entity {
         return velocity.y;
     }
 
+    /**
+     * Returns the current state of the unit
+     * @return the unit's state
+     */
     public State getState() {
         return state;
     }
 
+    /**
+     * Returns how long a unit has been in a state
+     * @return the length of time spent in a state
+     */
     public float getStateTime() {
         return stateTime;
     }
 
+    /**
+     * Returns the player that owns the unit
+     * @return player 1 or player 2
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Returns the current health of the unit
+     * @return the current health
+     */
     public int getHealth() {
         return health;
     }
     
+    /**
+     * Returns the amount of health the unit started with
+     * @return the unit's starting health
+     */
     public float getStartingHealth(){
         return startingHealth;
     }
