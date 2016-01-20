@@ -187,9 +187,6 @@ public class WorldRenderer {
 
         // finished listing things to draw
         batch.end();
-    }
-
-    public void resize(int width, int height) {
-        viewport.update(width, height);
+        }
     }
 }
