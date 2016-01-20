@@ -35,53 +35,26 @@ public class MainMenu implements Screen{
     private MyRTSGame manager;
     private MainGame newGame;
     private SpriteBatch batch;
-    BitmapFont text;
     private OrthographicCamera camera;
     private Viewport viewport;
     
-    private String currentPos;
-    
-    //menu button collisions
-    private Rectangle singlePlayer;
-    private Rectangle multiplayer;
-    private Rectangle howToPlay;
-    private Rectangle difficulty;
-    
     //difficulty of a single player game
-    private String[] difficultyLevels;
-    private String currentDifficulty;
+    private String[] coinLevels;
+    private String startingCoins;
     
-    //vector that helps tracks the coordinates of user's click
-    private Vector2 clickPoint;
-    
-    //debugging
-    private BitmapFont testing;
-    private String coords;
-    private String height;
     
     public MainMenu(MyRTSGame manager){
         this.manager = manager;
-        singlePlayer = new Rectangle(0,0,64,64);
-        howToPlay = new Rectangle(128,0,64,64);
-        difficultyLevels = new String[] {"Easy", "Normal", "Hard"};
-        currentDifficulty = difficultyLevels[0];
-        currentPos = "Single Player";
+        coinLevels = new String[] {"Low", "Medium", "High"};
+        startingCoins = "Medium";
         batch = new SpriteBatch();
-        text = new BitmapFont();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
-        clickPoint = new Vector2(); 
         camera.position.x = V_WIDTH/2f;
         // move the y position of the camera
         camera.position.y = V_HEIGHT/2f;
         // update the camera
         camera.update();
-        
-        //debugging
-        testing = new BitmapFont();
-        testing.setColor(Color.BLUE);
-        coords = new String();
-        height = String.valueOf(singlePlayer.height);
     }
     
     @Override
@@ -96,127 +69,20 @@ public class MainMenu implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-        
-        text.draw(batch, "MAIN MENU", 0, V_HEIGHT / 2, V_WIDTH, Align.center, false);
-        batch.draw(AssetManager.grass,singlePlayer.x,singlePlayer.y,singlePlayer.width,singlePlayer.height);
-        testing.draw(batch, coords, 128, 128);
-        batch.draw(AssetManager.grass,howToPlay.x,howToPlay.y,howToPlay.width,howToPlay.height);
-        testing.draw(batch, height, 256, 128);
         batch.end();
         
-        //main menu inputs using the keyboard
-        if(Gdx.input.isKeyPressed(Keys.ENTER)){
-            System.out.println(currentPos);
-            //starts single player mode
-            if(currentPos.equals("Single Player")){
-                manager.changeScreen(new MainGame(manager));
-            }
-            
-            //starts multiplayer mode
-            if(currentPos.equals("Multiplayer")){
-                manager.changeScreen(new MainGame(manager));
-            }
-            
-            //changes the difficulty of the single player mode
-            if(currentPos.equals("Difficulty")){
-                if(currentDifficulty.equals(difficultyLevels[difficultyLevels.length - 1])){
-                    currentDifficulty = difficultyLevels[0];
-                }else{
-                    for(int i = 0; i < difficultyLevels.length; i++){
-                        if(currentDifficulty.equals((difficultyLevels[i]))){
-                            currentDifficulty = difficultyLevels[i+1];
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            //shows the how to play menu
-            if(currentPos.equals("How to Play")){
-                manager.changeScreen(new HowToPlay(manager));
-            }
+        //if the enter key is pressed, the game starts
+        if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
+            manager.changeScreen(new MainGame(manager));
+        }
+        
+        //unit colour changing for player 1
+        if(Gdx.input.isKeyJustPressed(Keys.A)){
             
         }
         
-        //main menu navigation using the keyboard
-        //moves the selection down
-        if(Gdx.input.isKeyJustPressed(Keys.DOWN)){
-            String posChange = "";
-            if(currentPos.equals("Single Player")){
-                posChange = "Multiplayer";
-            }
+        if(Gdx.input.isKeyJustPressed(Keys.J)){
             
-            if(currentPos.equals("Multiplayer")){
-                posChange = "Difficulty";
-            }
-            
-            if(currentPos.equals("Difficulty")){
-                posChange = "How to Play";
-            }
-            
-            if(currentPos.equals("How to Play")){
-                posChange = "Single Player";
-            }
-            
-            currentPos = posChange;
-            
-            System.out.println(currentPos);
-        }
-        //moves the selection up
-        else if(Gdx.input.isKeyJustPressed(Keys.UP)){
-            String posChange = "";
-            if(currentPos.equals("Single Player")){
-                posChange = "How to Play";
-            }
-            
-            if(currentPos.equals("How to Play")){
-                posChange = "Difficulty";
-            }
-            
-            if(currentPos.equals("Difficulty")){
-                posChange = "Multiplayer";
-            }
-            
-            if(currentPos.equals("Multiplayer")){
-                posChange = "Single Player";
-            }
-            
-            currentPos = posChange;
-            
-            System.out.println(currentPos);
-        }
-        
-        if(Gdx.input.isTouched()){
-            //converts screen touch coordinates to ingame coordinates
-            viewport.unproject(clickPoint.set(Gdx.input.getX(), Gdx.input.getY()));
-            coords = String.valueOf(clickPoint.x) + " " + String.valueOf(clickPoint.y);
-            
-            //starts single player mode
-            if(singlePlayer.contains(clickPoint.x, clickPoint.y)){
-                newGame = new MainGame(manager);
-                manager.changeScreen(newGame);
-            }
-            
-//            if(multiplayer.contains(clickPoint.x, clickPoint.y)){
-//                newGame = new MainGame(manager);
-//                newGame.setMode("Multiplayer");
-//                manager.changeScreen(newGame);
-//            }
-            
-            //shows instructions on how to play
-            if(howToPlay.contains(clickPoint.x, clickPoint.y)){
-                manager.changeScreen(new HowToPlay(manager));
-            }
-            
-//            if(difficulty.contains(clickPoint.x,clickPoint.y)){
-//                if(difficultyLevel.equals("Easy")){
-//                    difficultyLevel = "Medium";
-//                }else if(difficultyLevel.equals("Medium")){
-//                    difficultyLevel = "Hard";
-//                }else{
-//                    difficultyLevel = "Easy";
-//                }
-//            }
         }
     }
 

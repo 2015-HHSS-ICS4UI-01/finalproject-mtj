@@ -113,7 +113,6 @@ public class MainGame implements Screen {
         }
 
 
-
         if (p2.getUnits() != null) {
             for (Unit u : p2.getUnits()) {
                 u.update(deltaTime);

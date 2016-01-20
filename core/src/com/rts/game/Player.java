@@ -30,6 +30,11 @@ public class Player {
     private Base base;
     private float unitSpawnTime = 2;
 
+    /**
+     * Constructor for the player
+     * @param round the current round of the game
+     * @param name the player's name; either player 1 or player 2
+     */
     public Player(int round, String name) {
         this.name = name;
         coins = coins + (round * 50);
@@ -41,14 +46,34 @@ public class Player {
         }
     }
 
+    /**
+     * Return the player's current coin amount
+     * @return how many coins the player has
+     */
     public int getCoins() {
         return coins;
     }
 
+    /**
+     * Adds or removes coins from the player's current coins
+     * @param increase how many coins to add or remove
+     */
     public void updateCoins(int increase) {
         coins = coins + increase;
     }
 
+    /**
+     * 
+     * @param width
+     * @param height
+     * @param p
+     * @param cost
+     * @param dollarWorth
+     * @param health
+     * @param attackDamage
+     * @param attackSpeed
+     * @param spawnTime 
+     */
     public void createUnit(int width, int height, Player p, int cost, int dollarWorth, int health,
             int attackDamage, int attackSpeed, int spawnTime) {
         if (currentUnits < maxUnits) {
@@ -80,22 +105,42 @@ public class Player {
         }
     }
 
+    /**
+     * Returns all of the the player's units
+     * @return the player's units
+     */
     public Array<Unit> getUnits() {
         return units;
     }
 
+    /**
+     * Returns the player's base
+     * @return the player's base
+     */
     public Base getBase() {
         return base;
     }
 
+    /**
+     * Returns the player's name (player 1 or player 2)
+     * @return the player's name
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * Returns the remaining cooldown on spawning a new unit
+     * @return the remaining cooldown
+     */
     public float getRemainingCooldown(){
         return unitSpawnTime;
     }
 
+    /**
+     * Counts how long a player has waited since spawning a unit
+     * @param deltaTime the cooldown
+     */
     public void addToSpawnTime(float deltaTime) {
         unitSpawnTime = unitSpawnTime + deltaTime;
     }
@@ -104,6 +149,11 @@ public class Player {
         base.baseCheck(deltaTime);
     }
 
+    /**
+     * Returns the current position of a player's unit
+     * @param u the unit
+     * @return the unit's current position
+     */
     public int getUnitPosition(Unit u) {
         for(int i = 0; i < this.getUnits().size; i++){
         if(units.get(i) == u){

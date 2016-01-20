@@ -41,6 +41,20 @@ public class Unit extends Entity {
     // animation state counter
     private float stateTime;
 
+    /**
+     * Constructor for a Unit.
+     * @param x the unit's x position
+     * @param y the unit's y position
+     * @param width the width of the unit
+     * @param height the height of the unit
+     * @param p the player the unit belongs to
+     * @param cost the cost of spawning the unit
+     * @param dollarWorth the coin amount received by the enemy when the unit is killed
+     * @param health the unit's current health
+     * @param attackDamage the amount of health the unit can remove from an enemy in one hit
+     * @param attackSpeed how quickly the unit can attack
+     * @param spawnTime the amount of time a player must wait before spawning another unit
+     */
     public Unit(float x, float y, float width, float height, Player p, int cost,
             int dollarWorth, int health, int attackDamage, int attackSpeed, int spawnTime) {
 
@@ -111,14 +125,15 @@ public class Unit extends Entity {
         }
         addToPosition(velocity.x, velocity.y);
 
-
-
-
         attackTimer += delta;
         stateTime += delta;
         damageStateTimer += delta;
     }
 
+    /**
+     * Attack loop for when a unit is being attacked.
+     * @param u the unit that being attacked.
+     */
     public void attack(Unit u) {
         if (attackTimer >= attackSpeed) {
             u.health = u.health - attackDamage;
@@ -129,6 +144,10 @@ public class Unit extends Entity {
         }
     }
 
+    /**
+     * Attack loop for when a base is being attacked.
+     * @param b the base that is being attacked.
+     */
     public void attackBase(Base b) {
         if (attackTimer >= attackSpeed) {
             b.removeHealth(attackDamage);
@@ -137,7 +156,7 @@ public class Unit extends Entity {
             b.damageStateTimer = 0;
         }
     }
-
+    
     public void setVelocityX(float x) {
         velocity.x = x;
     }

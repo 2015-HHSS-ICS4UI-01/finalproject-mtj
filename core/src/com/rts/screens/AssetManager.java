@@ -35,8 +35,8 @@ public class AssetManager {
     public static Texture base2Damage = new Texture("Base2Damage.png");
     public static Texture health = new Texture("Health.png");
     public static Texture cooldown = new Texture("Cooldown.png");
-    //public static Texture GUI = new Texture("GUI.png");
-    //public static Texture GUICoolDown = new Texture("GUICoolDown.png");
+    public static Texture GUI = new Texture("GUI.png");
+    public static Texture GUICooldown = new Texture("GUICooldown.png");
     
     public void setColor(String player){
         
