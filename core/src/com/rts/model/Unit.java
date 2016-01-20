@@ -123,9 +123,6 @@ public class Unit extends Entity {
         }
         addToPosition(velocity.x, velocity.y);
 
-
-
-
         attackTimer += delta;
         stateTime += delta;
         damageStateTimer += delta;
@@ -157,7 +154,7 @@ public class Unit extends Entity {
             b.damageStateTimer = 0;
         }
     }
-
+    
     public void setVelocityX(float x) {
         velocity.x = x;
     }
