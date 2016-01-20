@@ -96,6 +96,7 @@ public class MainMenu implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
+        
         text.draw(batch, "MAIN MENU", 0, V_HEIGHT / 2, V_WIDTH, Align.center, false);
         batch.draw(AssetManager.grass,singlePlayer.x,singlePlayer.y,singlePlayer.width,singlePlayer.height);
         testing.draw(batch, coords, 128, 128);
