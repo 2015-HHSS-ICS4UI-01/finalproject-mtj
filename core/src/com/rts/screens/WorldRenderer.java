@@ -31,6 +31,7 @@ public class WorldRenderer {
     private Viewport viewport;
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    private AssetManager assetManager;
     BitmapFont font;
     private Player p1;
     private Player p2;
@@ -41,6 +42,7 @@ public class WorldRenderer {
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         batch = new SpriteBatch();
         font = new BitmapFont();
+        assetManager = new AssetManager();
 
         this.p1 = p1;
         this.p2 = p2;
@@ -70,27 +72,27 @@ public class WorldRenderer {
         // list of things to draw
 
         // draw the ground
-        batch.draw(AssetManager.grass, 0, 0, 800, 40);
+        batch.draw(assetManager.grass, 0, 0, 800, 40);
 
         //draw player 1 units
         if (p1.getUnits() != null) {
             for (Unit u : p1.getUnits()) {
                 if (u.getState() == State.DAMAGE) {
-                    batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
-                    batch.draw(AssetManager.unitDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(assetManager.getUnitColor("p1"), u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(assetManager.unitDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 } else {
-                    batch.draw(AssetManager.boxUnitBlue, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(assetManager.getUnitColor("p1"), u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 }
                 if (u.getHealth() > 0) {
                     //drawing health
-                    batch.draw(AssetManager.health, u.getX(), u.getY() + u.getHeight() + 5,
+                    batch.draw(assetManager.health, u.getX(), u.getY() + u.getHeight() + 5,
                             u.getWidth() * (u.getHealth() / u.getStartingHealth()), 5);
                     //drawing cooldown
                     if (u.getAttackTimer() < u.getAttackSpeed()) {
-                        batch.draw(AssetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
+                        batch.draw(assetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
                                 u.getWidth() * (u.getAttackTimer() / u.getAttackSpeed()), 5);
                     } else {
-                        batch.draw(AssetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
+                        batch.draw(assetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
                                 u.getWidth(), 5);
                     }
                 }
@@ -101,29 +103,29 @@ public class WorldRenderer {
         if (p2.getUnits() != null) {
             for (Unit u : p2.getUnits()) {
                 if (u.getState() == State.DAMAGE) {
-                    batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
-                    batch.draw(AssetManager.unitDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(assetManager.getUnitColor("p2"), u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(assetManager.unitDamage, u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 } else {
-                    batch.draw(AssetManager.boxUnitRed, u.getX(), u.getY(), u.getWidth(), u.getHeight());
+                    batch.draw(assetManager.getUnitColor("p2"), u.getX(), u.getY(), u.getWidth(), u.getHeight());
                 }
                 if (u.getHealth() > 0) {
                     //drawing health
-                    batch.draw(AssetManager.health, u.getX(), u.getY() + u.getHeight() + 5,
+                    batch.draw(assetManager.health, u.getX(), u.getY() + u.getHeight() + 5,
                             u.getWidth() * (u.getHealth() / u.getStartingHealth()), 5);
                     //drawing cooldown
                     if (u.getAttackTimer() < u.getAttackSpeed()) {
-                        batch.draw(AssetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
+                        batch.draw(assetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
                                 u.getWidth() * (u.getAttackTimer() / u.getAttackSpeed()), 5);
                     } else {
-                        batch.draw(AssetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
+                        batch.draw(assetManager.cooldown, u.getX(), u.getY() + u.getHeight() + 10,
                                 u.getWidth(), 5);
                     }
 
                 }
                 if(u.getPlayer().getRemainingCooldown() != 0){
-                    batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                    batch.draw(assetManager.GUICooldown,606,536,64,64);
                 }else{
-                    batch.draw(AssetManager.GUI,606,536,64,64);
+                    batch.draw(assetManager.GUI,606,536,64,64);
             }
         }
 
@@ -133,14 +135,14 @@ public class WorldRenderer {
 
         //GUI
         //team blue
-        batch.draw(AssetManager.GUI,0,536,64,64);
-        batch.draw(AssetManager.GUI,65,536,64,64);
-        batch.draw(AssetManager.GUI,130,536,64,64);
+        batch.draw(assetManager.GUI,0,536,64,64);
+        batch.draw(assetManager.GUI,65,536,64,64);
+        batch.draw(assetManager.GUI,130,536,64,64);
 
         //team red
-        batch.draw(AssetManager.GUI,606,536,64,64);
-        batch.draw(AssetManager.GUI,671,536,64,64);
-        batch.draw(AssetManager.GUI,736,536,64,64);
+        batch.draw(assetManager.GUI,606,536,64,64);
+        batch.draw(assetManager.GUI,671,536,64,64);
+        batch.draw(assetManager.GUI,736,536,64,64);
 
         font.setColor(1f, 1f, 1f, 1f);
         font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);
@@ -148,42 +150,42 @@ public class WorldRenderer {
 
 //        if(p1.getTurrets() != null){
 //            for(Turret t: p1.getTurrets()){
-//                batch.draw(AssetManager.boxUnitBlue, t.getX(), t.getY(), t.getWidth(), t.getHeight());
+//                batch.draw(assetManager.boxUnitBlue, t.getX(), t.getY(), t.getWidth(), t.getHeight());
 //            }
 //        }
 //        
 //        if(p2.getTurrets() != null){
 //            for(Turret t: p2.getTurrets()){
-//                batch.draw(AssetManager.boxUnitRed, t.getX(), t.getY(), t.getWidth(), t.getHeight());
+//                batch.draw(assetManager.boxUnitRed, t.getX(), t.getY(), t.getWidth(), t.getHeight());
 //            }
 //        }
 
         // draw the bases
         if (p1.getBase().getState() == Base.baseState.DAMAGE) {
-            batch.draw(AssetManager.baseBlue, 0, 16, 80, 80);
-            batch.draw(AssetManager.base1Damage, 0, 16, 80, 80);
+            batch.draw(assetManager.getBaseColor("p1"), 0, 16, 80, 80);
+            batch.draw(assetManager.base1Damage, 0, 16, 80, 80);
         } else {
-            batch.draw(AssetManager.baseBlue, 0, 16, 80, 80);
+            batch.draw(assetManager.getBaseColor("p1"), 0, 16, 80, 80);
         }
         if (p2.getBase().getState() == Base.baseState.DAMAGE) {
-            batch.draw(AssetManager.baseRed, 720, 16, 80, 80);
-            batch.draw(AssetManager.base2Damage, 720, 16, 80, 80);
+            batch.draw(assetManager.getBaseColor("p2"), 720, 16, 80, 80);
+            batch.draw(assetManager.base2Damage, 720, 16, 80, 80);
         } else {
-            batch.draw(AssetManager.baseRed, 720, 16, 80, 80);
+            batch.draw(assetManager.getBaseColor("p2"), 720, 16, 80, 80);
         }
 
 //        // draw mario
 //        if(player.getState() == Unit.State.STANDING){
 //            if(player.isFacingLeft()){
-//                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
+//                batch.draw(assetManager.skrillex, player.getX(), player.getY());
 //            }else{
-//                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
+//                batch.draw(assetManager.skrillex, player.getX(), player.getY());
 //            }
 //        }else if(player.getState() == Unit.State.RUNNING){
 //            if(player.isFacingLeft()){
-//                batch.draw(AssetManager.marioRunL.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
+//                batch.draw(assetManager.marioRunL.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
 //            }else{
-//                batch.draw(AssetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
+//                batch.draw(assetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
 //            }
 //        }
 
