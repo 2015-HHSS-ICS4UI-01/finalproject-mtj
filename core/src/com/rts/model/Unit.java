@@ -157,14 +157,18 @@ public class Unit extends Entity {
         }
     }
     
+    /**
+     * Sets the movement speed of the unit.
+     * @param x the speed at which the unit is moving
+     */
     public void setVelocityX(float x) {
         velocity.x = x;
     }
 
-    public void setVelocityY(float y) {
-        velocity.y = y;
-    }
-
+    /**
+     * Sets the current state of the unit
+     * @param s the new state
+     */
     public void setState(State s) {
         if (state != s) {
             stateTime = 0;
@@ -173,46 +177,82 @@ public class Unit extends Entity {
 
     }
 
+    /**
+     * Returns the movement speed of the unit
+     * @return the unit's movement speed
+     */
     public float getVelocityX() {
         return velocity.x;
     }
 
-    public float getVelocityY() {
-        return velocity.y;
-    }
-
+    /**
+     * Returns the current state of the unit
+     * @return the unit's state
+     */
     public State getState() {
         return state;
     }
 
+    /**
+     * Returns how long a unit has been in a state
+     * @return the length of time spent in a state
+     */
     public float getStateTime() {
         return stateTime;
     }
 
+    /**
+     * Returns the player that owns the unit
+     * @return player 1 or player 2
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Returns the current health of the unit
+     * @return the current health
+     */
     public int getHealth() {
         return health;
     }
     
+    /**
+     * Returns the amount of health the unit started with
+     * @return the unit's starting health
+     */
     public float getStartingHealth(){
         return startingHealth;
     }
 
+    /**
+     * Returns how long the unit has been in the damage state
+     * @return the length of time spent in the damage state
+     */
     public float getDamageStateTimer() {
         return damageStateTimer;
     }
     
+    /**
+     * Returns the number of coins the unit grants an enemy when killed
+     * @return how much the unit is worth
+     */
     public int getDollarWorth(){
         return dollarWorth;
     }
     
+    /**
+     * Returns the time it takes for the unit to attack
+     * @return how long the unit must wait to attack again
+     */
     public int getAttackSpeed(){
         return attackSpeed;
     }
     
+    /**
+     * Returns the cooldown between the unit's attack
+     * @return the length of time since an attack
+     */
     public float getAttackTimer(){
         return attackTimer;
     }

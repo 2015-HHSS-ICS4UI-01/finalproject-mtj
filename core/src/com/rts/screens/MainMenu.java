@@ -14,8 +14,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -76,7 +74,11 @@ public class MainMenu implements Screen{
         
         //if the enter key is pressed, the game starts
         if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
-            manager.changeScreen(new MainGame(manager));
+            manager.changeScreen(new MainGame(manager));    
+        }
+        
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+            manager.changeScreen(new HowToPlay(manager));
         }
         
         //unit colour changing for player 1
@@ -87,6 +89,7 @@ public class MainMenu implements Screen{
             AssetManager.setColorRight("p1");
         }
         
+        //unit colour changing for player 2
         if(Gdx.input.isKeyJustPressed(Keys.J)){
             AssetManager.setColorLeft("p2");
         }

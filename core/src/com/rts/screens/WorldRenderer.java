@@ -146,8 +146,6 @@ public class WorldRenderer {
         font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);
         font.draw(batch, "Coins: " + p2.getCoins(), 671, 472);
 
-
-
 //        if(p1.getTurrets() != null){
 //            for(Turret t: p1.getTurrets()){
 //                batch.draw(AssetManager.boxUnitBlue, t.getX(), t.getY(), t.getWidth(), t.getHeight());
