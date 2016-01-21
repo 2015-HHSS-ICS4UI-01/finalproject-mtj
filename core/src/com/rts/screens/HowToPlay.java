@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MainGame;
 import com.rts.game.MyRTSGame;
+import java.awt.Font;
 
 /**
  *
@@ -31,7 +32,7 @@ public class HowToPlay implements Screen{
     private Viewport viewport;
     
     private SpriteBatch batch;
-    private OrthographicCamera camera;  
+    private OrthographicCamera camera;
  
     public HowToPlay(MyRTSGame manager){
         this.manager = manager;
@@ -57,7 +58,7 @@ public class HowToPlay implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-
+        
         batch.end();
         
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)){

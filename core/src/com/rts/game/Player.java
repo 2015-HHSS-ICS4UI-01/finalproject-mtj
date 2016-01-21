@@ -70,9 +70,9 @@ public class Player {
      * @param cost how much it costs to spawn the unit
      * @param dollarWorth how much the enemy player will receive if the unit dies
      * @param health how much health the unit currently has
-     * @param attackDamage
-     * @param attackSpeed
-     * @param spawnTime 
+     * @param attackDamage how much a unit can damage an enemy in one attack
+     * @param attackSpeed how quickly a unit can attack an enemy
+     * @param spawnTime how long the player must wait before spawning another unit
      */
     public void createUnit(int width, int height, Player p, int cost, int dollarWorth, int health,
             int attackDamage, int attackSpeed, int spawnTime) {
@@ -92,6 +92,11 @@ public class Player {
         }
     }
 
+    /**
+     * Removes a dead unit belonging to the player
+     * @param u the unit to remove
+     * @param enemy the player that killed the unit
+     */
     public void removeUnit(Unit u, Player enemy) {
         //give the other player coins
         enemy.updateCoins(u.getDollarWorth());

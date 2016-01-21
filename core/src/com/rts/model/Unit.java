@@ -165,10 +165,6 @@ public class Unit extends Entity {
         velocity.x = x;
     }
 
-    public void setVelocityY(float y) {
-        velocity.y = y;
-    }
-
     /**
      * Sets the current state of the unit
      * @param s the new state
@@ -187,10 +183,6 @@ public class Unit extends Entity {
      */
     public float getVelocityX() {
         return velocity.x;
-    }
-
-    public float getVelocityY() {
-        return velocity.y;
     }
 
     /**
@@ -233,18 +225,34 @@ public class Unit extends Entity {
         return startingHealth;
     }
 
+    /**
+     * Returns how long the unit has been in the damage state
+     * @return the length of time spent in the damage state
+     */
     public float getDamageStateTimer() {
         return damageStateTimer;
     }
     
+    /**
+     * Returns the number of coins the unit grants an enemy when killed
+     * @return how much the unit is worth
+     */
     public int getDollarWorth(){
         return dollarWorth;
     }
     
+    /**
+     * Returns the time it takes for the unit to attack
+     * @return how long the unit must wait to attack again
+     */
     public int getAttackSpeed(){
         return attackSpeed;
     }
     
+    /**
+     * Returns the cooldown between the unit's attack
+     * @return the length of time since an attack
+     */
     public float getAttackTimer(){
         return attackTimer;
     }
