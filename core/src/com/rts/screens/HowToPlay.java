@@ -64,8 +64,8 @@ public class HowToPlay implements Screen{
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         batch.begin();
-        batch.draw(AssetManager.grass,back.x,back.y,back.width,back.height);
-        batch.draw(AssetManager.grass,next.x,next.y,next.width,next.height);
+        batch.draw(AssetManager.ground,back.x,back.y,back.width,back.height);
+        batch.draw(AssetManager.ground,next.x,next.y,next.width,next.height);
         batch.end();
         
         if(Gdx.input.isTouched()){

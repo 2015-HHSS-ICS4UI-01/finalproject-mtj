@@ -24,17 +24,24 @@ public class AssetManager {
     
     //the color of the team units
     public static Texture p1UnitColor;
-    public static Texture p1BaseColor;
+    public static TextureRegion p1BaseColor;
     public static Texture p2UnitColor;
-    public static Texture p2BaseColor;
+    public static TextureRegion p2BaseColor;
     
-    public static Texture grass = new Texture("grass.png");
+    public static Texture ground = new Texture("ground.png");
+    public static Texture mainMenu = new Texture("MainMenu.png");
     public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
+    public static Texture boxUnitPurple = new Texture("BoxUnitPurple.png");
     public static Texture boxUnitRed = new Texture("BoxUnitRed.png");
-    public static Texture boxUnitLime = new Texture("BoxUnitLime.png");
+    public static Texture boxUnitGreen = new Texture("BoxUnitGreen.png");
+    public static Texture boxUnitWhite = new Texture("BoxUnitWhite.png");
+    public static Texture boxUnitOrange = new Texture("BoxUnitOrange.png");
     public static Texture baseBlue = new Texture("BaseBlue.png");
+    public static Texture basePurple = new Texture("BasePurple.png");
     public static Texture baseRed = new Texture("BaseRed.png");
-    public static Texture baseLime = new Texture("BaseLime.png");
+    public static Texture baseGreen = new Texture("BaseGreen.png");
+    public static Texture baseWhite = new Texture("BaseWhite.png");
+    public static Texture baseOrange = new Texture("BaseOrange.png");
     public static Texture unitDamage = new Texture("UnitDamage.png");
     public static Texture base1Damage = new Texture("Base1Damage.png");
     public static Texture base2Damage = new Texture("Base2Damage.png");
@@ -48,39 +55,50 @@ public class AssetManager {
         baseTextures = new Array<Texture>();
         //adding unit colors to unit array
         unitTextures.add(boxUnitBlue);
+        unitTextures.add(boxUnitPurple);
         unitTextures.add(boxUnitRed);
-        unitTextures.add(boxUnitLime);
+        unitTextures.add(boxUnitGreen);
+        unitTextures.add(boxUnitWhite);
+        unitTextures.add(boxUnitOrange);
         //adding base colors to the base array
         baseTextures.add(baseBlue);
+        baseTextures.add(basePurple);
         baseTextures.add(baseRed);
-        baseTextures.add(baseLime);
+        baseTextures.add(baseGreen);
+        baseTextures.add(baseWhite);
+        baseTextures.add(baseOrange);
         
         p1UnitColor = unitTextures.get(arrayPosP1);
-        p1BaseColor = baseTextures.get(arrayPosP1);
+        p1BaseColor = new TextureRegion(baseTextures.get(arrayPosP1));
         p2UnitColor = unitTextures.get(arrayPosP2);
-        p2BaseColor = baseTextures.get(arrayPosP2);
+        p2BaseColor = new TextureRegion(baseTextures.get(arrayPosP2));
+        p2BaseColor.flip(true, false);
     }
     
     public static void setColorRight(String player){
         if(player.contains("p1")){
             if(arrayPosP1 == unitTextures.size - 1){
                 p1UnitColor = unitTextures.get(0);
-                p1BaseColor = baseTextures.get(0);
+                p1BaseColor = new TextureRegion(baseTextures.get(0));
                 arrayPosP1 = 0;
             }else {
                 p1UnitColor = unitTextures.get(arrayPosP1 + 1);
-                p1BaseColor = baseTextures.get(arrayPosP1 + 1);
+                p1BaseColor = new TextureRegion(baseTextures.get(arrayPosP1 + 1));
                 arrayPosP1++;
             }
             
         }else if(player.contains("p2")){
             if(arrayPosP2 == unitTextures.size - 1){
                 p2UnitColor = unitTextures.get(0);
-                p2BaseColor = baseTextures.get(0);
+                p2BaseColor = new TextureRegion(baseTextures.get(0));
+
+                p2BaseColor.flip(true, false);
                 arrayPosP2 = 0;
             }else {
                 p2UnitColor = unitTextures.get(arrayPosP2 + 1);
-                p2BaseColor = baseTextures.get(arrayPosP2 + 1);
+                p2BaseColor = new TextureRegion(baseTextures.get(arrayPosP2 + 1));
+
+                p2BaseColor.flip(true, false);
                 arrayPosP2++;
             }
         }
@@ -90,22 +108,24 @@ public class AssetManager {
         if(player.contains("p1")){
             if(arrayPosP1 == 0){
                 p1UnitColor = unitTextures.get(unitTextures.size - 1);
-                p1BaseColor = baseTextures.get(baseTextures.size - 1);
+                p1BaseColor = new TextureRegion(baseTextures.get(baseTextures.size - 1));
                 arrayPosP1 = unitTextures.size - 1;
             }else {
                 p1UnitColor = unitTextures.get(arrayPosP1 - 1);
-                p1BaseColor = baseTextures.get(arrayPosP1 - 1);
+                p1BaseColor = new TextureRegion(baseTextures.get(arrayPosP1 - 1));
                 arrayPosP1--;
             }
             
         }else if(player.contains("p2")){
             if(arrayPosP2 == 0){
                 p2UnitColor = unitTextures.get(unitTextures.size - 1);
-                p2BaseColor = baseTextures.get(baseTextures.size - 1);
+                p2BaseColor = new TextureRegion(baseTextures.get(baseTextures.size - 1));
+                p2BaseColor.flip(true, false);
                 arrayPosP2 = unitTextures.size - 1;
             }else {
                 p2UnitColor = unitTextures.get(arrayPosP2 - 1);
-                p2BaseColor = baseTextures.get(arrayPosP2 - 1);
+                p2BaseColor = new TextureRegion(baseTextures.get(arrayPosP2 - 1));
+                p2BaseColor.flip(true, false);
                 arrayPosP2--;
             }
         }
@@ -119,7 +139,7 @@ public class AssetManager {
         }
     }
     
-    public static Texture getBaseColor(String player){
+    public static TextureRegion getBaseColor(String player){
         if(player.contains("p1")){
             return p1BaseColor;
         }else{
