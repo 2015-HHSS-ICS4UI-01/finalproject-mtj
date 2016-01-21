@@ -73,7 +73,7 @@ public class MainMenu implements Screen{
         
         //if the enter key is pressed, the game starts
         if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
-            manager.changeScreen(new MainGame(manager));
+            manager.changeScreen(new MainGame(manager));    
         }
         
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
