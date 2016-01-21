@@ -78,6 +78,10 @@ public class MainMenu implements Screen{
             manager.changeScreen(new MainGame(manager));
         }
         
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+            manager.changeScreen(new HowToPlay(manager));
+        }
+        
         //unit colour changing for player 1
         if(Gdx.input.isKeyJustPressed(Keys.A)){
             assetManager.setColorLeft("p1");
@@ -86,6 +90,7 @@ public class MainMenu implements Screen{
             assetManager.setColorRight("p1");
         }
         
+        //unit colour changing for player 2
         if(Gdx.input.isKeyJustPressed(Keys.J)){
             assetManager.setColorLeft("p2");
         }

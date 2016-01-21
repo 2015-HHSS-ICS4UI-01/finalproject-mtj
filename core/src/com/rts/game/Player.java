@@ -11,7 +11,7 @@ import com.rts.model.Turret;
 import com.rts.model.Unit;
 
 /**
- * The player; each user has a base, a set of units, coins, and a cooldown
+ * The player; each player has a base, a set of units, coins, and a cooldown
  * associated with spawning each unit.
  * @author donet6376
  */
@@ -63,13 +63,13 @@ public class Player {
     }
 
     /**
-     * 
-     * @param width
-     * @param height
-     * @param p
-     * @param cost
-     * @param dollarWorth
-     * @param health
+     * Creates a new unit that belongs to the player.
+     * @param width the width of the unit
+     * @param height the height of the unit
+     * @param p the player the unit belongs to (player 1 or player 2)
+     * @param cost how much it costs to spawn the unit
+     * @param dollarWorth how much the enemy player will receive if the unit dies
+     * @param health how much health the unit currently has
      * @param attackDamage
      * @param attackSpeed
      * @param spawnTime 

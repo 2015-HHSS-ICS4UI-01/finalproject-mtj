@@ -57,7 +57,6 @@ public class MainGame implements Screen {
             //when unit is spawned, coins are deducted from player 1
             if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-smallUnitCost);
-                System.out.println("p1:" + p1.getCoins());
             }
         }
         //spawns a medium unit that costs 150 coins
@@ -66,7 +65,6 @@ public class MainGame implements Screen {
             //when unit is spawned, coins are deducted from player 1
             if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-mediumUnitCost);
-                System.out.println("p1:" + p1.getCoins());
             }
         }
         //spawns a large unit that costs 300 coins
@@ -75,7 +73,6 @@ public class MainGame implements Screen {
             //when unit is spawned, coins are deducted from player 1
             if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-largeUnitCost);
-                System.out.println("p1:" + p1.getCoins());
             }
         }
         //spawns a small unit that costs 75 coins
@@ -84,7 +81,6 @@ public class MainGame implements Screen {
             //when unit is spawned, coins are deducted from player 2
             if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-smallUnitCost);
-                System.out.println("p2:" + p2.getCoins());
             }
         }
         //spawns a medium unit that costs 150 coins
@@ -93,7 +89,6 @@ public class MainGame implements Screen {
             //when unit is spawned, coins are deducted from player 2
             if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-mediumUnitCost);
-                System.out.println("p2:" + p2.getCoins());
             }
         }
         //spawns a large unit that costs 300 coins
@@ -102,7 +97,6 @@ public class MainGame implements Screen {
             //when unit is spawned, coins are deducted from player 2
             if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-largeUnitCost);
-                System.out.println("p2:" + p2.getCoins());
             }
         }
 
