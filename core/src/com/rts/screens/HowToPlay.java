@@ -32,13 +32,11 @@ public class HowToPlay implements Screen{
     
     private SpriteBatch batch;
     private OrthographicCamera camera;  
-    private AssetManager assetManager;
  
     public HowToPlay(MyRTSGame manager){
         this.manager = manager;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        assetManager = new AssetManager();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         camera.position.x = V_WIDTH/2f;
         // move the y position of the camera
@@ -59,6 +57,7 @@ public class HowToPlay implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
+
         batch.end();
         
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)){

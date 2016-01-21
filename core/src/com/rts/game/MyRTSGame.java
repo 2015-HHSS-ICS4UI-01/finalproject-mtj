@@ -8,11 +8,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rts.screens.AssetManager;
+
 
 public class MyRTSGame extends Game {
+    
 	
 	@Override
 	public void create () {
+            AssetManager.load();
             setScreen(new MainMenu(this));
             
 	}

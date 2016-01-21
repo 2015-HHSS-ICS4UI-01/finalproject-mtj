@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.model.Base;
 import com.rts.model.Unit;
+import com.rts.screens.AssetManager;
 import com.rts.screens.WorldRenderer;
 
 /**
@@ -36,7 +37,6 @@ public class MainGame implements Screen {
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
-
         round = 1;
         p1 = new Player(round, "p1");
         p2 = new Player(round, "p2");

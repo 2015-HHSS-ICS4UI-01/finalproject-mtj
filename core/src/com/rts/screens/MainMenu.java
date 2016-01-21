@@ -35,7 +35,6 @@ public class MainMenu implements Screen{
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private Viewport viewport;
-    private AssetManager assetManager;
     
     //difficulty of a single player game
     private String[] coinLevels;
@@ -48,7 +47,6 @@ public class MainMenu implements Screen{
         startingCoins = "Medium";
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        assetManager = new AssetManager();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
         camera.position.x = V_WIDTH/2f;
         // move the y position of the camera
@@ -69,8 +67,8 @@ public class MainMenu implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-        batch.draw(assetManager.getBaseColor("p1"), 32, 32);
-        batch.draw(assetManager.getBaseColor("p2"), 472, 472);
+        batch.draw(AssetManager.getBaseColor("p1"), 32, 32);
+        batch.draw(AssetManager.getBaseColor("p2"), 472, 472);
         batch.end();
         
         //if the enter key is pressed, the game starts
@@ -84,19 +82,19 @@ public class MainMenu implements Screen{
         
         //unit colour changing for player 1
         if(Gdx.input.isKeyJustPressed(Keys.A)){
-            assetManager.setColorLeft("p1");
+            AssetManager.setColorLeft("p1");
         }
         if(Gdx.input.isKeyJustPressed(Keys.D)){
-            assetManager.setColorRight("p1");
+            AssetManager.setColorRight("p1");
         }
         
         //unit colour changing for player 2
         if(Gdx.input.isKeyJustPressed(Keys.J)){
-            assetManager.setColorLeft("p2");
+            AssetManager.setColorLeft("p2");
         }
         
         if(Gdx.input.isKeyJustPressed(Keys.L)){
-            assetManager.setColorRight("p2");
+            AssetManager.setColorRight("p2");
         }
     }
 
