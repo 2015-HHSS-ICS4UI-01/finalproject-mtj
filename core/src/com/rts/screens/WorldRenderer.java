@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.Player;
 import com.rts.model.Base;
-import com.rts.model.Turret;
 import com.rts.model.Unit;
 import com.rts.model.Unit.State;
 

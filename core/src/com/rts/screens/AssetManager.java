@@ -17,20 +17,24 @@ import com.badlogic.gdx.utils.Array;
  */
 public class AssetManager {
     
+    //tracks the current team color choices
     private static Array<Texture> unitTextures;
     private static Array<Texture> baseTextures;
     private static int arrayPosP1 = 0;
     private static int arrayPosP2 = 1;
     
-    //the color of the team units
+    //stores the color of the team units
     public static Texture p1UnitColor;
     public static TextureRegion p1BaseColor;
     public static Texture p2UnitColor;
     public static TextureRegion p2BaseColor;
     
+    //Misc. textures used for menus
     public static Texture ground = new Texture("ground.png");
     public static Texture mainMenu = new Texture("MainMenu.png");
     public static Texture pressEnter = new Texture("PressEnter.png");
+    public static Texture p1win = new Texture("Player1WinScreen.png");
+    public static Texture p2win = new Texture("Player2WinScreen.png");
     
     //unit and base color variations
     public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");

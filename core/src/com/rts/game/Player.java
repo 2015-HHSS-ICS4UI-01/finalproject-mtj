@@ -7,7 +7,6 @@ package com.rts.game;
 import com.badlogic.gdx.utils.Array;
 import com.rts.model.Base;
 import com.rts.model.Entity;
-import com.rts.model.Turret;
 import com.rts.model.Unit;
 
 /**
