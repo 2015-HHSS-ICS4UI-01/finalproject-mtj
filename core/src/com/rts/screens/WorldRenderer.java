@@ -25,7 +25,6 @@ import com.rts.model.Unit.State;
  */
 public class WorldRenderer {
     // my games virtual width and height
-
     public final int V_WIDTH = 800;
     public final int V_HEIGHT = 600;
     private Viewport viewport;
@@ -120,11 +119,6 @@ public class WorldRenderer {
                     }
 
                 }
-                if(u.getPlayer().getRemainingCooldown() != 0){
-                    batch.draw(AssetManager.GUICooldown,606,536,64,64);
-                }else{
-                    batch.draw(AssetManager.GUI,606,536,64,64);
-            }
         }
 
 
