@@ -38,8 +38,8 @@ public class MainGame implements Screen {
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
         round = 1;
-        p1 = new Player(round, "p1");
-        p2 = new Player(round, "p2");
+        p1 = new Player("p1");
+        p2 = new Player("p2");
         renderer = new WorldRenderer(p1, p2);
         collisionCheck = new Array<Unit>();
     }

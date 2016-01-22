@@ -23,12 +23,12 @@ public class Base extends Entity {
     
     /**
      * Constructor for the Bases.
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param playerName
-     * @param health 
+     * @param x the base's x position
+     * @param y the base's y position
+     * @param width the base's width
+     * @param height the base's height
+     * @param playerName the player the base belongs to
+     * @param health the base's current health
      */
     public Base(float x, float y, float width, float height, String playerName, int health) {
 
@@ -71,6 +71,10 @@ public class Base extends Entity {
         System.out.println("health is " +health );
     }
     
+    /**
+     * Checks if the base is currently being attacked.
+     * @param deltaTime how long the base has been in the damage state
+     */
     public void baseCheck(float deltaTime){
         damageStateTimer = damageStateTimer + deltaTime;
         if(baseState == baseState.DAMAGE){

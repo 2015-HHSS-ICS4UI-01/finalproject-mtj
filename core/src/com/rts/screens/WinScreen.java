@@ -12,39 +12,30 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MainGame;
 import com.rts.game.MyRTSGame;
-import com.rts.screens.AssetManager;
+import java.awt.Font;
 
 /**
- * The game's Main Menu; allows user to start a 2 player game,
- * or learn how to play the game.
+ *
  * @author besem4079
  */
-public class MainMenu implements Screen{
+public class WinScreen implements Screen{
     public final int V_WIDTH = 800;
     public final int V_HEIGHT = 600;
     
     private MyRTSGame manager;
-    private MainGame newGame;
-    private SpriteBatch batch;
-    private OrthographicCamera camera;
     private Viewport viewport;
     
-    //difficulty of a single player game
-    private String[] coinLevels;
-    private String startingCoins;
-    
-    
-    public MainMenu(MyRTSGame manager){
+    private SpriteBatch batch;
+    private OrthographicCamera camera;
+ 
+    public WinScreen(MyRTSGame manager){
         this.manager = manager;
-        coinLevels = new String[] {"Low", "Medium", "High"};
-        startingCoins = "Medium";
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
@@ -54,48 +45,25 @@ public class MainMenu implements Screen{
         // update the camera
         camera.update();
     }
-    
+
     @Override
     public void show() {
         
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta) { 
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-        batch.draw(AssetManager.mainMenu, 0, 0);
-        batch.draw(AssetManager.getUnitColor("p1"), 96, 64);
-        batch.draw(AssetManager.getUnitColor("p2"), 672, 64);
+        //batch.draw(AssetManager.ground,back.x,back.y,back.width,back.height);
+        //batch.draw(AssetManager.ground,next.x,next.y,next.width,next.height);
         batch.end();
         
-        //if the enter key is pressed, the game starts
-        if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
-            manager.changeScreen(new MainGame(manager));    
-        }
-        
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-            manager.changeScreen(new WinScreen(manager));
-        }
-        
-        //unit colour changing for player 1
-        if(Gdx.input.isKeyJustPressed(Keys.A)){
-            AssetManager.setColorLeft("p1");
-        }
-        if(Gdx.input.isKeyJustPressed(Keys.D)){
-            AssetManager.setColorRight("p1");
-        }
-        
-        //unit colour changing for player 2
-        if(Gdx.input.isKeyJustPressed(Keys.J)){
-            AssetManager.setColorLeft("p2");
-        }
-        
-        if(Gdx.input.isKeyJustPressed(Keys.L)){
-            AssetManager.setColorRight("p2");
+            manager.changeScreen(new MainMenu(manager));
         }
     }
 
@@ -123,5 +91,4 @@ public class MainMenu implements Screen{
     public void dispose() {
         
     }
-    
 }

@@ -20,24 +20,18 @@ public class Player {
     private float COOLDOWN = 2;
     private String name;
     private int coins = 450;
-    private int baseTotalHealth = 5000;
-    private int baseRemainingHealth = 5000;
     private int maxUnits = 5;
     private int currentUnits = 0;
-    private int maxTurrets = 1;
-    private int currentTurrets = 0;
     private Array<Unit> units;
     private Base base;
     private float unitSpawnTime = 2;
 
     /**
      * Constructor for the player
-     * @param round the current round of the game
      * @param name the player's name; either player 1 or player 2
      */
-    public Player(int round, String name) {
+    public Player(String name) {
         this.name = name;
-        coins = coins + (round * 50);
         units = new Array<Unit>();
         if (name.contains("p1")) {
             base = new Base(0, 16, 80, 80, "p1", 1500);
@@ -93,7 +87,7 @@ public class Player {
     }
 
     /**
-     * Removes a dead unit belonging to the player
+     * Removes a dead unit belonging to the player.
      * @param u the unit to remove
      * @param enemy the player that killed the unit
      */
@@ -111,7 +105,7 @@ public class Player {
     }
 
     /**
-     * Returns all of the the player's units
+     * Returns all of the the player's units.
      * @return the player's units
      */
     public Array<Unit> getUnits() {
@@ -127,7 +121,7 @@ public class Player {
     }
 
     /**
-     * Returns the player's name (player 1 or player 2)
+     * Returns the player's name (player 1 or player 2).
      * @return the player's name
      */
     public String getName() {
@@ -135,7 +129,7 @@ public class Player {
     }
     
     /**
-     * Returns the remaining cooldown on spawning a new unit
+     * Returns the remaining cooldown on spawning a new unit.
      * @return the remaining cooldown
      */
     public float getRemainingCooldown(){
@@ -143,27 +137,31 @@ public class Player {
     }
 
     /**
-     * Counts how long a player has waited since spawning a unit
+     * Counts how long a player has waited since spawning a unit.
      * @param deltaTime the cooldown
      */
     public void addToSpawnTime(float deltaTime) {
         unitSpawnTime = unitSpawnTime + deltaTime;
     }
     
+    /**
+     * Counts how long since the player's base has been hit.
+     * @param deltaTime the amount of time since the base was hit
+     */
     public void addToBaseCheck(float deltaTime){
         base.baseCheck(deltaTime);
     }
 
     /**
-     * Returns the current position of a player's unit
+     * Returns the current position of a player's unit.
      * @param u the unit
      * @return the unit's current position
      */
     public int getUnitPosition(Unit u) {
         for(int i = 0; i < this.getUnits().size; i++){
-        if(units.get(i) == u){
-            return i;
-        }
+            if(units.get(i) == u){
+                return i;
+            }
         }
         //dead return
         return -1;
