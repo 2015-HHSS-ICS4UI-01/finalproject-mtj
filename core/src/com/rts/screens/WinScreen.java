@@ -24,7 +24,7 @@ import java.awt.Font;
  *
  * @author besem4079
  */
-public class HowToPlay implements Screen{
+public class WinScreen implements Screen{
     public final int V_WIDTH = 800;
     public final int V_HEIGHT = 600;
     
@@ -35,7 +35,7 @@ public class HowToPlay implements Screen{
     private SpriteBatch batch;
     private OrthographicCamera camera;
  
-    public HowToPlay(MyRTSGame manager, String winner){
+    public WinScreen(MyRTSGame manager, String winner){
         this.manager = manager;
         this.winner = winner;
         batch = new SpriteBatch();

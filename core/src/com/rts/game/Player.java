@@ -19,7 +19,7 @@ public class Player {
 
     private float COOLDOWN = 2;
     private String name;
-    private int coins = 450;
+    private int coins = 500;
     private int maxUnits = 5;
     private int currentUnits = 0;
     private Array<Unit> units;
@@ -34,9 +34,9 @@ public class Player {
         this.name = name;
         units = new Array<Unit>();
         if (name.contains("p1")) {
-            base = new Base(0, 16, 80, 80, "p1", 1500);
+            base = new Base(0, 16, 80, 80, "p1", 500);
         } else {
-            base = new Base(720, 16, 80, 80, "p2", 1500);
+            base = new Base(720, 16, 80, 80, "p2", 500);
         }
     }
 

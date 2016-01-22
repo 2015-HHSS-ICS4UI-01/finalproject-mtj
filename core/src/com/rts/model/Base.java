@@ -73,6 +73,10 @@ public class Base extends Entity {
         System.out.println("health is " +health );
     }
     
+    public float getStartingHealth(){
+        return startingHealth;
+    }
+    
     /**
      * Checks if the base is currently being attacked.
      * @param deltaTime how long the base has been in the damage state

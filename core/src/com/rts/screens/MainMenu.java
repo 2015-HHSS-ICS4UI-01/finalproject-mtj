@@ -35,6 +35,8 @@ public class MainMenu implements Screen{
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private Viewport viewport;
+    private float pressEnterTimer;
+    private boolean showEnter = true;
     
     //difficulty of a single player game
     private String[] coinLevels;
@@ -48,6 +50,7 @@ public class MainMenu implements Screen{
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
+        pressEnterTimer = 0;
         camera.position.x = V_WIDTH/2f;
         // move the y position of the camera
         camera.position.y = V_HEIGHT/2f;
@@ -68,6 +71,16 @@ public class MainMenu implements Screen{
         
         batch.begin();
         batch.draw(AssetManager.mainMenu, 0, 0);
+        
+        if(pressEnterTimer > 1){
+            showEnter = !showEnter;
+            pressEnterTimer = 0;
+        }
+        
+        if(showEnter){
+            batch.draw(AssetManager.pressEnter, 220, 72);
+        }
+        
         batch.draw(AssetManager.getUnitColor("p1"), 96, 64);
         batch.draw(AssetManager.getUnitColor("p2"), 672, 64);
         batch.end();
@@ -93,6 +106,8 @@ public class MainMenu implements Screen{
         if(Gdx.input.isKeyJustPressed(Keys.L)){
             AssetManager.setColorRight("p2");
         }
+        
+        pressEnterTimer += delta;
     }
 
     @Override
