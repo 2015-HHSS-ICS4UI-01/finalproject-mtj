@@ -120,15 +120,22 @@ public class WorldRenderer {
                 }
             }
         }
-
+                
+        //gui 
+        //p1
+        batch.draw(AssetManager.smallGUI,0,536,64,64);
+        batch.draw(AssetManager.mediumGUI,65,536,64,64);
+        batch.draw(AssetManager.largeGUI,130,536,64,64);
+        //p2
+        batch.draw(AssetManager.smallGUI,606,536,64,64);
+        batch.draw(AssetManager.mediumGUI,671,536,64,64);
+        batch.draw(AssetManager.largeGUI,736,536,64,64);
+            
 
         //P1 gui cooldown
         if (p1.getUnits() != null){
             //p1
-            batch.draw(AssetManager.smallGUI,0,536,64,64);
-            batch.draw(AssetManager.mediumGUI,65,536,64,64);
-            batch.draw(AssetManager.largeGUI,130,536,64,64);
-            for(Unit u : p1.getUnits()){
+            for(Unit u : p1.getUnits()){ 
                 if(u.getDollarWorth() == 100){
                     if(u.getPlayer().getRemainingCooldown() <= 2){
                         batch.draw(AssetManager.GUICooldown,0,536,64,64);
@@ -144,38 +151,43 @@ public class WorldRenderer {
                         batch.draw(AssetManager.GUICooldown,0,536,64,64);
                         batch.draw(AssetManager.GUICooldown,65,536,64,64);
                         batch.draw(AssetManager.GUICooldown,130,536,64,64);
-                    }else {
+                    }else{
                         batch.draw(AssetManager.smallGUI,0,536,64,64);
                         batch.draw(AssetManager.mediumGUI,65,536,64,64);
                         batch.draw(AssetManager.largeGUI,130,536,64,64);
-                    } 
+                    }
                 }else if(u.getDollarWorth() == 350){
                     if(u.getPlayer().getRemainingCooldown() <= 5){
                         batch.draw(AssetManager.GUICooldown,0,536,64,64);
                         batch.draw(AssetManager.GUICooldown,65,536,64,64);
                         batch.draw(AssetManager.GUICooldown,130,536,64,64);
-                    }else {
+                    }else{
                         batch.draw(AssetManager.smallGUI,0,536,64,64);
                         batch.draw(AssetManager.mediumGUI,65,536,64,64);
                         batch.draw(AssetManager.largeGUI,130,536,64,64);
-                    } 
-                }                   
+                    }          
+                }
+                //lets the player know if they have enough money for the unit
+                if(p1.getCoins() < 75){
+                    batch.draw(AssetManager.GUICooldown,0,536,64,64);
+                }if(p1.getCoins() < 150){  
+                    batch.draw(AssetManager.GUICooldown,65,536,64,64);  
+                }if(p1.getCoins() < 300){
+                    batch.draw(AssetManager.GUICooldown,130,536,64,64);  
+                }                    
             }
         }
             
         //P2 gui cooldown
         if (p2.getUnits() != null) {
             //p2
-            batch.draw(AssetManager.smallGUI,606,536,64,64);
-            batch.draw(AssetManager.mediumGUI,671,536,64,64);
-            batch.draw(AssetManager.largeGUI,736,536,64,64);
             for (Unit u : p2.getUnits()) {
                 if(u.getDollarWorth() == 100){
                     if(u.getPlayer().getRemainingCooldown() <= 2){    
                         batch.draw(AssetManager.GUICooldown,606,536,64,64);
                         batch.draw(AssetManager.GUICooldown,671,536,64,64);
                         batch.draw(AssetManager.GUICooldown,736,536,64,64);
-                    }else {
+                    }else{
                         batch.draw(AssetManager.smallGUI,606,536,64,64);
                         batch.draw(AssetManager.mediumGUI,671,536,64,64);
                         batch.draw(AssetManager.largeGUI,736,536,64,64);
@@ -185,7 +197,7 @@ public class WorldRenderer {
                         batch.draw(AssetManager.GUICooldown,606,536,64,64);
                         batch.draw(AssetManager.GUICooldown,671,536,64,64);
                         batch.draw(AssetManager.GUICooldown,736,536,64,64);
-                    }else {
+                    }else{
                         batch.draw(AssetManager.smallGUI,606,536,64,64);
                         batch.draw(AssetManager.mediumGUI,671,536,64,64);
                         batch.draw(AssetManager.largeGUI,736,536,64,64);
@@ -195,14 +207,23 @@ public class WorldRenderer {
                         batch.draw(AssetManager.GUICooldown,606,536,64,64);
                         batch.draw(AssetManager.GUICooldown,671,536,64,64);
                         batch.draw(AssetManager.GUICooldown,736,536,64,64);
-                    }else {
+                    }else{
                         batch.draw(AssetManager.smallGUI,606,536,64,64);
                         batch.draw(AssetManager.mediumGUI,671,536,64,64);
                         batch.draw(AssetManager.largeGUI,736,536,64,64);
                     } 
                 }
+                //lets the player know if they have enough money for the unit
+                if(p2.getCoins() < 75){
+                    batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                }if(p2.getCoins() < 150){  
+                    batch.draw(AssetManager.GUICooldown,671,536,64,64);  
+                }if(p2.getCoins() < 300){
+                    batch.draw(AssetManager.GUICooldown,736,536,64,64);  
+                } 
             }
         }
+
         
             //draw the coins
             font.setColor(1f, 1f, 1f, 1f);		                      
