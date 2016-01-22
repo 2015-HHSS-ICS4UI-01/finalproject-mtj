@@ -119,26 +119,90 @@ public class WorldRenderer {
                     }
 
                 }
+            }
         }
 
 
-
-        Rectangle GUI = new Rectangle(0, 536, 64, 64);
-
-        //GUI
-        //team blue
-        batch.draw(AssetManager.GUI,0,536,64,64);
-        batch.draw(AssetManager.GUI,65,536,64,64);
-        batch.draw(AssetManager.GUI,130,536,64,64);
-
-        //team red
-        batch.draw(AssetManager.GUI,606,536,64,64);
-        batch.draw(AssetManager.GUI,671,536,64,64);
-        batch.draw(AssetManager.GUI,736,536,64,64);
-
-        font.setColor(1f, 1f, 1f, 1f);
-        font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);
-        font.draw(batch, "Coins: " + p2.getCoins(), 671, 472);
+        //P1 gui cooldown
+        if (p1.getUnits() != null){
+            //p1
+            batch.draw(AssetManager.smallGUI,0,536,64,64);
+            batch.draw(AssetManager.mediumGUI,65,536,64,64);
+            batch.draw(AssetManager.largeGUI,130,536,64,64);
+            for(Unit u : p1.getUnits()){
+                if(u.getDollarWorth() == 100){
+                    if(u.getPlayer().getRemainingCooldown() >= 0 && u.getPlayer().getRemainingCooldown() <= 2){
+                        batch.draw(AssetManager.GUICooldown,0,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,65,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,130,536,64,64);                      
+                    }else{
+                        batch.draw(AssetManager.smallGUI,0,536,64,64);
+                        batch.draw(AssetManager.mediumGUI,65,536,64,64);
+                        batch.draw(AssetManager.largeGUI,130,536,64,64);
+                    }
+                }else if(u.getDollarWorth() == 175){
+                    if(u.getPlayer().getRemainingCooldown() >=0 && u.getPlayer().getRemainingCooldown() <= 3){
+                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
+                    }else {
+                        batch.draw(AssetManager.smallGUI,0,536,64,64);
+                        batch.draw(AssetManager.mediumGUI,65,536,64,64);
+                        batch.draw(AssetManager.largeGUI,130,536,64,64);
+                    } 
+                }else if(u.getDollarWorth() == 350){
+                    if(u.getPlayer().getRemainingCooldown() >=0 && u.getPlayer().getRemainingCooldown() <= 5){
+                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
+                    }else {
+                        batch.draw(AssetManager.smallGUI,0,536,64,64);
+                        batch.draw(AssetManager.mediumGUI,65,536,64,64);
+                        batch.draw(AssetManager.largeGUI,130,536,64,64);
+                    } 
+                }                   
+            }
+        }
+            
+        //P2 gui cooldown
+        if (p2.getUnits() != null) {
+            //p2
+            batch.draw(AssetManager.smallGUI,606,536,64,64);
+            batch.draw(AssetManager.mediumGUI,671,536,64,64);
+            batch.draw(AssetManager.largeGUI,736,536,64,64);
+            for (Unit u : p2.getUnits()) {
+                if(u.getDollarWorth() == 100){
+                    if(u.getPlayer().getRemainingCooldown() >= 0 && u.getPlayer().getRemainingCooldown() <= 2){    
+                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
+                    }else {
+                        batch.draw(AssetManager.smallGUI,606,536,64,64);
+                        batch.draw(AssetManager.mediumGUI,671,536,64,64);
+                        batch.draw(AssetManager.largeGUI,736,536,64,64);
+                    }   
+                }else if(u.getDollarWorth() == 175){
+                    if(u.getPlayer().getRemainingCooldown() >=0 && u.getPlayer().getRemainingCooldown() <= 3){
+                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
+                    }else {
+                        batch.draw(AssetManager.smallGUI,606,536,64,64);
+                        batch.draw(AssetManager.mediumGUI,671,536,64,64);
+                        batch.draw(AssetManager.largeGUI,736,536,64,64);
+                    } 
+                }else if(u.getDollarWorth() == 350){
+                    if(u.getPlayer().getRemainingCooldown() >=0 && u.getPlayer().getRemainingCooldown() <= 5){
+                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
+                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
+                    }else {
+                        batch.draw(AssetManager.smallGUI,606,536,64,64);
+                        batch.draw(AssetManager.mediumGUI,671,536,64,64);
+                        batch.draw(AssetManager.largeGUI,736,536,64,64);
+                    } 
+                }
+            }
 
 //        if(p1.getTurrets() != null){
 //            for(Turret t: p1.getTurrets()){
