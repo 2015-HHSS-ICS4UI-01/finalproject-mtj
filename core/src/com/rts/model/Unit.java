@@ -1,19 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rts.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.rts.game.Player;
 
 /**
- * Creates units that will advance towards the opposing base, and will attack 
+ * Creates units that will advance towards the opposing base, and will attack
  * enemy units or the enemy base if either are in range.
- * @author lamonta
+ *
+ * @author MTJ
  */
 public class Unit extends Entity {
-    
+
     private final float X_MAX_VEL = 2.0f;
     private final float DAMP = 0.8f;
     private Player player;
@@ -42,17 +39,21 @@ public class Unit extends Entity {
 
     /**
      * Constructor for a Unit.
+     *
      * @param x the unit's x position
      * @param y the unit's y position
      * @param width the width of the unit
      * @param height the height of the unit
      * @param p the player the unit belongs to
      * @param cost the cost of spawning the unit
-     * @param dollarWorth the coin amount received by the enemy when the unit is killed
+     * @param dollarWorth the coin amount received by the enemy when the unit is
+     * killed
      * @param health the unit's current health
-     * @param attackDamage the amount of health the unit can remove from an enemy in one hit
+     * @param attackDamage the amount of health the unit can remove from an
+     * enemy in one hit
      * @param attackSpeed how quickly the unit can attack
-     * @param spawnTime the amount of time a player must wait before spawning another unit
+     * @param spawnTime the amount of time a player must wait before spawning
+     * another unit
      */
     public Unit(float x, float y, float width, float height, Player p, int cost,
             int dollarWorth, int health, int attackDamage, int attackSpeed, int spawnTime) {
@@ -114,7 +115,6 @@ public class Unit extends Entity {
             }
         }
 
-
         velocity.mulAdd(acceleration, delta);
 
         if (velocity.x < 0.01f && velocity.x > -0.01f) {
@@ -129,6 +129,7 @@ public class Unit extends Entity {
 
     /**
      * Attack loop for when unit is attacking another unit.
+     *
      * @param u the unit that being attacked.
      */
     public void attack(Unit u) {
@@ -145,6 +146,7 @@ public class Unit extends Entity {
 
     /**
      * Attack loop for when unit is attacking a base.
+     *
      * @param b the base that is being attacked.
      */
     public void attackBase(Base b) {
@@ -157,9 +159,10 @@ public class Unit extends Entity {
             b.damageStateTimer = 0;
         }
     }
-    
+
     /**
      * Sets the movement speed of the unit.
+     *
      * @param x the speed at which the unit is moving
      */
     public void setVelocityX(float x) {
@@ -168,6 +171,7 @@ public class Unit extends Entity {
 
     /**
      * Sets the current state of the unit
+     *
      * @param s the new state
      */
     public void setState(State s) {
@@ -180,6 +184,7 @@ public class Unit extends Entity {
 
     /**
      * Returns the movement speed of the unit
+     *
      * @return the unit's movement speed
      */
     public float getVelocityX() {
@@ -188,6 +193,7 @@ public class Unit extends Entity {
 
     /**
      * Returns the current state of the unit
+     *
      * @return the unit's state
      */
     public State getState() {
@@ -196,6 +202,7 @@ public class Unit extends Entity {
 
     /**
      * Returns how long a unit has been in a state
+     *
      * @return the length of time spent in a state
      */
     public float getStateTime() {
@@ -204,6 +211,7 @@ public class Unit extends Entity {
 
     /**
      * Returns the player that owns the unit
+     *
      * @return player 1 or player 2
      */
     public Player getPlayer() {
@@ -212,57 +220,64 @@ public class Unit extends Entity {
 
     /**
      * Returns the current health of the unit
+     *
      * @return the current health
      */
     public int getHealth() {
         return health;
     }
-    
+
     /**
      * Returns the amount of health the unit started with
+     *
      * @return the unit's starting health
      */
-    public float getStartingHealth(){
+    public float getStartingHealth() {
         return startingHealth;
     }
 
     /**
      * Returns how long the unit has been in the damage state
+     *
      * @return the length of time spent in the damage state
      */
     public float getDamageStateTimer() {
         return damageStateTimer;
     }
-    
+
     /**
      * Return the number of coins it costs to spawn the unit
+     *
      * @return the unit's cost
      */
-    public int getCost(){
+    public int getCost() {
         return cost;
     }
-    
+
     /**
      * Returns the number of coins the unit grants an enemy when killed
+     *
      * @return how much the unit is worth
      */
-    public int getDollarWorth(){
+    public int getDollarWorth() {
         return dollarWorth;
     }
-    
+
     /**
      * Returns the time it takes for the unit to attack
+     *
      * @return how long the unit must wait to attack again
      */
-    public int getAttackSpeed(){
+    public int getAttackSpeed() {
         return attackSpeed;
     }
-    
+
     /**
      * Returns the cooldown between the unit's attack
+     *
      * @return the length of time since an attack
      */
-    public float getAttackTimer(){
+    public float getAttackTimer() {
         return attackTimer;
     }
 }

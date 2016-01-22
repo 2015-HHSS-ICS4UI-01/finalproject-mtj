@@ -1,28 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rts.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.model.Base;
 import com.rts.model.Unit;
-import com.rts.screens.AssetManager;
 import com.rts.screens.WinScreen;
 import com.rts.screens.WorldRenderer;
 
 /**
  *
- * @author donet6376
+ * @author MTJ
  */
 public class MainGame implements Screen {
 
@@ -49,7 +38,7 @@ public class MainGame implements Screen {
 
     @Override
     public void render(float deltaTime) {
-        
+
         //SPAWNING UNITS
         //player 1 spawns a small unit that costs 75 coins
         if (Gdx.input.isKeyJustPressed(Keys.A) && p1.getCoins() >= smallUnitCost) {
@@ -113,20 +102,20 @@ public class MainGame implements Screen {
                 u.update(deltaTime);
             }
         }
-        
+
         //COLLISIONS
         //check that there are units to collide
         if (p1.getUnits() != null && p2.getUnits() != null) {
-            
+
             //fill the collision array with both player's units
             collisionCheck.clear();
             collisionCheck.addAll(p1.getUnits());
             collisionCheck.addAll(p2.getUnits());
-            
+
             //check through every unit
             for (int i = 0; i < collisionCheck.size; i++) {
                 Unit u1 = collisionCheck.get(i);
-                
+
                 //if the unit is not currently taking damage
                 if (u1.getState() != Unit.State.DAMAGE) {
 
@@ -148,7 +137,7 @@ public class MainGame implements Screen {
                     //check if it is colliding with every other unit
                     for (Unit u2 : collisionCheck) {
                         if (u1 != u2 && u1.isColliding(u2)) {
-                            
+
                             //the unit is the front unit for their team
                             if (p1.getUnitPosition(u1) == 0 || p2.getUnitPosition(u1) == 0) {
                                 //the two units are on the opposite team
@@ -156,14 +145,13 @@ public class MainGame implements Screen {
                                     //sets the state of the front unit
                                     u1.setState(Unit.State.STANDING);
                                 }
-                            //the unit is colliding with a teammate and not the front unit
+                                //the unit is colliding with a teammate and not the front unit
                             } else if (u1.getPlayer().getName().equals(u2.getPlayer().getName())
                                     && (p1.getUnitPosition(u1) != -1 && p1.getUnitPosition(u1) > p1.getUnitPosition(u2)
                                     || p2.getUnitPosition(u1) != -1 && p2.getUnitPosition(u1) > p2.getUnitPosition(u2))) {
                                 //sets the state of the unit behind a teammate
                                 u1.setState(Unit.State.WAITING);
                             }
-
 
                             //each unit attacks
                             if (!u1.getPlayer().getName().equals(u2.getPlayer().getName())) {
@@ -178,38 +166,36 @@ public class MainGame implements Screen {
                 }
             }
 
-
             Base base1 = p1.getBase();
             //player 2 units colliding with player 1's base
 
             for (Unit u2 : p2.getUnits()) {
-                if(u2.getState() != Unit.State.DAMAGE){
-                   if (u2.isColliding(base1)) {
-                    u2.setState(Unit.State.STANDING);
-                    u2.attackBase(base1);
-                } 
+                if (u2.getState() != Unit.State.DAMAGE) {
+                    if (u2.isColliding(base1)) {
+                        u2.setState(Unit.State.STANDING);
+                        u2.attackBase(base1);
+                    }
                 }
-                
-            }
-            
-            if(base1.getHealth() <= 0){
-                manager.changeScreen(new WinScreen(manager, "p2"));
+
             }
 
+            if (base1.getHealth() <= 0) {
+                manager.changeScreen(new WinScreen(manager, "p2"));
+            }
 
             Base base2 = p2.getBase();
             //player 1 units colliding with player 2's base
 
             for (Unit u1 : p1.getUnits()) {
-                if(u1.getState() != Unit.State.DAMAGE){
-                if (u1.isColliding(base2)) {
-                    u1.setState(Unit.State.STANDING);
-                    u1.attackBase(base2);
+                if (u1.getState() != Unit.State.DAMAGE) {
+                    if (u1.isColliding(base2)) {
+                        u1.setState(Unit.State.STANDING);
+                        u1.attackBase(base2);
+                    }
                 }
             }
-            }
-            
-            if(base2.getHealth() <= 0){
+
+            if (base2.getHealth() <= 0) {
                 manager.changeScreen(new WinScreen(manager, "p1"));
             }
 

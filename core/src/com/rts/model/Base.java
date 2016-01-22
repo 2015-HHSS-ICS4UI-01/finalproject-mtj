@@ -1,29 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rts.model;
 
 /**
- * Creates a base that is the spawn point for units; if a player's base is depleted 
- * of its health, the opposing player wins the game.
- * @author donet6376
+ * Creates a base that is the spawn point for units; if a player's base is
+ * depleted of its health, the opposing player wins the game.
+ *
+ * @author MTJ
  */
 public class Base extends Entity {
-    
+
     private int health;
     private float startingHealth;
     private String playerName;
     private baseState baseState;
     public float damageStateTimer = 0;
-    
+
     public enum baseState {
 
         NORMAL, DAMAGE
     }
-    
+
     /**
      * Constructor for the Bases.
+     *
      * @param x the base's x position
      * @param y the base's y position
      * @param width the base's width
@@ -39,57 +37,62 @@ public class Base extends Entity {
         this.playerName = playerName;
         baseState = baseState.NORMAL;
     }
-    
+
     /**
      * Returns the current health of a base.
+     *
      * @return the base's health
      */
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
-    
+
     /**
      * Returns the current state of a base.
+     *
      * @return the base's state
      */
-    public baseState getState(){
+    public baseState getState() {
         return baseState;
     }
-    
+
     /**
      * Changes the base's current state.
+     *
      * @param baseState the new state
      */
-    public void setBaseState(baseState baseState){
+    public void setBaseState(baseState baseState) {
         this.baseState = baseState;
     }
-    
+
     /**
      * Decreases the current health of the base when attacked.
+     *
      * @param decrease the amount to remove from the base's health
      */
-    public void removeHealth(int decrease){
+    public void removeHealth(int decrease) {
         health = health - decrease;
-        System.out.println("health is " +health );
+        System.out.println("health is " + health);
     }
-    
-    public float getStartingHealth(){
+
+    public float getStartingHealth() {
         return startingHealth;
     }
-    
+
     /**
      * Checks if the base is currently being attacked.
+     *
      * @param deltaTime how long the base has been in the damage state
      */
-    public void baseCheck(float deltaTime){
+    public void baseCheck(float deltaTime) {
         damageStateTimer = damageStateTimer + deltaTime;
-        if(baseState == baseState.DAMAGE){
-            
-            if(damageStateTimer >= 0.2){
+        if (baseState == baseState.DAMAGE) {
+
+            if (damageStateTimer >= 0.2) {
                 this.setBaseState(baseState.NORMAL);
-                
+
             }
         }
     }
-    
+
 }

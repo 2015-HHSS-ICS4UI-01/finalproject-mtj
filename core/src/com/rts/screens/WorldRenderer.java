@@ -1,16 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rts.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.Player;
@@ -20,10 +14,12 @@ import com.rts.model.Unit.State;
 
 /**
  *
- * @author lamonta
+ * @author MTJ
  */
 public class WorldRenderer {
+
     // my games virtual width and height
+
     public final int V_WIDTH = 800;
     public final int V_HEIGHT = 600;
     private Viewport viewport;
@@ -51,14 +47,12 @@ public class WorldRenderer {
         camera.update();
 
         // loads in the images
-        
     }
 
     public void render(float delta) {
         // clear the screen with black
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 
         // links the renderer to the camera
         batch.setProjectionMatrix(camera.combined);
@@ -120,115 +114,117 @@ public class WorldRenderer {
                 }
             }
         }
-                
+
         //gui 
-        //p1
-        batch.draw(AssetManager.smallGUI,0,536,64,64);
-        batch.draw(AssetManager.mediumGUI,65,536,64,64);
-        batch.draw(AssetManager.largeGUI,130,536,64,64);
-        //p2
-        batch.draw(AssetManager.smallGUI,606,536,64,64);
-        batch.draw(AssetManager.mediumGUI,671,536,64,64);
-        batch.draw(AssetManager.largeGUI,736,536,64,64);
-            
+        //draw p1 gui section
+        batch.draw(AssetManager.smallGUI, 0, 536, 64, 64);
+        batch.draw(AssetManager.mediumGUI, 65, 536, 64, 64);
+        batch.draw(AssetManager.largeGUI, 130, 536, 64, 64);
+        //draw p2 gui section
+        batch.draw(AssetManager.smallGUI, 606, 536, 64, 64);
+        batch.draw(AssetManager.mediumGUI, 671, 536, 64, 64);
+        batch.draw(AssetManager.largeGUI, 736, 536, 64, 64);
 
         //P1 gui cooldown
-        if (p1.getUnits() != null){
+        if (p1.getUnits() != null) {
             //p1
-            for(Unit u : p1.getUnits()){ 
-                if(u.getDollarWorth() == 100){
-                    if(u.getPlayer().getRemainingCooldown() <= 2){
-                        batch.draw(AssetManager.GUICooldown,0,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,65,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,130,536,64,64);                      
-                    }else{
-                        batch.draw(AssetManager.smallGUI,0,536,64,64);
-                        batch.draw(AssetManager.mediumGUI,65,536,64,64);
-                        batch.draw(AssetManager.largeGUI,130,536,64,64);
+            for (Unit u : p1.getUnits()) {
+                if (u.getDollarWorth() == 100) {
+                    if (u.getPlayer().getRemainingCooldown() <= 2) {
+                        batch.draw(AssetManager.GUICooldown, 0, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 65, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 130, 536, 64, 64);
+                    } else {
+                        batch.draw(AssetManager.smallGUI, 0, 536, 64, 64);
+                        batch.draw(AssetManager.mediumGUI, 65, 536, 64, 64);
+                        batch.draw(AssetManager.largeGUI, 130, 536, 64, 64);
                     }
-                }else if(u.getDollarWorth() == 175){
-                    if(u.getPlayer().getRemainingCooldown() <= 3){
-                        batch.draw(AssetManager.GUICooldown,0,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,65,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,130,536,64,64);
-                    }else{
-                        batch.draw(AssetManager.smallGUI,0,536,64,64);
-                        batch.draw(AssetManager.mediumGUI,65,536,64,64);
-                        batch.draw(AssetManager.largeGUI,130,536,64,64);
+                } else if (u.getDollarWorth() == 175) {
+                    if (u.getPlayer().getRemainingCooldown() <= 3) {
+                        batch.draw(AssetManager.GUICooldown, 0, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 65, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 130, 536, 64, 64);
+                    } else {
+                        batch.draw(AssetManager.smallGUI, 0, 536, 64, 64);
+                        batch.draw(AssetManager.mediumGUI, 65, 536, 64, 64);
+                        batch.draw(AssetManager.largeGUI, 130, 536, 64, 64);
                     }
-                }else if(u.getDollarWorth() == 350){
-                    if(u.getPlayer().getRemainingCooldown() <= 5){
-                        batch.draw(AssetManager.GUICooldown,0,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,65,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,130,536,64,64);
-                    }else{
-                        batch.draw(AssetManager.smallGUI,0,536,64,64);
-                        batch.draw(AssetManager.mediumGUI,65,536,64,64);
-                        batch.draw(AssetManager.largeGUI,130,536,64,64);
-                    }          
+                } else if (u.getDollarWorth() == 350) {
+                    if (u.getPlayer().getRemainingCooldown() <= 5) {
+                        batch.draw(AssetManager.GUICooldown, 0, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 65, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 130, 536, 64, 64);
+                    } else {
+                        batch.draw(AssetManager.smallGUI, 0, 536, 64, 64);
+                        batch.draw(AssetManager.mediumGUI, 65, 536, 64, 64);
+                        batch.draw(AssetManager.largeGUI, 130, 536, 64, 64);
+                    }
                 }
                 //lets the player know if they have enough money for the unit
-                if(p1.getCoins() < 75){
-                    batch.draw(AssetManager.GUICooldown,0,536,64,64);
-                }if(p1.getCoins() < 150){  
-                    batch.draw(AssetManager.GUICooldown,65,536,64,64);  
-                }if(p1.getCoins() < 300){
-                    batch.draw(AssetManager.GUICooldown,130,536,64,64);  
-                }                    
+                if (p1.getCoins() < 75) {
+                    batch.draw(AssetManager.GUICooldown, 0, 536, 64, 64);
+                }
+                if (p1.getCoins() < 150) {
+                    batch.draw(AssetManager.GUICooldown, 65, 536, 64, 64);
+                }
+                if (p1.getCoins() < 300) {
+                    batch.draw(AssetManager.GUICooldown, 130, 536, 64, 64);
+                }
             }
         }
-            
+
         //P2 gui cooldown
         if (p2.getUnits() != null) {
             //p2
             for (Unit u : p2.getUnits()) {
-                if(u.getDollarWorth() == 100){
-                    if(u.getPlayer().getRemainingCooldown() <= 2){    
-                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
-                    }else{
-                        batch.draw(AssetManager.smallGUI,606,536,64,64);
-                        batch.draw(AssetManager.mediumGUI,671,536,64,64);
-                        batch.draw(AssetManager.largeGUI,736,536,64,64);
-                    }   
-                }else if(u.getDollarWorth() == 175){
-                    if(u.getPlayer().getRemainingCooldown() <= 3){
-                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
-                    }else{
-                        batch.draw(AssetManager.smallGUI,606,536,64,64);
-                        batch.draw(AssetManager.mediumGUI,671,536,64,64);
-                        batch.draw(AssetManager.largeGUI,736,536,64,64);
-                    } 
-                }else if(u.getDollarWorth() == 350){
-                    if(u.getPlayer().getRemainingCooldown() <= 5){
-                        batch.draw(AssetManager.GUICooldown,606,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,671,536,64,64);
-                        batch.draw(AssetManager.GUICooldown,736,536,64,64);
-                    }else{
-                        batch.draw(AssetManager.smallGUI,606,536,64,64);
-                        batch.draw(AssetManager.mediumGUI,671,536,64,64);
-                        batch.draw(AssetManager.largeGUI,736,536,64,64);
-                    } 
+                if (u.getDollarWorth() == 100) {
+                    if (u.getPlayer().getRemainingCooldown() <= 2) {
+                        batch.draw(AssetManager.GUICooldown, 606, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 671, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 736, 536, 64, 64);
+                    } else {
+                        batch.draw(AssetManager.smallGUI, 606, 536, 64, 64);
+                        batch.draw(AssetManager.mediumGUI, 671, 536, 64, 64);
+                        batch.draw(AssetManager.largeGUI, 736, 536, 64, 64);
+                    }
+                } else if (u.getDollarWorth() == 175) {
+                    if (u.getPlayer().getRemainingCooldown() <= 3) {
+                        batch.draw(AssetManager.GUICooldown, 606, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 671, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 736, 536, 64, 64);
+                    } else {
+                        batch.draw(AssetManager.smallGUI, 606, 536, 64, 64);
+                        batch.draw(AssetManager.mediumGUI, 671, 536, 64, 64);
+                        batch.draw(AssetManager.largeGUI, 736, 536, 64, 64);
+                    }
+                } else if (u.getDollarWorth() == 350) {
+                    if (u.getPlayer().getRemainingCooldown() <= 5) {
+                        batch.draw(AssetManager.GUICooldown, 606, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 671, 536, 64, 64);
+                        batch.draw(AssetManager.GUICooldown, 736, 536, 64, 64);
+                    } else {
+                        batch.draw(AssetManager.smallGUI, 606, 536, 64, 64);
+                        batch.draw(AssetManager.mediumGUI, 671, 536, 64, 64);
+                        batch.draw(AssetManager.largeGUI, 736, 536, 64, 64);
+                    }
                 }
                 //lets the player know if they have enough money for the unit
-                if(p2.getCoins() < 75){
-                    batch.draw(AssetManager.GUICooldown,606,536,64,64);
-                }if(p2.getCoins() < 150){  
-                    batch.draw(AssetManager.GUICooldown,671,536,64,64);  
-                }if(p2.getCoins() < 300){
-                    batch.draw(AssetManager.GUICooldown,736,536,64,64);  
-                } 
+                if (p2.getCoins() < 75) {
+                    batch.draw(AssetManager.GUICooldown, 606, 536, 64, 64);
+                }
+                if (p2.getCoins() < 150) {
+                    batch.draw(AssetManager.GUICooldown, 671, 536, 64, 64);
+                }
+                if (p2.getCoins() < 300) {
+                    batch.draw(AssetManager.GUICooldown, 736, 536, 64, 64);
+                }
             }
         }
 
-        
-            //draw the coins
-            font.setColor(1f, 1f, 1f, 1f);		                      
-            font.draw(batch, "Coins: " + p1.getCoins(), 65, 530);		 
-            font.draw(batch, "Coins: " + p2.getCoins(), 671, 530);
+        //draw the coins
+        font.setColor(1f, 1f, 1f, 1f);
+        font.draw(batch, "Coins: " + p1.getCoins(), 65, 530);
+        font.draw(batch, "Coins: " + p2.getCoins(), 671, 530);
 
         // draw player 1's base
         if (p1.getBase().getState() == Base.baseState.DAMAGE) {
@@ -238,11 +234,11 @@ public class WorldRenderer {
             batch.draw(AssetManager.getBaseColor("p1"), 0, 16, 80, 80);
         }
         //drawing player 1's bases' health
-        if (p1.getBase().getHealth() > 0){
+        if (p1.getBase().getHealth() > 0) {
             batch.draw(AssetManager.health, p1.getBase().getX(), p1.getBase().getY() + p1.getBase().getHeight() + 5,
-            p1.getBase().getWidth() * (p1.getBase().getHealth() / p1.getBase().getStartingHealth()), 5);
-        }   
-                    
+                    p1.getBase().getWidth() * (p1.getBase().getHealth() / p1.getBase().getStartingHealth()), 5);
+        }
+
         //draw player 2's base    
         if (p2.getBase().getState() == Base.baseState.DAMAGE) {
             batch.draw(AssetManager.getBaseColor("p2"), 720, 16, 80, 80);
@@ -251,15 +247,14 @@ public class WorldRenderer {
             batch.draw(AssetManager.getBaseColor("p2"), 720, 16, 80, 80);
         }
         //drawing player 2's bases' health
-        if(p2.getBase().getHealth() > 0){
-           batch.draw(AssetManager.health, p2.getBase().getX() + p2.getBase().getWidth(), p2.getBase().getY() + p2.getBase().getHeight() + 5,
-           -p2.getBase().getWidth() * (p2.getBase().getHealth() / p2.getBase().getStartingHealth()), 5); 
-        }  
+        if (p2.getBase().getHealth() > 0) {
+            batch.draw(AssetManager.health, p2.getBase().getX() + p2.getBase().getWidth(), p2.getBase().getY() + p2.getBase().getHeight() + 5,
+                    -p2.getBase().getWidth() * (p2.getBase().getHealth() / p2.getBase().getStartingHealth()), 5);
+        }
 
         // finished listing things to draw
         batch.end();
     }
-    
 
     public void resize(int width, int height) {
         viewport.update(width, height);

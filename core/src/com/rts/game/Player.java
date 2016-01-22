@@ -1,18 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rts.game;
 
 import com.badlogic.gdx.utils.Array;
 import com.rts.model.Base;
-import com.rts.model.Entity;
 import com.rts.model.Unit;
 
 /**
  * The player; each player has a base, a set of units, coins, and a cooldown
  * associated with spawning each unit.
- * @author donet6376
+ *
+ * @author MTJ
  */
 public class Player {
 
@@ -27,6 +23,7 @@ public class Player {
 
     /**
      * Constructor for the player
+     *
      * @param name the player's name; either player 1 or player 2
      */
     public Player(String name) {
@@ -41,6 +38,7 @@ public class Player {
 
     /**
      * Return the player's current coin amount
+     *
      * @return how many coins the player has
      */
     public int getCoins() {
@@ -49,6 +47,7 @@ public class Player {
 
     /**
      * Adds or removes coins from the player's current coins
+     *
      * @param increase how many coins to add or remove
      */
     public void updateCoins(int increase) {
@@ -57,15 +56,18 @@ public class Player {
 
     /**
      * Creates a new unit that belongs to the player.
+     *
      * @param width the width of the unit
      * @param height the height of the unit
      * @param p the player the unit belongs to (player 1 or player 2)
      * @param cost how much it costs to spawn the unit
-     * @param dollarWorth how much the enemy player will receive if the unit dies
+     * @param dollarWorth how much the enemy player will receive if the unit
+     * dies
      * @param health how much health the unit currently has
      * @param attackDamage how much a unit can damage an enemy in one attack
      * @param attackSpeed how quickly a unit can attack an enemy
-     * @param spawnTime how long the player must wait before spawning another unit
+     * @param spawnTime how long the player must wait before spawning another
+     * unit
      */
     public void createUnit(int width, int height, Player p, int cost, int dollarWorth, int health,
             int attackDamage, int attackSpeed, int spawnTime) {
@@ -87,6 +89,7 @@ public class Player {
 
     /**
      * Removes a dead unit belonging to the player.
+     *
      * @param u the unit to remove
      * @param enemy the player that killed the unit
      */
@@ -105,6 +108,7 @@ public class Player {
 
     /**
      * Returns all of the the player's units.
+     *
      * @return the player's units
      */
     public Array<Unit> getUnits() {
@@ -113,6 +117,7 @@ public class Player {
 
     /**
      * Returns the player's base
+     *
      * @return the player's base
      */
     public Base getBase() {
@@ -121,50 +126,54 @@ public class Player {
 
     /**
      * Returns the player's name (player 1 or player 2).
+     *
      * @return the player's name
      */
     public String getName() {
         return name;
     }
-    
+
     /**
      * Returns the remaining cooldown on spawning a new unit.
+     *
      * @return the remaining cooldown
      */
-    public float getRemainingCooldown(){
+    public float getRemainingCooldown() {
         return unitSpawnTime;
     }
 
     /**
      * Counts how long a player has waited since spawning a unit.
+     *
      * @param deltaTime the cooldown
      */
     public void addToSpawnTime(float deltaTime) {
         unitSpawnTime = unitSpawnTime + deltaTime;
     }
-    
+
     /**
      * Counts how long since the player's base has been hit.
+     *
      * @param deltaTime the amount of time since the base was hit
      */
-    public void addToBaseCheck(float deltaTime){
+    public void addToBaseCheck(float deltaTime) {
         base.baseCheck(deltaTime);
     }
 
     /**
      * Returns the current position of a player's unit.
+     *
      * @param u the unit
      * @return the unit's current position
      */
     public int getUnitPosition(Unit u) {
-        for(int i = 0; i < this.getUnits().size; i++){
-            if(units.get(i) == u){
+        for (int i = 0; i < this.getUnits().size; i++) {
+            if (units.get(i) == u) {
                 return i;
             }
         }
         //dead return
         return -1;
     }
-    
-    
+
 }
