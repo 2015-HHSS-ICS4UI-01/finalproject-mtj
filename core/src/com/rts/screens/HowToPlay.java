@@ -58,7 +58,8 @@ public class HowToPlay implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-        
+        batch.draw(AssetManager.ground,back.x,back.y,back.width,back.height);
+        batch.draw(AssetManager.ground,next.x,next.y,next.width,next.height);
         batch.end();
         
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)){

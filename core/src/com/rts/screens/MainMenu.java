@@ -67,8 +67,9 @@ public class MainMenu implements Screen{
         batch.setProjectionMatrix(camera.combined);
         
         batch.begin();
-        batch.draw(AssetManager.getBaseColor("p1"), 32, 32);
-        batch.draw(AssetManager.getBaseColor("p2"), 472, 472);
+        batch.draw(AssetManager.mainMenu, 0, 0);
+        batch.draw(AssetManager.getUnitColor("p1"), 96, 64);
+        batch.draw(AssetManager.getUnitColor("p2"), 672, 64);
         batch.end();
         
         //if the enter key is pressed, the game starts
