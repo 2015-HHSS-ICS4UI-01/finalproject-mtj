@@ -19,7 +19,7 @@ public class Player {
 
     private float COOLDOWN = 2;
     private String name;
-    private int coins = 450;
+    private int coins = 500;
     private int baseTotalHealth = 5000;
     private int baseRemainingHealth = 5000;
     private int maxUnits = 5;
@@ -35,9 +35,8 @@ public class Player {
      * @param round the current round of the game
      * @param name the player's name; either player 1 or player 2
      */
-    public Player(int round, String name) {
+    public Player(String name) {
         this.name = name;
-        coins = coins + (round * 50);
         units = new Array<Unit>();
         if (name.contains("p1")) {
             base = new Base(0, 16, 80, 80, "p1", 1500);

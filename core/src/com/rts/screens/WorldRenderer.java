@@ -204,56 +204,43 @@ public class WorldRenderer {
                     } 
                 }
             }
-       
+        }
+        
+            //draw the coins
             font.setColor(1f, 1f, 1f, 1f);		                      
-            font.draw(batch, "Coins: " + p1.getCoins(), 65, 472);		 
-            font.draw(batch, "Coins: " + p2.getCoins(), 671, 472);
+            font.draw(batch, "Coins: " + p1.getCoins(), 65, 530);		 
+            font.draw(batch, "Coins: " + p2.getCoins(), 671, 530);
 
-//        if(p1.getTurrets() != null){
-//            for(Turret t: p1.getTurrets()){
-//                batch.draw(AssetManager.boxUnitBlue, t.getX(), t.getY(), t.getWidth(), t.getHeight());
-//            }
-//        }
-//        
-//        if(p2.getTurrets() != null){
-//            for(Turret t: p2.getTurrets()){
-//                batch.draw(AssetManager.boxUnitRed, t.getX(), t.getY(), t.getWidth(), t.getHeight());
-//            }
-//        }
-
-        // draw the bases
+        // draw player 1's base
         if (p1.getBase().getState() == Base.baseState.DAMAGE) {
             batch.draw(AssetManager.getBaseColor("p1"), 0, 16, 80, 80);
             batch.draw(AssetManager.base1Damage, 0, 16, 80, 80);
         } else {
             batch.draw(AssetManager.getBaseColor("p1"), 0, 16, 80, 80);
         }
+        //drawing player 1's bases' health
+        if (p1.getBase().getHealth() > 0){
+            batch.draw(AssetManager.health, p1.getBase().getX(), p1.getBase().getY() + p1.getBase().getHeight() + 5,
+            p1.getBase().getWidth() * (p1.getBase().getHealth() / p1.getBase().getStartingHealth()), 5);
+        }   
+                    
+        //draw player 2's base    
         if (p2.getBase().getState() == Base.baseState.DAMAGE) {
             batch.draw(AssetManager.getBaseColor("p2"), 720, 16, 80, 80);
             batch.draw(AssetManager.base2Damage, 720, 16, 80, 80);
         } else {
             batch.draw(AssetManager.getBaseColor("p2"), 720, 16, 80, 80);
         }
-
-//        // draw mario
-//        if(player.getState() == Unit.State.STANDING){
-//            if(player.isFacingLeft()){
-//                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
-//            }else{
-//                batch.draw(AssetManager.skrillex, player.getX(), player.getY());
-//            }
-//        }else if(player.getState() == Unit.State.RUNNING){
-//            if(player.isFacingLeft()){
-//                batch.draw(AssetManager.marioRunL.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
-//            }else{
-//                batch.draw(AssetManager.marioRun.getKeyFrame(player.getStateTime(), true), player.getX(), player.getY());
-//            }
-//        }
+        //drawing player 2's bases' health
+        if(p2.getBase().getHealth() > 0){
+           batch.draw(AssetManager.health, p2.getBase().getX() + p2.getBase().getWidth(), p2.getBase().getY() + p2.getBase().getHeight() + 5,
+           -p2.getBase().getWidth() * (p2.getBase().getHealth() / p2.getBase().getStartingHealth()), 5); 
+        }  
 
         // finished listing things to draw
         batch.end();
     }
-    }
+    
 
     public void resize(int width, int height) {
         viewport.update(width, height);

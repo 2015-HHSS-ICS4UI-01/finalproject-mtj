@@ -42,13 +42,5 @@ public abstract class Entity {
         return bounds.overlaps(other.bounds);
     }
     
-    public float getOverlapX(Entity other){
-        float overlap = Math.min(this.bounds.x + this.bounds.width, other.bounds.x + other.bounds.width) - Math.max(this.bounds.x, other.bounds.x);
-        return overlap;
-    }
-    
-    public float getOverlapY(Entity other){
-        float overlap = Math.min(this.bounds.y + this.bounds.height, other.bounds.y + other.bounds.height) - Math.max(this.bounds.y, other.bounds.y);
-        return overlap;
-    }
+
 }

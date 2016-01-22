@@ -30,16 +30,14 @@ public class MainGame implements Screen {
     private final int largeUnitCost = 300;
     private MyRTSGame manager;
     private WorldRenderer renderer;
-    private int round;
     private Player p1;
     private Player p2;
     private Array<Unit> collisionCheck;
 
     public MainGame(MyRTSGame manager) {
         this.manager = manager;
-        round = 1;
-        p1 = new Player(round, "p1");
-        p2 = new Player(round, "p2");
+        p1 = new Player("p1");
+        p2 = new Player("p2");
         renderer = new WorldRenderer(p1, p2);
         collisionCheck = new Array<Unit>();
     }
@@ -50,8 +48,9 @@ public class MainGame implements Screen {
 
     @Override
     public void render(float deltaTime) {
-
-        //spawns a small unit that costs 75 coins
+        
+        //SPAWNING UNITS
+        //player 1 spawns a small unit that costs 75 coins
         if (Gdx.input.isKeyJustPressed(Keys.A) && p1.getCoins() >= smallUnitCost) {
             p1.createUnit(16, 32, p1, 75, 100, 100, 50, 2, 2);
             //when unit is spawned, coins are deducted from player 1
@@ -59,7 +58,7 @@ public class MainGame implements Screen {
                 p1.updateCoins(-smallUnitCost);
             }
         }
-        //spawns a medium unit that costs 150 coins
+        //player 1 spawns a medium unit that costs 150 coins
         if (Gdx.input.isKeyJustPressed(Keys.S) && p1.getCoins() >= mediumUnitCost) {
             p1.createUnit(32, 48, p1, 150, 175, 150, 100, 3, 3);
             //when unit is spawned, coins are deducted from player 1
@@ -67,7 +66,7 @@ public class MainGame implements Screen {
                 p1.updateCoins(-mediumUnitCost);
             }
         }
-        //spawns a large unit that costs 300 coins
+        //player 1 spawns a large unit that costs 300 coins
         if (Gdx.input.isKeyJustPressed(Keys.D) && p1.getCoins() >= largeUnitCost) {
             p1.createUnit(48, 64, p1, 300, 350, 300, 150, 5, 5);
             //when unit is spawned, coins are deducted from player 1
@@ -75,7 +74,7 @@ public class MainGame implements Screen {
                 p1.updateCoins(-largeUnitCost);
             }
         }
-        //spawns a small unit that costs 75 coins
+        //player 2 spawns a small unit that costs 75 coins
         if (Gdx.input.isKeyJustPressed(Keys.J) && p2.getCoins() >= smallUnitCost) {
             p2.createUnit(16, 32, p2, 75, 100, 100, 50, 2, 2);
             //when unit is spawned, coins are deducted from player 2
@@ -83,7 +82,7 @@ public class MainGame implements Screen {
                 p2.updateCoins(-smallUnitCost);
             }
         }
-        //spawns a medium unit that costs 150 coins
+        //player 2 spawns a medium unit that costs 150 coins
         if (Gdx.input.isKeyJustPressed(Keys.K) && p2.getCoins() >= mediumUnitCost) {
             p2.createUnit(32, 48, p2, 150, 175, 150, 100, 3, 3);
             //when unit is spawned, coins are deducted from player 2
@@ -91,7 +90,7 @@ public class MainGame implements Screen {
                 p2.updateCoins(-mediumUnitCost);
             }
         }
-        //spawns a large unit that costs 300 coins
+        //player 2 spawns a large unit that costs 300 coins
         if (Gdx.input.isKeyJustPressed(Keys.L) && p2.getCoins() >= largeUnitCost) {
             p2.createUnit(48, 64, p2, 300, 350, 300, 150, 5, 5);
             //when unit is spawned, coins are deducted from player 2
@@ -100,32 +99,37 @@ public class MainGame implements Screen {
             }
         }
 
+        //update player 1's units
         if (p1.getUnits() != null) {
             for (Unit u : p1.getUnits()) {
                 u.update(deltaTime);
             }
         }
 
-
+        //update player 2's units
         if (p2.getUnits() != null) {
             for (Unit u : p2.getUnits()) {
                 u.update(deltaTime);
             }
         }
-        //collisions
-        // go through each unit
-        // units colliding with each other
+        
+        //COLLISIONS
+        //check that there are units to collide
         if (p1.getUnits() != null && p2.getUnits() != null) {
-
+            
+            //fill the collision array with both player's units
             collisionCheck.clear();
             collisionCheck.addAll(p1.getUnits());
             collisionCheck.addAll(p2.getUnits());
+            
+            //check through every unit
             for (int i = 0; i < collisionCheck.size; i++) {
-
                 Unit u1 = collisionCheck.get(i);
+                
+                //if the unit is not currently taking damage
                 if (u1.getState() != Unit.State.DAMAGE) {
 
-                    //if a unit has died
+                    //if a unit has died, remove it
                     if (u1.getHealth() <= 0) {
                         //if unit was player 1's, player 2 earns coins
                         if (u1.getPlayer().getName().equals("p1")) {
@@ -134,26 +138,33 @@ public class MainGame implements Screen {
                         else if (u1.getPlayer().getName().equals("p2")) {
                             u1.getPlayer().removeUnit(u1, p1);
                         }
+                        //move onto the next unit
                         continue;
                     }
 
+                    //Assume the unit's state is moving unless found otherwise
                     u1.setState(Unit.State.MOVING);
+                    //check if it is colliding with every other unit
                     for (Unit u2 : collisionCheck) {
                         if (u1 != u2 && u1.isColliding(u2)) {
-
-
+                            
+                            //the unit is the front unit for their team
                             if (p1.getUnitPosition(u1) == 0 || p2.getUnitPosition(u1) == 0) {
+                                //the two units are on the opposite team
                                 if (!u1.getPlayer().getName().equals(u2.getPlayer().getName())) {
+                                    //sets the state of the front unit
                                     u1.setState(Unit.State.STANDING);
                                 }
+                            //the unit is colliding with a teammate and not the front unit
                             } else if (u1.getPlayer().getName().equals(u2.getPlayer().getName())
                                     && (p1.getUnitPosition(u1) != -1 && p1.getUnitPosition(u1) > p1.getUnitPosition(u2)
                                     || p2.getUnitPosition(u1) != -1 && p2.getUnitPosition(u1) > p2.getUnitPosition(u2))) {
+                                //sets the state of the unit behind a teammate
                                 u1.setState(Unit.State.WAITING);
                             }
 
 
-                            //damage
+                            //each unit attacks
                             if (!u1.getPlayer().getName().equals(u2.getPlayer().getName())) {
                                 u1.attack(u2);
                                 u2.attack(u1);

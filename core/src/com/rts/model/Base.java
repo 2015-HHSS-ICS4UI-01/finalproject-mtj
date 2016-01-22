@@ -12,6 +12,7 @@ package com.rts.model;
 public class Base extends Entity {
     
     private int health;
+    private float startingHealth;
     private String playerName;
     private baseState baseState;
     public float damageStateTimer = 0;
@@ -34,6 +35,7 @@ public class Base extends Entity {
 
         super(x, y, width, height);
         this.health = health;
+        this.startingHealth = health;
         this.playerName = playerName;
         baseState = baseState.NORMAL;
     }
@@ -69,6 +71,10 @@ public class Base extends Entity {
     public void removeHealth(int decrease){
         health = health - decrease;
         System.out.println("health is " +health );
+    }
+    
+    public float getStartingHealth(){
+        return startingHealth;
     }
     
     public void baseCheck(float deltaTime){
