@@ -77,10 +77,6 @@ public class MainMenu implements Screen{
             manager.changeScreen(new MainGame(manager));    
         }
         
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-            manager.changeScreen(new HowToPlay(manager));
-        }
-        
         //unit colour changing for player 1
         if(Gdx.input.isKeyJustPressed(Keys.A)){
             AssetManager.setColorLeft("p1");

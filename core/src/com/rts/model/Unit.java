@@ -13,9 +13,8 @@ import com.rts.game.Player;
  * @author lamonta
  */
 public class Unit extends Entity {
-
+    
     private final float X_MAX_VEL = 2.0f;
-    private final float Y_MAX_VEL = 4.0f;
     private final float DAMP = 0.8f;
     private Player player;
     private int cost;
@@ -82,10 +81,8 @@ public class Unit extends Entity {
     public void update(float delta) {
 
         if (state == State.DAMAGE) {
-
             if (damageStateTimer >= 0.2) {
                 this.setState(State.STANDING);
-
             }
         }
 
@@ -131,10 +128,12 @@ public class Unit extends Entity {
     }
 
     /**
-     * Attack loop for when a unit is being attacked.
+     * Attack loop for when unit is attacking another unit.
      * @param u the unit that being attacked.
      */
     public void attack(Unit u) {
+        //the unit attacks the enemy unit if the time elapsed since its last attack
+        //is greater than its attack speed
         if (attackTimer >= attackSpeed) {
             u.health = u.health - attackDamage;
             System.out.println("Health is " + u.health);
@@ -145,10 +144,12 @@ public class Unit extends Entity {
     }
 
     /**
-     * Attack loop for when a base is being attacked.
+     * Attack loop for when unit is attacking a base.
      * @param b the base that is being attacked.
      */
     public void attackBase(Base b) {
+        //the unit attacks the enemy base if the time elapsed since its last attack
+        //is greater than its attack speed
         if (attackTimer >= attackSpeed) {
             b.removeHealth(attackDamage);
             attackTimer = 0;
@@ -231,6 +232,14 @@ public class Unit extends Entity {
      */
     public float getDamageStateTimer() {
         return damageStateTimer;
+    }
+    
+    /**
+     * Return the number of coins it costs to spawn the unit
+     * @return the unit's cost
+     */
+    public int getCost(){
+        return cost;
     }
     
     /**

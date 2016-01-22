@@ -30,6 +30,8 @@ public class AssetManager {
     
     public static Texture ground = new Texture("ground.png");
     public static Texture mainMenu = new Texture("MainMenu.png");
+    
+    //unit and base color variations
     public static Texture boxUnitBlue = new Texture("BoxUnitBlue.png");
     public static Texture boxUnitPurple = new Texture("BoxUnitPurple.png");
     public static Texture boxUnitRed = new Texture("BoxUnitRed.png");
@@ -42,9 +44,13 @@ public class AssetManager {
     public static Texture baseGreen = new Texture("BaseGreen.png");
     public static Texture baseWhite = new Texture("BaseWhite.png");
     public static Texture baseOrange = new Texture("BaseOrange.png");
+    
+    //flashes when a unit or base is damaged
     public static Texture unitDamage = new Texture("UnitDamage.png");
     public static Texture base1Damage = new Texture("Base1Damage.png");
     public static Texture base2Damage = new Texture("Base2Damage.png");
+    
+    //health/cooldown bars and GUI
     public static Texture health = new Texture("Health.png");
     public static Texture cooldown = new Texture("Cooldown.png");
     public static Texture smallGUI = new Texture("smallGUI.png");
