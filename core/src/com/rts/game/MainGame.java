@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.model.Base;
 import com.rts.model.Unit;
 import com.rts.screens.AssetManager;
+import com.rts.screens.HowToPlay;
 import com.rts.screens.WorldRenderer;
 
 /**
@@ -179,6 +180,10 @@ public class MainGame implements Screen {
                 }
                 
             }
+            
+            if(base1.getHealth() <= 0){
+                manager.changeScreen(new HowToPlay(manager, "p2"));
+            }
 
 
             Base base2 = p2.getBase();
@@ -191,6 +196,10 @@ public class MainGame implements Screen {
                     u1.attackBase(base2);
                 }
             }
+            }
+            
+            if(base2.getHealth() <= 0){
+                manager.changeScreen(new HowToPlay(manager, "p1"));
             }
 
         }

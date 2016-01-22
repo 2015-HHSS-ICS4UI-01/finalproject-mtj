@@ -29,13 +29,15 @@ public class HowToPlay implements Screen{
     public final int V_HEIGHT = 600;
     
     private MyRTSGame manager;
+    private String winner;
     private Viewport viewport;
     
     private SpriteBatch batch;
     private OrthographicCamera camera;
  
-    public HowToPlay(MyRTSGame manager){
+    public HowToPlay(MyRTSGame manager, String winner){
         this.manager = manager;
+        this.winner = winner;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, camera);
