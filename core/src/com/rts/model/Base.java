@@ -72,7 +72,6 @@ public class Base extends Entity {
      */
     public void removeHealth(int decrease) {
         health = health - decrease;
-        System.out.println("health is " + health);
     }
 
     public float getStartingHealth() {
