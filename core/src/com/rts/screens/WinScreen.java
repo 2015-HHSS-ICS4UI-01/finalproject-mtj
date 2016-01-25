@@ -11,7 +11,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MyRTSGame;
 
 /**
- *
+ * The screen that appears when a base has died, announcing the player that
+ * destroyed the base as the winner.
  * @author MTJ
  */
 public class WinScreen implements Screen {

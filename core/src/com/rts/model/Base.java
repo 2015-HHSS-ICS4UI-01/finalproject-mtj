@@ -1,8 +1,8 @@
 package com.rts.model;
 
 /**
- * Creates a base that is the spawn point for units; if a player's base is
- * depleted of its health, the opposing player wins the game.
+ * Creates an immobile base that is the spawn point for units; if a player's base 
+ * is depleted of its health, the opposing player wins the game.
  *
  * @author MTJ
  */
