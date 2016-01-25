@@ -58,7 +58,7 @@ public class MainGame implements Screen {
         }
         //player 1 spawns a large unit that costs 300 coins
         if (Gdx.input.isKeyJustPressed(Keys.D) && p1.getCoins() >= largeUnitCost) {
-            p1.createUnit(48, 64, p1, 300, 350, 300, 150, 5, 5);
+            p1.createUnit(48, 64, p1, 300, 350, 300, 150, 3, 5);
             //when unit is spawned, coins are deducted from player 1
             if (p1.getRemainingCooldown() == 0) {
                 p1.updateCoins(-largeUnitCost);
@@ -82,7 +82,7 @@ public class MainGame implements Screen {
         }
         //player 2 spawns a large unit that costs 300 coins
         if (Gdx.input.isKeyJustPressed(Keys.L) && p2.getCoins() >= largeUnitCost) {
-            p2.createUnit(48, 64, p2, 300, 350, 300, 150, 5, 5);
+            p2.createUnit(48, 64, p2, 300, 350, 300, 150, 3, 5);
             //when unit is spawned, coins are deducted from player 2
             if (p2.getRemainingCooldown() == 0) {
                 p2.updateCoins(-largeUnitCost);

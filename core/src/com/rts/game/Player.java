@@ -83,6 +83,7 @@ public class Player {
                 unitSpawnTime = 0;
                 COOLDOWN = spawnTime;
                 currentUnits++;
+                base.removeHealth(10);
             }
         }
     }
