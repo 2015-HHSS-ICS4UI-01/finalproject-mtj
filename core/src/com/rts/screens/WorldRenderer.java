@@ -114,7 +114,6 @@ public class WorldRenderer {
                 }
             }
         }
-
         
         //gui 
         //draw p1 gui section

@@ -75,9 +75,6 @@ public class Unit extends Entity {
         attackTimer = attackSpeed;
     }
 
-    public void dampen() {
-        velocity.x = velocity.x * DAMP;
-    }
 
     public void update(float delta) {
 
@@ -137,7 +134,6 @@ public class Unit extends Entity {
         //is greater than its attack speed
         if (attackTimer >= attackSpeed) {
             u.health = u.health - attackDamage;
-            System.out.println("Health is " + u.health);
             attackTimer = 0;
             u.state = State.DAMAGE;
             u.damageStateTimer = 0;
