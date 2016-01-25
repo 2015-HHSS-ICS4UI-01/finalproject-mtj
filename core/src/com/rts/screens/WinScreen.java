@@ -52,6 +52,7 @@ public class WinScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
+        //displays the player who won the game
         if (winner.contains("p1")) {
             batch.draw(AssetManager.p1win, 0, 0);
         } else {
@@ -59,6 +60,7 @@ public class WinScreen implements Screen {
         }
         batch.end();
 
+        //pressing the space bar returns players to the main menu
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
             manager.changeScreen(new MainMenu(manager));
         }
