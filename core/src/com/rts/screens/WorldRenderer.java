@@ -115,6 +115,7 @@ public class WorldRenderer {
             }
         }
 
+        
         //gui 
         //draw p1 gui section
         batch.draw(AssetManager.smallGUI, 0, 536, 64, 64);
@@ -129,7 +130,11 @@ public class WorldRenderer {
         if (p1.getUnits() != null) {
             //p1
             for (Unit u : p1.getUnits()) {
-                if (u.getDollarWorth() == 100) {
+                if(p1.getUnits().size >=5){
+                    batch.draw(AssetManager.GUICooldown, 0, 536, 64, 64);
+                    batch.draw(AssetManager.GUICooldown, 65, 536, 64, 64);
+                    batch.draw(AssetManager.GUICooldown, 130, 536, 64, 64);
+                }else if (u.getDollarWorth() == 100) {
                     if (u.getPlayer().getRemainingCooldown() <= 2) {
                         batch.draw(AssetManager.GUICooldown, 0, 536, 64, 64);
                         batch.draw(AssetManager.GUICooldown, 65, 536, 64, 64);
@@ -177,7 +182,11 @@ public class WorldRenderer {
         if (p2.getUnits() != null) {
             //p2
             for (Unit u : p2.getUnits()) {
-                if (u.getDollarWorth() == 100) {
+                if(p2.getUnits().size >=5){
+                    batch.draw(AssetManager.GUICooldown, 606, 536, 64, 64);
+                    batch.draw(AssetManager.GUICooldown, 671, 536, 64, 64);
+                    batch.draw(AssetManager.GUICooldown, 736, 536, 64, 64);
+                }else if (u.getDollarWorth() == 100) {
                     if (u.getPlayer().getRemainingCooldown() <= 2) {
                         batch.draw(AssetManager.GUICooldown, 606, 536, 64, 64);
                         batch.draw(AssetManager.GUICooldown, 671, 536, 64, 64);
