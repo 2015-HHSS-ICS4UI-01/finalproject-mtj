@@ -12,8 +12,8 @@ import com.rts.game.MainGame;
 import com.rts.game.MyRTSGame;
 
 /**
- * The game's Main Menu; allows user to start a 2 player game, or learn how to
- * play the game.
+ * The game's Main Menu; allows players to start a 2 player game, change the colours
+ * of their units, and learn how to play the game.
  *
  * @author MTJ
  */

@@ -179,6 +179,8 @@ public class MainGame implements Screen {
 
             }
 
+            //if player 1's base is destroyed
+            //player 2 is announced the winner
             if (base1.getHealth() <= 0) {
                 manager.changeScreen(new WinScreen(manager, "p2"));
             }
@@ -195,6 +197,8 @@ public class MainGame implements Screen {
                 }
             }
 
+            //if player 2's base is destroyed
+            //player 1 is announced the winner
             if (base2.getHealth() <= 0) {
                 manager.changeScreen(new WinScreen(manager, "p1"));
             }

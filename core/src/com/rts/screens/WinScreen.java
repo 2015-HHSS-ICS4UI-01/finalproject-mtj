@@ -11,7 +11,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rts.game.MyRTSGame;
 
 /**
- *
+ * The screen that appears when a base has died, announcing the player that
+ * destroyed the base as the winner.
  * @author MTJ
  */
 public class WinScreen implements Screen {
@@ -51,6 +52,7 @@ public class WinScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
+        //displays the player who won the game
         if (winner.contains("p1")) {
             batch.draw(AssetManager.p1win, 0, 0);
         } else {
@@ -58,6 +60,7 @@ public class WinScreen implements Screen {
         }
         batch.end();
 
+        //pressing the space bar returns players to the main menu
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
             manager.changeScreen(new MainMenu(manager));
         }
